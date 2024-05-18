@@ -188,6 +188,7 @@
     font-size: 14px;
     text-decoration: none;
     color: #676767;
+    cursor: default;
 }
 
 .clickable-login {
