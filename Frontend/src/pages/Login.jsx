@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Login.css'
-//import loginImg from 'ds'
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,7 +11,6 @@ export default function Login() {
     navigate("/home") //navigates to the home page after authentication
   }
 
-  //<img className="login-img" src={loginImg} alt="aerial view of farms" />
   return (
     <div className="outer-login-container">
       <div className="loginContainer">
