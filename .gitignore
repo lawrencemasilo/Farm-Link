@@ -1,1 +1,9 @@
-node_modules
+# Node.js dependences
+/node_modules
+/Frontend/node_modules
+/Backend/node_modules
+
+# Environment variables
+.env
+/Frontend/.env
+/Backend/.env
