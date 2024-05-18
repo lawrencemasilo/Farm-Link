@@ -21,36 +21,48 @@ export default function Login() {
           <div className="title_slogan-container">
             <h1 className="FarmLink-title">FarmLink</h1>
             <p className="Farmlink-slogans">Link the future of farming with us</p>
+            <button className="back-btn" onClick={() => navigate("/")}>Back</button>
           </div>
           
         </div>
 
         <div className="input-container">
-          <h1>Hello Again!</h1>
-          <h2>Welcome Back</h2>
-
-          <form className='form-container' onSubmit={handleSubmit}>
-
-            <div className="email-container">
-              <input type="email" name="email" placeholder="Email Address" required/>
+          <div className="input-spacer"></div>
+          <div className="input-content-container">
+            <div className="title">
+              <h1>Hello Again!</h1>
+              <p>Welcome Back</p>
             </div>
 
-            <div className="password-container">
-              <input type="password" name="password" placeholder="Password" required/>
-            </div>
+            <form className='form-container' onSubmit={handleSubmit}>
 
-            <div className="submit-btn-container">
-              <button className="login-btn">Login</button>
-            </div>
+              <div className="email-container">
+                <input type="email" name="email" placeholder="Email Address" required/>
+              </div>
 
-            <div className="register-link-container">
-              <Link to="/register">Register</Link>
-            </div>
+              <div className="password-container">
+                <input type="password" name="password" placeholder="Password" required/>
+              </div>
 
-            <div className="forgot-password-container">
-              <Link className="forgot-password-link" to="/forgot_password">Forgot Password</Link>
-            </div>
-          </form>
+              <div className="submit-btn-container">
+                <button className="login-btn">Login</button>
+              </div>
+  
+              <div className="login-links">
+                <div className="register-link-container">
+                  <Link className="register-link" to="/register">Register</Link>
+                </div>
+
+                <div className="link-divider"></div>
+
+                <div className="forgot-password-container">
+                  <Link className="forgot-password-link" to="/forgotpassword">Forgot Password</Link>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          
         </div>
       </div>
     </div>
