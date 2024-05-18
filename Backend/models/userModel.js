@@ -1,0 +1,1 @@
+// Defines the user schema and related data methods

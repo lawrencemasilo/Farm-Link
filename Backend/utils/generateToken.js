@@ -1,0 +1,1 @@
+// Helper function to generate JWT for authentication.
