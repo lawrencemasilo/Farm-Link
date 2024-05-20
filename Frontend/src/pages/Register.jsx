@@ -8,7 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('123456789');
   const [address, setAddress] = useState('');
-  const [farmSize, setFarmSize] = useState('10');
+  const [farmSize, setFarmSize] = useState('');
   const [cropType, setCropType] = useState('');
   const [production, setProduction] = useState('');
   
