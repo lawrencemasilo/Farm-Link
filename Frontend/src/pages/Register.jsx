@@ -8,7 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('123456789');
   const [address, setAddress] = useState('');
-  const [farmSize, setFarmSize] = useState('');
+  const [farmSize, setFarmSize] = useState('10');
   const [cropType, setCropType] = useState('');
   const [production, setProduction] = useState('');
   
@@ -51,27 +51,27 @@ export default function Register() {
             <form className='form-container' onSubmit={handleSubmit}>
 
               <div className="name-container">
-                <input type="text" name="name" placeholder="Name/Company" required/>
+                <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name/Company" required/>
               </div>
               
               <div className="email-container">
-                <input type="email" name="email" placeholder="Email Address" required/>
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
               </div>
 
               <div className="address-container">
-                <input type="text" name="address" placeholder="Address" required/>
+                <input type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" required/>
               </div>
 
               <div className="crop-type-container">
-                <input type="text" name="crop-type" placeholder="Crop Grown" required/>
+                <input type="text" name="crop-type" value={cropType} onChange={(e) => setCropType(e.target.value)} placeholder="Crop Grown" required/>
               </div>
 
               <div className="farm-size-container">
-                <input type="number" name="farm-size" placeholder="Farm Size/ha" required/>
+                <input type="number" name="farm-size" value={farmSize} onChange={(e) => setFarmSize(e.target.value)} placeholder="Farm Size/ha" required/>
               </div>
 
               <div className="production-container">
-                <input type="text" name="production" placeholder="Production Capacity" required/>
+                <input type="text" name="production" value={production} onChange={(e) => setProduction(e.target.value)} placeholder="Production Capacity" required/>
               </div>
 
               <div className="submit-btn-container">
