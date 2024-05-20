@@ -7,6 +7,7 @@ const errorMiddleware = require('./middleware/errors');
 const ErrorHandler = require('./utils/errorHandler');
 const connectDB = require('./config/db');
 
+
 // Setting up .env file variables
 dotenv.config();
 
@@ -30,6 +31,7 @@ const auth = require('./routes/userRoutes');
 
 
 app.use('/api/v1', auth);
+
 
 
 
