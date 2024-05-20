@@ -4,9 +4,17 @@ const app = express()
 const dotenv =require('dotenv');
 const errorMiddleware = require('./middleware/errors');
 const ErrorHandler = require('./utils/errorHandler');
+const connectDB = require('./config/db');
+
 
 // Setting up .env file variables
 dotenv.config();
+
+// Connect to database
+connectDB();
+
+// Setup body parser
+app.use(express.json());
 
 // Handling Uncaught Exception
 process.on('uncaughtException', err => {
@@ -16,6 +24,11 @@ process.on('uncaughtException', err => {
 }) 
 
 // The routes start here
+// Import all routes
+const auth = require('./routes/userRoutes');
+
+
+app.use('/api/v1', auth);
 
 
 

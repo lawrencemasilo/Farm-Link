@@ -1,15 +1,14 @@
 // Handle database connection setup
-const mysql = require('mysql2');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
 
 dotenv.config();
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
-}).promise();
+const connectDB = () => { mongoose.connect(process.env.DB_LOCAL_URI)
+  .then(con => {
+  console.log(`MongoDB database connected with host: ${con.connection.host}`);
+  });
+};
 
-module.exports = pool;
+module.exports = connectDB;
+
