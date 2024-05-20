@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const app = express()
 
@@ -15,6 +16,7 @@ connectDB();
 
 // Setup body parser
 app.use(express.json());
+app.use(cors());
 
 // Handling Uncaught Exception
 process.on('uncaughtException', err => {

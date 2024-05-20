@@ -35,8 +35,13 @@ const userSchema = new mongoose.Schema({
 
 // Encrypting passwords before saving them
 userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
   this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
+
 
 // Function that returns a JSON WEB TOKEN
 userSchema.methods.getJwtToken = function() {
@@ -46,8 +51,8 @@ userSchema.methods.getJwtToken = function() {
 }
 
 // Compare the entered password with the password stored in database
-userSchema.methods.comparePassword = async function(providedPassword) {
-  return await bcrypt.compare(providedPassword, this.password);
+userSchema.methods.comparePassword = async function(enterPassword) {
+  return await bcrypt.compare(enterPassword, this.password);
 }
 
 module.exports = mongoose.model('User', userSchema);
