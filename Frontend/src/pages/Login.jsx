@@ -1,14 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Login.css'
+import { loginUser } from '../services/authService'
+import { useState } from 'react';
 
 export default function Login() {
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     //handles when the form is submited (login button is pressed)
     //form input values (ex.Name) etc will be retrieved and sent to the backend from here.
     event.preventDefault();
-    navigate("/home") //navigates to the home page after authentication
+
+    try {
+      const data = await loginUser({ name, password });
+      navigate("/home") //navigates to the home page after authentication
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   return (
@@ -35,11 +46,11 @@ export default function Login() {
             <form className='form-container' onSubmit={handleSubmit}>
 
               <div className="email-container">
-                <input type="email" name="email" placeholder="Email Address" required/>
+                <input type="email" name="email" value={name} onChange={(e) => setName(e.target.value)} placeholder="Email Address" required/>
               </div>
 
               <div className="password-container">
-                <input type="password" name="password" placeholder="Password" required/>
+                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required/>
               </div>
 
               <div className="submit-btn-container">
