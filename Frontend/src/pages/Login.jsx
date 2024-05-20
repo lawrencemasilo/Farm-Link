@@ -27,7 +27,7 @@ export default function Login() {
         <div className="input-container">
           <div className="input-spacer"></div>
           <div className="input-content-container">
-            <div className="title">
+            <div className="login-title">
               <h1>Hello Again!</h1>
               <p>Welcome Back</p>
             </div>

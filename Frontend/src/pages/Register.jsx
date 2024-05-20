@@ -43,7 +43,7 @@ export default function Register() {
         <div className="input-container">
           <div className="input-spacer"></div>
           <div className="input-content-container">
-            <div className="title">
+            <div className="register-title">
               <h1>Hello</h1>
               <p>Join Us</p>
             </div>
