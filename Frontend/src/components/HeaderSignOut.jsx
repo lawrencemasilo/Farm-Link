@@ -9,7 +9,7 @@ export default function HeaderSignOut() {
       <div className="wrapper">
         <div className="nav">
           <div className="home-link-container">
-            <p>Home</p>
+            <p>Services</p>
           </div>
           <div className="about_us-link-container">
             <p>About Us</p>
