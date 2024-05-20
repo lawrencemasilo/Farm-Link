@@ -14,9 +14,15 @@ dotenv.config();
 // Connect to database
 connectDB();
 
+// Permited frontend url
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  optionsSuccessStatus: 200
+}
+
 // Setup body parser
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Handling Uncaught Exception
 process.on('uncaughtException', err => {
