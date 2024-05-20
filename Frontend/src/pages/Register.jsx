@@ -1,0 +1,94 @@
+import { Link, useNavigate } from 'react-router-dom'
+import '../styles/Register.css'
+import { registerUser } from '../services/authService';
+import { useState } from 'react';
+
+export default function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('123456789');
+  const [address, setAddress] = useState('');
+  const [farmSize, setFarmSize] = useState('');
+  const [cropType, setCropType] = useState('');
+  const [production, setProduction] = useState('');
+  
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    //handles when the form is submited (Register button is pressed)
+    //form input values (ex.Name) etc will be retrieved and sent to the backend from here.
+    event.preventDefault();
+    try {
+      const data = await registerUser({ name, email, password, address, farmSize, cropType, production });
+      navigate("/successfulregistration") //navigates to the successful registration if successful
+    } catch (err) {
+      console.log(err.message);
+    }
+    
+  }
+  
+  return (
+    <div className="outer-register-container">
+      <div className="registerContainer">
+        <div className="image-container">
+          <div className="registration-spacer"></div>
+          <div className="title_slogan-container">
+            <h1 className="FarmLink-title">FarmLink</h1>
+            <p className="Farmlink-slogans">Link the future of farming with us</p>
+            <button className="back-btn" onClick={() => navigate("/")}>Back</button>
+          </div>
+          
+        </div>
+
+        <div className="input-container">
+          <div className="input-spacer"></div>
+          <div className="input-content-container">
+            <div className="title">
+              <h1>Hello</h1>
+              <p>Join Us</p>
+            </div>
+
+            <form className='form-container' onSubmit={handleSubmit}>
+
+              <div className="name-container">
+                <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name/Company" required/>
+              </div>
+              
+              <div className="email-container">
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
+              </div>
+
+              <div className="address-container">
+                <input type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" required/>
+              </div>
+
+              <div className="crop-type-container">
+                <input type="text" name="crop-type" value={cropType} onChange={(e) => setCropType(e.target.value)} placeholder="Crop Grown" required/>
+              </div>
+
+              <div className="farm-size-container">
+                <input type="number" name="farm-size" value={farmSize} onChange={(e) => setFarmSize(e.target.value)} placeholder="Farm Size/ha" required/>
+              </div>
+
+              <div className="production-container">
+                <input type="text" name="production" value={production} onChange={(e) => setProduction(e.target.value)} placeholder="Production Capacity" required/>
+              </div>
+
+              <div className="submit-btn-container">
+                <button className="registration-btn">Register</button>
+              </div>
+  
+              <div className="registration-links">
+                <div className="login-link-container">
+                  <Link className="login-link" to="/login">Already have an account? <span className="clickable-login">Login</span></Link>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  )
+}
