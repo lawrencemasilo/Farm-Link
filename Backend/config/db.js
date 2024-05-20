@@ -11,3 +11,4 @@ const connectDB = () => { mongoose.connect(process.env.DB_LOCAL_URI)
 };
 
 module.exports = connectDB;
+
