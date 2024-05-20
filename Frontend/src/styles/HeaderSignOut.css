@@ -58,6 +58,13 @@
     color: #ffffff;
 }
 
+.login-container button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #0575e6;
+    border: 1px solid #0575e6;
+}
+
 .login-container {
     margin-right: 20px;
 }
