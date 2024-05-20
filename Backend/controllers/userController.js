@@ -43,11 +43,11 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Find the related user from the database
-  const user = User.findOne({email}).select('+password');
+  const user = await User.findOne({email}).select('+password');
 
   // Check is the provided email exists
   if (!user) {
-    return next(new ErrorHandler('Invalid email or paswort', 401));
+    return next(new ErrorHandler('Invalid email or password', 401));
   }
 
   // Check if the provided password corresponds with password in database
@@ -55,7 +55,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
   // Check is the password entered is correct
   if (!isPasswordCorrect) {
-    return next(new ErrorHandler('Invalid email or paswort', 401));
+    return next(new ErrorHandler('Invalid email or password', 401));
   }
   
   // Create a json web token
