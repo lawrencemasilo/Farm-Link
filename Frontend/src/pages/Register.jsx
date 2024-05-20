@@ -1,14 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Register.css'
+import { registerUser } from '../services/authService';
+import { useState } from 'react';
 
 export default function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('123456789');
+  const [address, setAddress] = useState('');
+  const [farmSize, setFarmSize] = useState('');
+  const [cropType, setCropType] = useState('');
+  const [production, setProduction] = useState('');
+  
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     //handles when the form is submited (Register button is pressed)
     //form input values (ex.Name) etc will be retrieved and sent to the backend from here.
     event.preventDefault();
-    navigate("/successfulregistration") //navigates to the successful registration if successful
+    try {
+      const data = await registerUser({ name, email, password, address, farmSize, cropType, production });
+      navigate("/successfulregistration") //navigates to the successful registration if successful
+    } catch (err) {
+      console.log(err.message);
+    }
+    
   }
   
   return (
