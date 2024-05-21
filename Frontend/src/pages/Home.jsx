@@ -1,7 +1,10 @@
 import React from 'react'
+import HeaderSignIn from '../components/HeaderSignIn'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div className="home-container">
+      {<HeaderSignIn />}
+    </div>
   )
 }
