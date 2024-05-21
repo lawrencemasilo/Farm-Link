@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import '../styles/HeaderSignIn.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faGear, faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function HeaderSignIn() {
   const navigate = useNavigate();
@@ -11,16 +13,19 @@ export default function HeaderSignIn() {
       </div>
       <div className="header-nav">
         <div className="home-search-container">
-          <input type="text" />
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
+          <input type="text" placeholder="Search..." />
         </div>
       </div>
       <div className="signin-wrapper">
         <div className="logout-btn-container">
           <div className="setting-container">
-            
+            <FontAwesomeIcon icon={faGear} className="settingsIcon"/>
+            <p className="settings-title">Settings</p>
           </div>
           <div className="profile-container">
-            
+            <FontAwesomeIcon icon={faUser} className="profileIcon" />
+            <p className="userName-title">User</p>
           </div>
           <div className="logout-container">
             <button onClick={() => {navigate('/login')}}>Logout</button>
