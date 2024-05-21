@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const cropSchema = new mongoose.Schema({
     cropName: {
         type: String,
-        ref: 'Crop',
+        required: true
+    },
+    farm: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Farm',
         required: true
     },
     plantDate: {
