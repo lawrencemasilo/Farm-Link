@@ -9,7 +9,6 @@ export default function Services() {
         <div className="services">
             <div className="service">
                 <div className="icon-container">
-                    <FontAwesomeIcon icon={faRectangleList} />
                 </div>
                 <h1 className="service-title">Manage Applications</h1>
             </div>

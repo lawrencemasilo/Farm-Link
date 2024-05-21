@@ -4,7 +4,7 @@ import { loginUser } from '../services/authService'
 import { useState } from 'react';
 
 export default function Login() {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const data = await loginUser({ name, password });
+      const data = await loginUser({ email, password });
       navigate("/home") //navigates to the home page after authentication
     } catch (err) {
       console.log(err.message);
@@ -46,7 +46,7 @@ export default function Login() {
             <form className='form-container' onSubmit={handleSubmit}>
 
               <div className="email-container">
-                <input type="email" name="email" value={name} onChange={(e) => setName(e.target.value)} placeholder="Email Address" required/>
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
               </div>
 
               <div className="password-container">
