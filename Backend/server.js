@@ -38,10 +38,12 @@ process.on('uncaughtException', err => {
 // The routes start here
 // Import all routes
 const auth = require('./routes/userRoutes');
+const crops = require('./routes/cropRoutes');
 const profile = require('./routes/userProfileRoutes');
 
 
 app.use('/api/v1', auth);
+app.use('/api/v1', crops);
 app.use('/api/v1', profile);
 
 
