@@ -3,13 +3,6 @@ const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../middleware/authMiddleware');
 
-// Importing crop controller methods
-const { addCrop, updateCrop, getCrop } = require('../controllers/cropController');
-
-router.route('/crop').post(addCrop);
-router.route('/crop/:id').put(updateCrop);
-router.route('/crop/:id').get(getCrop);
-
 // Importing user controller methods
 const { registerUser, userLogin, forgotPassword, passwordReset, userLogout } = require('../controllers/userController');
 
