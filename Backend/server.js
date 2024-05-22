@@ -1,8 +1,9 @@
 const cors = require('cors');
 const express = require('express');
+const cookieParser = require('cookie-parser'); 
 const app = express()
 
-const dotenv =require('dotenv');
+const dotenv = require('dotenv');
 const errorMiddleware = require('./middleware/errors');
 const ErrorHandler = require('./utils/errorHandler');
 const connectDB = require('./config/db');
@@ -22,7 +23,10 @@ const corsOptions = {
 
 // Setup body parser
 app.use(express.json());
+// Setup CrossOriginResourceSharing
 app.use(cors(corsOptions));
+// Setup cookie parser
+app.use(cookieParser());
 
 // Handling Uncaught Exception
 process.on('uncaughtException', err => {
@@ -34,10 +38,11 @@ process.on('uncaughtException', err => {
 // The routes start here
 // Import all routes
 const auth = require('./routes/userRoutes');
+const profile = require('./routes/userProfileRoutes');
 
 
 app.use('/api/v1', auth);
-
+app.use('/api/v1', profile);
 
 
 

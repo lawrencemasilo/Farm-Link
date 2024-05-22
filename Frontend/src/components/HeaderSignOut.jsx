@@ -1,6 +1,9 @@
 import '../styles/HeaderSignOut.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function HeaderSignOut() {
+const navigate = useNavigate();
+
   return (
     <div className="header-container">
       <div className="logo-container">
@@ -17,10 +20,10 @@ export default function HeaderSignOut() {
         </div>
         <div className="login_register-btn-container">
           <div className="login-container">
-            <button>Login</button>
+            <button onClick={() => {navigate('/login')}}>Login</button>
           </div>
           <div className="register-container">
-            <button>Register</button>
+            <button onClick={() => {navigate('/register')}}>Register</button>
           </div>
         </div>
       </div>

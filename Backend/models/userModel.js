@@ -1,9 +1,11 @@
 // Defines the user schema and related data methods
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { reset } = require('nodemon');
 const validator = require('validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -53,6 +55,20 @@ userSchema.methods.getJwtToken = function() {
 // Compare the entered password with the password stored in database
 userSchema.methods.comparePassword = async function(enterPassword) {
   return await bcrypt.compare(enterPassword, this.password);
+}
+
+// Create a password reset token
+userSchema.methods.getResetPasswordToken = function() {
+  // generate the token
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash the token
+  this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  // Set token expiry time
+  this.resetPasswordExpire = Date.now() + 30*60*1000;
+
+  return resetToken;
 }
 
 module.exports = mongoose.model('User', userSchema);

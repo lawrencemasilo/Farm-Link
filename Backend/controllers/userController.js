@@ -1,11 +1,14 @@
 // Logic for user-related operations
-
-const User = require('../models/userModel');
 const Farm = require('../models/farmModel');
+const User = require('../models/userModel');
+
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const sendToken = require('../utils/generateToken');
+const sendEmail = require('../utils/sendEmail');
+const crypto = require('crypto');
 
-// Register a new user along with their farm details
+// Register a new user along with their farm details : /api/v1/register
 const registerUser =  catchAsyncErrors(async (req, res, next) => {
   const { name, email, password, address, cropType, farmSize, production } = req.body;
 
@@ -22,18 +25,14 @@ const registerUser =  catchAsyncErrors(async (req, res, next) => {
   user.farms.push(farm._id);
   await user.save();
 
-  // Create a json web token
-  const token = user.getJwtToken();
-
   // Send response with reqistered user and farm details
   res.status(201).json({
     success: true,
-    token : token,
     message: 'User was successfuly registered'
   }) ;
 });
 
-// Login a registered user
+// Login a registered user : : /api/v1/login
 const userLogin = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -59,17 +58,90 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
   }
   
   // Create a json web token
-  const token = user.getJwtToken();
+  sendToken(user, 200, res);
+
+})
+
+// Forgot Password : /api/v1/forgot/password
+const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  // Find the related user from the database
+  const user = await User.findOne({email: req.body.email});
+
+  // Check is the provided email exists
+  if (!user) {
+    return next(new ErrorHandler('No user found with this email', 404));
+  }
+
+  // Get password reset token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave : false });
+
+  // Create reset password url
+  const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`
+
+  const message = `Use the link below to reset your password:\n\n${resetUrl}\n\n Ignore this email if you did not request password reset.`
+  
+  try {
+    await sendEmail({
+      email : user.email,
+      subject : 'Farm_Link Password recovery',
+      message
+    });
+  
+    res.status(200).json({
+      success : true,
+      message: `Email sent successfully to: ${user.email}`
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({ validateBeforeSave : false });
+    return next(new ErrorHandler('Email not sent'), 500);
+  }
+  
+})
+
+// Password reset: /api/v1/password/reset/:token
+const passwordReset = catchAsyncErrors(async (req, res, next) => {
+  // Hash the token from the url
+  const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+  const user = await User.findOne({resetPasswordToken, resetPasswordExpire: {$gt : Date.now()}});
+
+  // Check is the provided email exists
+  if (!user) {
+    return next(new ErrorHandler('Password reset token is invalid or expired', 400));
+  }
+
+  // Create new password
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  
+  await user.save();
+
+  sendToken(user, 200, res);
+})
+
+// Logout user: /api/v1/logout
+const userLogout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now()),
+    httpOnly : true
+  })
 
   res.status(200).json({
     success: true,
-    token : token,
-    message: 'User successfuly logged in'
+    message : 'Logged out successfully'
   })
-    
-})
+});
 
 module.exports = {
   registerUser,
   userLogin,
+  forgotPassword,
+  passwordReset,
+  userLogout
 };
