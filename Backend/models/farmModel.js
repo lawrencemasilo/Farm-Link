@@ -7,17 +7,29 @@ const farmSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  cropType: {
+  name: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  },
+  streetName: {
+    type: String,
+    required: true
+  },
+  houseNumber: {
+    type: String,
+    required: true
+  },
+  city: {
     type: String,
     required: true
   },
   farmSize: {
     type: Number,
     required: true
-  },
-  production: {
-      type: Number,
-      required: true
   }
 });
 
