@@ -16,12 +16,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
     unique: true,
-    validate: validator.isEmail
+    validate: [validator.isEmail, 'Please enter a valid email address']
   },
   password: {
     type: String,
     require: true,
     select: false
+  },
+  phone: {
+    type: String,
+    require: true,
+    validator: [validator.isMobilePhone, 'Please enter a valid phone number']
+  },
+  role: {
+    type: String,
+    enum: ['farmer', 'admin'],
+    default: 'farmer'
   },
   createdAt: {
     type: Date,
