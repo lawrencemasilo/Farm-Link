@@ -54,7 +54,7 @@ export default function Register() {
                 <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name/Company" required/>
               </div>
               
-              <div className="email-container">
+              <div className="email-container-r">
                 <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
               </div>
 
