@@ -40,15 +40,13 @@ process.on('uncaughtException', err => {
 const auth = require('./routes/userRoutes');
 const crops = require('./routes/cropRoutes');
 const farm = require('./routes/farmRoutes');
-//const profile = require('./routes/userProfileRoutes');
+const profile = require('./routes/userProfileRoutes');
 
 
 app.use('/api/v1', auth);
 app.use('/api/v1', crops);
 app.use('/api/v1', farm);
-//app.use('/api/v1', profile);
-
-
+app.use('/api/v1', profile);
 
 // The routes end here
 
