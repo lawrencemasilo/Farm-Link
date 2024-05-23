@@ -1,6 +1,7 @@
 import '../styles/Schedule.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faTruckFast, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import Map from './Map'
 
 export default function Schedule() {
   return (
@@ -23,8 +24,12 @@ export default function Schedule() {
                 <p className="assign-person">For</p>
                 <FontAwesomeIcon icon={faCaretDown} className="assign-arrowIcon"/>
             </div>
+            <div className="schedule-btn-container">
+                <p className="schedule-btn-title">Schedule</p>
+            </div>
         </div>
         <div className="map-container">
+            <Map />
         </div>
     </div>
   )
