@@ -123,7 +123,7 @@
 
 /* Input Fields */
 
-.name-container input, .email-container input, .address-container input, .crop-type-container input, .farm-size-container input, .production-container input {
+.name-container input, .email-container-r input, .address-container input, .crop-type-container input, .farm-size-container input, .production-container input {
     width: 280px;
     height: 53px;
     color: #aeaeae;
@@ -134,9 +134,13 @@
     transition: box-shadow 0.6s ease;
 }
 
-.email-container input:focus, .address-container input:focus, .name-container input:focus, .crop-type-container input:focus, .farm-size-container input:focus, .production-container input:focus {
+.email-container-r input:focus, .address-container input:focus, .name-container input:focus, .crop-type-container input:focus, .farm-size-container input:focus, .production-container input:focus {
     outline: none;
     box-shadow: 0 0 8px 4px #0575e6;
+}
+
+.email-container-r {
+    margin-top: 40px;
 }
 
 .name-container {
@@ -144,7 +148,7 @@
     margin-bottom: -21px;
 }
 
-.email-container input {
+.email-container-r input {
     margin-top: 0px;
 }
 
