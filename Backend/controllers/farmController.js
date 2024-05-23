@@ -10,7 +10,7 @@ const createFarm = catchAsyncErrors(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    message: 'Farm created successfully!',
+    message: 'Farm details added successfully!',
     data: farm
   });
 });
