@@ -2,13 +2,13 @@
 const mongoose = require('mongoose');
 
 const cropSchema = new mongoose.Schema({
-    cropName: {
-        type: String,
-        required: true
-    },
     farm: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Farm',
+        required: true
+    },
+    cropName: {
+        type: String,
         required: true
     },
     plantDate: {
@@ -20,6 +20,10 @@ const cropSchema = new mongoose.Schema({
         required: true
     },
     yield: {
+        type: Number,
+        required: true
+    },
+    plotSize: {
         type: Number,
         required: true
     }
