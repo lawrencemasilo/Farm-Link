@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import ForgotPassword from './pages/ForgotPassword'
 import SuccessfulRegisteration from './pages/SuccessfulRegisteration'
+import PasswordReset from './pages/PasswordReset'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/successfulregistration" element={<SuccessfulRegisteration />} />
+        <Route path="/password/reset/:token" element={<PasswordReset />} />
       </Routes>
     </BrowserRouter>
   )

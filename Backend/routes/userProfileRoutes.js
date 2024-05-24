@@ -4,15 +4,19 @@ const { isAuthenticated, authorizedRoles } = require('../middleware/authMiddlewa
 
 // Importing user profile controller methods
 const { 
-  getUserProfile, 
+  getUserProfile,
   updateUserPassword, 
   updateUserData, 
-  deleteUser 
+  deleteUser,
+  getUsers 
 } = require('../controllers/userProfileController');
 
 router.route('/profile').get(isAuthenticated, getUserProfile);
 router.route('/update/password').put(isAuthenticated, updateUserPassword);
 router.route('/profile/update').put(isAuthenticated, updateUserData);
 router.route('/profile/delete').delete(isAuthenticated, deleteUser);
+
+// Admin only routes
+router.route('/users').get(isAuthenticated, getUsers);
 
 module.exports = router;

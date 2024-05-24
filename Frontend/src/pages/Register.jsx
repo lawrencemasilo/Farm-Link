@@ -2,15 +2,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Register.css'
 import { registerUser } from '../services/authService';
 import { useState } from 'react';
+//Name(persons name), email, password, phone, location(township), farmSize.
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('123456789');
-  const [address, setAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
   const [farmSize, setFarmSize] = useState('');
-  const [cropType, setCropType] = useState('');
-  const [production, setProduction] = useState('');
   
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Register() {
     //form input values (ex.Name) etc will be retrieved and sent to the backend from here.
     event.preventDefault();
     try {
-      const data = await registerUser({ name, email, password, address, farmSize, cropType, production });
+      const data = await registerUser({ name, email, password, phone, location, farmSize });
       navigate("/successfulregistration") //navigates to the successful registration if successful
     } catch (err) {
       console.log(err.message);
@@ -51,27 +51,27 @@ export default function Register() {
             <form className='form-container' onSubmit={handleSubmit}>
 
               <div className="name-container">
-                <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name/Company" required/>
+                <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required/>
               </div>
               
               <div className="email-container-r">
                 <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
               </div>
 
-              <div className="address-container">
-                <input type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" required/>
+              <div className="password-container-r">
+                <input type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Create password" required/>
               </div>
 
-              <div className="crop-type-container">
-                <input type="text" name="crop-type" value={cropType} onChange={(e) => setCropType(e.target.value)} placeholder="Crop Grown" required/>
+              <div className="phone-container">
+                <input type="number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" required/>
+              </div>
+
+              <div className="location-container">
+                <input type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" required/>
               </div>
 
               <div className="farm-size-container">
                 <input type="number" name="farm-size" value={farmSize} onChange={(e) => setFarmSize(e.target.value)} placeholder="Farm Size/ha" required/>
-              </div>
-
-              <div className="production-container">
-                <input type="text" name="production" value={production} onChange={(e) => setProduction(e.target.value)} placeholder="Production Capacity" required/>
               </div>
 
               <div className="submit-btn-container">
