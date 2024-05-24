@@ -6,15 +6,15 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Allow user to add a new crop
 const addCrop = catchAsyncErrors(async (req, res, next) => {
-    const { cropName, farm, plantDate, harvestDate, yield } = req.body;
+    const { cropName, farm, plantDate, harvestDate, yield, plotSize } = req.body;
 
     // Check if all required fields are provided
-    if (!cropName || !farm || !plantDate || !harvestDate || !yield) {
+    if (!cropName || !farm || !plantDate || !harvestDate || !yield || !plotSize) {
         return next(new ErrorHandler('Please fill in all the required fields', 400));
     }
 
     // Create a new crop document
-    const crop = await Crop.create({ cropName, farm, plantDate, harvestDate, yield });
+    const crop = await Crop.create({ cropName, farm, plantDate, harvestDate, yield, plotSize });
 
     // Send response with the new crop details
     res.status(201).json({
@@ -64,4 +64,14 @@ const getCrop = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-module.exports = { addCrop, updateCrop, getCrop };
+// Allow user to retrieve all crop instances
+const getCrops = catchAsyncErrors(async (req, res, next) => {
+    const crops = await Crop.find().populate('farm');
+
+    res.status(200).json({
+        success: true,
+        data: crops
+    });
+});
+
+module.exports = { addCrop, updateCrop, getCrop, getCrops };

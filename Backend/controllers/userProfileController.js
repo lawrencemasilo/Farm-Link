@@ -6,7 +6,7 @@ const sendToken = require('../utils/generateToken');
 
 // Get detailes of the currently logged in user: /api/v1/profile
 const getUserProfile =  catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id).populate('farms');
 
   res.status(200).json({
     success: true,
