@@ -9,12 +9,12 @@ export default function Members() {
   
   return (
     <div className="members-container">
-      <div className="members-title">
-        <h1>Members</h1>
-      </div>
       <div className="members-wrapper">
+        <div className="members-title">
+          <h1>Members</h1>
+        </div>
         <div className="members-nav-container">
-        <div className={selected == 'recent' ? "recent-container2" : "recent-container"} onClick={() => setSelected('recent')}>
+          <div className={selected == 'recent' ? "recent-container2" : "recent-container"} onClick={() => setSelected('recent')}>
             <p className="members-recent-title">Recent</p>
           </div>
           <div className={selected == 'farmers' ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('farmers')}>
@@ -24,8 +24,6 @@ export default function Members() {
             <p className="members-application-title">Applications</p>
           </div>
         </div>
-      </div>
-      <div className="members-main-container">
         {selected == 'recent' && <Recent /> }
         {selected == 'farmers' && <Farmers />}
         {selected == 'applications' && <Applications />}
