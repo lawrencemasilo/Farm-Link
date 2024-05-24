@@ -9,7 +9,7 @@ const farmSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true
+    required: false
   },
   location: {
     type: String,
@@ -17,15 +17,15 @@ const farmSchema = new mongoose.Schema({
   },
   streetName: {
     type: String,
-    required: true
+    required: false
   },
   houseNumber: {
     type: String,
-    required: true
+    required: false
   },
   city: {
     type: String,
-    required: true
+    required: false
   },
   farmSize: {
     type: Number,

@@ -117,6 +117,7 @@ const passwordReset = catchAsyncErrors(async (req, res, next) => {
 
   // Create new password
   user.password = req.body.password;
+  user.confirmPassword = req.body.confirmPassword;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   
