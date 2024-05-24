@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require('../utils/generateToken');
+const FarmLinkFilters = require('../utils/apiFilters')
 
 // Get detailes of the currently logged in user: /api/v1/profile
 const getUserProfile =  catchAsyncErrors(async (req, res, next) => {
@@ -64,9 +65,28 @@ const deleteUser =  catchAsyncErrors(async (req, res, next) => {
   })
 });
 
+// Admin only methods
+// Show all users : /api/v1/users
+const getUsers =  catchAsyncErrors(async (req, res, next) => {
+  const appFilters = new FarmLinkFilters(User.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .pagination();
+
+  const users = await appFilters.query;
+
+  res.status(200).json({
+    success : true,
+    results : users.length,
+    data : users
+  })
+});
+
 module.exports = {
   getUserProfile,
   updateUserPassword,
   updateUserData,
   deleteUser,
+  getUsers
 }
