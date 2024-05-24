@@ -13,7 +13,7 @@
 }
 
 .logo_signin-container h1 {
-    font-size: 39px;
+    font-size: 34px;
     color: #283712;
 }
 
@@ -42,12 +42,12 @@
     top: 12px;
     color: #595959;
 }
-.home-search-container {
+/*.home-search-container {
     width: 500px;
-    height: 40px;
+    height: 30px;
     display: flex;
     align-items: center;
-}
+}*/
 
 .home-search-container input {
     width: 100%;
@@ -65,12 +65,13 @@
 
 .logout-btn-container {
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
 
 .setting-container, .profile-container {
-    width: 138px;
-    height: 40px;
+    width: 110px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,21 +87,21 @@
 }
 
 .settingsIcon, .profileIcon {
-    font-size: 20px;
+    font-size: 16px;
     margin-right: 10px;
 }
 
 .settings-title, .userName-title {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .logout-container button {
-    width: 138px;
-    height: 40px;
+    width: 110px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+    font-size: 14px;
     border: none;
     border-radius: 8px;
     background-color: #0575e6;

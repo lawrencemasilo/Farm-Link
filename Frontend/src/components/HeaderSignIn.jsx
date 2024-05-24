@@ -3,6 +3,13 @@ import '../styles/HeaderSignIn.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faGear, faUser } from '@fortawesome/free-solid-svg-icons'
 
+
+/*
+<div className="home-search-container">
+  <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
+  <input type="text" placeholder="Search..." />
+</div>
+*/
 export default function HeaderSignIn() {
   const navigate = useNavigate();
 
@@ -12,10 +19,7 @@ export default function HeaderSignIn() {
         <h1>FarmLink</h1>
       </div>
       <div className="header-nav">
-        <div className="home-search-container">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
-          <input type="text" placeholder="Search..." />
-        </div>
+        
       </div>
       <div className="signin-wrapper">
         <div className="logout-btn-container">
