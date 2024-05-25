@@ -19,7 +19,7 @@ const cropSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    yield: {
+    produceYield: {
         type: Number,
         required: true
     },
