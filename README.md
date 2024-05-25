@@ -60,6 +60,7 @@ FROM_NAME=Farm Link
 - Note: Replace `your_mongodb_uri`, `your_jwt_secret`, `your_google_maps_api_key`, `your_email_address`, and `your_email_password` with your own values.
 
 5. Start the development server:
+Open separate terminals for the frontend and backend and run the following commands:
 ```bash
 npm run dev
 ```
