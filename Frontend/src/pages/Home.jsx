@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [selectedSchedule, setSelectedSchedule] = useState('schedule');
+  const [selected, setSelected] = useState('recent');
 
   return (
     <div className="home-container">
@@ -14,8 +15,8 @@ export default function Home() {
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {<SideBar setSelectedSchedule={setSelectedSchedule}/>}
-        {selectedSchedule === 'schedule' ? <Schedule /> : <Members />}
+        {<SideBar setSelectedSchedule={setSelectedSchedule} setSelectedItem={setSelected} />}
+        {selectedSchedule === 'schedule' ? <Schedule /> : <Members selectedItem={selected} />}
       </div>
     </div>
   )
