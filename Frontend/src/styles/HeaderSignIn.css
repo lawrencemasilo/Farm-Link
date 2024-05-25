@@ -24,7 +24,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: end;
-    margin-right: 80px;
+    margin-right: 50px;
 }
 
 .header-nav {
@@ -47,7 +47,7 @@
     height: 30px;
     display: flex;
     align-items: center;
-}*/
+}
 
 .home-search-container input {
     width: 100%;
@@ -59,14 +59,15 @@
 }
 
 .home-search-container input:focus {
-    outline: 1px solid #0575e6 /*#686868*/;
+    outline: 1px solid #0575e6 ;
     color: #595959;
-}
+}*/
 
 .logout-btn-container {
     display: flex;
     align-items: center;
     flex-direction: row;
+    margin: 0;
 }
 
 .setting-container, .profile-container {
@@ -116,5 +117,5 @@
 }
 
 .logout-container {
-    margin-right: 20px;
+    margin-right: 0px;
 }
