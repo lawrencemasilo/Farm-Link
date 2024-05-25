@@ -39,10 +39,10 @@ const userSchema = new mongoose.Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
-  farms: [{
+  farm: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Farm'
-}]
+}
 });
 
 // Encrypting passwords before saving them
