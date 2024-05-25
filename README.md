@@ -49,7 +49,15 @@ PORT=3001
 NODE_ENV=development
 JWT_EXPIRY_TIME=5d
 COOKIE_EXPIRERY_TIME=5
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+EMAIL_HOST=smtp.gmail.com
+EMAIL_HOST_USER=your_email_address
+DEFAULT_FROM_EMAIL=your_email_address
+EMAIL_HOST_PASSWORD=your_email_password
+EMAIL_PORT=587
+FROM_NAME=Farm Link
 ```
+- Note: Replace `your_mongodb_uri`, `your_jwt_secret`, `your_google_maps_api_key`, `your_email_address`, and `your_email_password` with your own values.
 
 5. Start the development server:
 ```bash
