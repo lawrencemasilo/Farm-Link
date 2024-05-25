@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Farmers.css'
 import farmersData from '../dataTest'
 
-export default function Farmers() {
+export default function Farmers({setSelectedFarmer}) {
+  const [select, setSelect] = useState('');
+
+  const handleClick = (v) => {
+    setSelectedFarmer(v);
+  }
   return (
     <div className="farmers-container">
       <div className="header-farmers-containers">
@@ -20,7 +25,7 @@ export default function Farmers() {
           </thead>
           <tbody>
             {farmersData.map((farmer) => (
-              <tr key={farmer.id}>
+              <tr key={farmer.id} onClick={() => handleClick(farmer.id)}>
                 <td>{farmer.id}</td>
                 <td>{farmer.name}</td>
                 <td>{farmer.farmSize}</td>

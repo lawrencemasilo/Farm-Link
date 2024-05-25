@@ -4,17 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faUserGroup, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 
-export default function SideBar({setSelectedSchedule}) {
+export default function SideBar({setSelectedSchedule, setSelectedItem}) {
   const [selected, setSelected] = useState(false);
 
+  const handleSchedule = () => {
+    setSelectedSchedule('schedule');
+    setSelected(false);
+  }
+
   const handleSelected = () => {
-    setSelected((prevState) => !prevState)
-    setSelectedSchedule('member')
+    setSelected((prevState) => !prevState);
+    setSelectedSchedule('member');
   }
 
   return (
     <div className="sidebar-container">
-        <div className="item-container 1" onClick={() => setSelectedSchedule('schedule')}>
+        <div className="item-container 1" onClick={handleSchedule}>
             <FontAwesomeIcon icon={faCalendarDays} className="icon" />
             <p className="item-title schedule">Schedule</p>
         </div>
@@ -25,13 +30,13 @@ export default function SideBar({setSelectedSchedule}) {
                 <FontAwesomeIcon icon={faCaretDown} className={!selected ?"dropDownIcon": "dropDownIcon2"} />
             </div>
         </div>
-        {selected && <div className="item-container m1">
+        {selected && <div className="item-container m1" onClick={() => setSelectedItem('recent')}>
             <p className="item-title recent">Recent</p>
         </div>}
-        {selected && <div className="item-container m2">
+        {selected && <div className="item-container m2" onClick={() => setSelectedItem('farmers')}>
             <p className="item-title farmers">Farmers</p>
         </div>}
-        {selected && <div className="item-container m3">
+        {selected && <div className="item-container m3" onClick={() => setSelectedItem('applications')}>
             <p className="item-title applications">Applications</p>
         </div>}
     </div>
