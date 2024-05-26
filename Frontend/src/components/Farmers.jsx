@@ -70,6 +70,7 @@ export default function Farmers({setSelectedFarmer}) {
                   <td>{farmer.name}</td>
                   <td>{farmer.farmSize}</td>
                   <td>{farmer.cropType}</td>
+                  <td>kg</td>
               </tr>))}
           </tbody>
         </table>
