@@ -244,7 +244,30 @@ const getUsers =  catchAsyncErrors(async (req, res, next) => {
     success : true,
     results : users.length,
     data : users
-  })
+  });
+});
+
+// Show details of the selected user
+const getUserDetails =  catchAsyncErrors(async (req, res, next) => {
+  const userId = req.params.userId;
+
+  // Find the user by ID and populate farm and crop details
+  const user = await User.findById(userId)
+    .populate({
+      path: 'farm',
+      populate: {
+        path: 'crops'
+      }
+    });
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  res.status(200).json({
+    success : true,
+    data : user
+  });
 });
 
 module.exports = {
@@ -257,5 +280,6 @@ module.exports = {
   addCrop,
   updateCrop,
   getUserFarmAndCrops,
-  getUsers
+  getUsers,
+  getUserDetails
 }
