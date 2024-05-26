@@ -18,10 +18,18 @@ export const loginUser = async (userData) => {
   }
 };
 
-
 export const forgotPassword = async (userData) => {
   try {
     const response = await axiosInstance.post('api/v1/forgot/password', userData);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const ResetPassword = async (userData) => {
+  try {
+    const response = await axiosInstance.post('api/v1/password/reset/:token', userData);
     return response.data;
   } catch (error) {
     throw error.response.data;
