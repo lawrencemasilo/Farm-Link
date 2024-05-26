@@ -1,0 +1,98 @@
+.indiv-farmer-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.indiv-farmer-wrapper {
+    position: relative;
+    width: 40%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.farmer-back-container {
+    position: absolute;
+    width: 26px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    margin-top: 60px;
+    margin-right: 40px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+.farmer-back-container:hover {
+    cursor: pointer;
+    background-color: rgb(254, 44, 20);
+    color: #ffffff;
+}
+
+
+.farmer-info-wrapper {
+    margin-right: 40px;
+}
+
+.farmer-info {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.farmer-info p {
+    margin-bottom: 10px;
+}
+
+.farmer-info p span {
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.contact-delect-container {
+    margin-top: 20px;
+}
+
+.contact-delect-container button {
+    width: 82px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+}
+
+.farmer-contact-btn {
+    background-color: #ffffff;
+    margin-right: 20px;
+}
+
+.farmer-contact-btn:hover {
+    cursor: pointer;
+    border: 1px solid #0575E6;
+    color: #0575E6;
+}
+.farmer-deregister {
+    background-color: rgb(253, 16, 16);
+    opacity: 60%;
+    color: #ffffff;
+}
+
+.farmer-deregister:hover {
+    cursor: pointer;
+    background-color: red;
+    color: #ffffff;
+    opacity: 100%;
+}

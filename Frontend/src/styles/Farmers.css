@@ -1,0 +1,78 @@
+.farmers-container {
+    margin-top: 25px;
+}
+
+.header-farmers-containers {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.searchFarmersContainer {
+    width: 300px;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+}
+
+.table-container {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #D9D9D9;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0 8px 8px 0;
+}
+ 
+.table-container::-webkit-scrollbar-thumb {
+    background: #dcdcdc; 
+    border-radius: 20px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #adadad; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+tr, th {
+    height: 30px;
+    border: 1px solid #D9D9D9;
+    text-align: left;
+}
+
+th {
+    padding-left: 10px;
+}
+
+tbody {
+    height: 20px;
+}
+
+td {
+    padding-left: 10px;
+    border: 1px solid #D9D9D9;
+}
+
+table thead tr th {
+    height: 50px;
+    font-size: 18px;
+    font-weight: 500;
+}
+tbody tr:hover {
+    background-color: #D9D9D9;
+}
