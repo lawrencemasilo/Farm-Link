@@ -2,7 +2,7 @@ const express = require('express');
 // Importing user profile controller methods
 const { 
   getUserProfile, updateUserPassword, updateUserData, deleteUser, createFarm,
-  updateFarm, addCrop, updateCrop, getUserFarmAndCrops, getUsers
+  updateFarm, addCrop, updateCrop, getUserFarmAndCrops, getUsers, getUserDetails
 } = require('../controllers/userProfileController');
 const { isAuthenticated, authorizedRoles } = require('../middleware/authMiddleware');
 const router = express.Router();
@@ -22,5 +22,7 @@ router.route('/profile/farm').get(getUserFarmAndCrops);
 
 // Admin only routes
 router.route('/users').get(getUsers);
+router.route('/users/:userId').get(getUserDetails);
+
 
 module.exports = router;
