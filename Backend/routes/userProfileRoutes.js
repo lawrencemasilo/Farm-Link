@@ -2,10 +2,10 @@ const express = require('express');
 // Importing user profile controller methods
 const { 
   getUserProfile, updateUserPassword, updateUserData, deleteUser, createFarm,
-  updateFarm, addCrop, updateCrop, getUserFarmAndCrops, getUsers, getUserDetails
+  updateFarm, addCrop, updateCrop, getUserFarmAndCrops, getUsers, getUserDetails,
+  adminDeleteUser
 } = require('../controllers/userProfileController');
-const { isAuthenticated, authorizedRoles } = require('../middleware/authMiddleware');
-const cookieJwtAuth = require('../middleware/crackCookie');
+const {cookieJwtAuth, authorizedRoles } = require('../middleware/crackCookie');
 const router = express.Router();
 
 router.use(cookieJwtAuth);
@@ -22,8 +22,9 @@ router.route('/profile/farm/crops/:cropId').put(updateCrop);
 router.route('/profile/farm').get(getUserFarmAndCrops);
 
 // Admin only routes
-router.route('/users').get(getUsers);
-router.route('/users/:userId').get(getUserDetails);
+router.route('/users').get(authorizedRoles('admin'), getUsers);
+router.route('/users/:userId').get(authorizedRoles('admin'), getUserDetails);
+router.route('/users/:userId').delete(authorizedRoles('admin'), adminDeleteUser);
 
 
 module.exports = router;
