@@ -1,7 +1,8 @@
 import React from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import Product from './Product'
 
 export default function Orders() {
   return (
@@ -38,20 +39,13 @@ export default function Orders() {
             </div>
           </div>
         </div>
+        <div className="add-order-container">
+          <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
+          <p>Add</p>
+        </div>
         <div className="order-form-container">
-          <div className="order-input-fields">
-            <div className="order-name-input">
-              <label for>Name:</label>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div className="order-crop-type">
-            <label for>Crop Type:</label>
-              <input type="text" placeholder="Crop Type" /> 
-            </div>
-            <div className="order-quantity">
-              <label>Quantity:</label>
-              <input type="number" placeholder="Quantity" />   
-            </div>  
+          <div className="order-output-container">
+            {<Product />}
           </div>  
         </div>
       </div>
