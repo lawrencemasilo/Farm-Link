@@ -9,7 +9,7 @@ const farmSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: false
+    required: true
   },
   location: {
     type: String,
@@ -17,20 +17,26 @@ const farmSchema = new mongoose.Schema({
   },
   streetName: {
     type: String,
-    required: false
+    required: true
   },
   houseNumber: {
     type: String,
-    required: false
+    required: true
   },
   city: {
     type: String,
-    required: false
+    required: true
   },
   farmSize: {
     type: Number,
     required: true
-  }
+  },
+  crops: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Crop',
+    default: []
+  }],
+
 });
 
 module.exports = mongoose.model('Farm', farmSchema);

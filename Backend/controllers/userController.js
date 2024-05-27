@@ -10,19 +10,19 @@ const crypto = require('crypto');
 
 // Register a new user along with their farm details : /api/v1/register
 const registerUser =  catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password, location, farmSize, phone } = req.body;
+  const { name, email, password, phone } = req.body;
 
   // Check if all required fields are provided
-  if (!name || !email || !password || !location || !farmSize || !phone) {
+  if (!name || !email || !password || !phone) {
     return next(new ErrorHandler('Please fill in all the required fields', 400));
   }
 
   // Create user and farm documents within the same session
   const user = await User.create({ name, email, password, phone });
-  const farm = await Farm.create({ user: user._id, location, farmSize });
+  // const farm = await Farm.create({ user: user._id, location, farmSize });
 
   // Associate farm with the user and save changes
-  user.farms.push(farm._id);
+  // await farm.save();
   await user.save();
 
   // Send response with reqistered user and farm details

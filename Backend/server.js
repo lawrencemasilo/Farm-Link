@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 // Handling Uncaught Exception
 process.on('uncaughtException', err => {
-  console.log(`ERROR: ${err.message}`);
+  console.log(`ERROR: ${err.stack}`);
   console.log('Shutting down due to uncaught exception');
   process.exit(1);
 }) 
@@ -38,15 +38,16 @@ process.on('uncaughtException', err => {
 // The routes start here
 // Import all routes
 const auth = require('./routes/userRoutes');
-const crops = require('./routes/cropRoutes');
-const farm = require('./routes/farmRoutes');
+// const crops = require('./routes/cropRoutes');
+// const farm = require('./routes/farmRoutes');
 const profile = require('./routes/userProfileRoutes');
-
+const orderRoutes = require('./routes/orderRoutes');
+const deliveryRoutes = require('./routes/deliveryRoutes');
 
 app.use('/api/v1', auth);
-app.use('/api/v1', crops);
-app.use('/api/v1', farm);
 app.use('/api/v1', profile);
+app.use('/api/v1', orderRoutes);
+app.use('/api/v1', deliveryRoutes);
 
 // The routes end here
 
