@@ -17,7 +17,7 @@ export const getFarmers = async () => {
 };*/
 
 
-export const farmersData = async () => {
+export const usersData = async () => {
   try {
     const response = await axiosInstance.get('/api/v1/users');
     return response.data;
