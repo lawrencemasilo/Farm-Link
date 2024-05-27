@@ -5,11 +5,11 @@ import Farmers from './Farmers';
 import Applications from './Applications';
 import Farmer from './Farmer';
 
-export default function Members({selectedItem}) {
-  const [selected, setSelected] = useState('');
+export default function Members() {
+  const [selected, setSelected] = useState('farmers');
   const [selectedFarmer, setSelectedFarmer] = useState();
   
-  useEffect(() => {
+  /*useEffect(() => {
     if (selectedItem === 'recent') {
       setSelected('recent');
     } else if (selectedItem === 'applications') {
@@ -17,7 +17,7 @@ export default function Members({selectedItem}) {
     } else if (selectedItem === 'farmers') {
       setSelected('farmers');
     }
-  }, [selectedItem])
+  }, [selectedItem])*/
  
 
   return (
@@ -27,19 +27,21 @@ export default function Members({selectedItem}) {
           <h1>Members</h1>
         </div>
         <div className="members-nav-container">
-          <div className={selected == 'recent' ? "recent-container2" : "recent-container"} onClick={() => setSelected('recent')}>
+          {/*<div className={selected == 'recent' ? "recent-container2" : "recent-container"} onClick={() => setSelected('recent')}>
             <p className="members-recent-title">Recent</p>
-          </div>
-          <div className={selected == 'farmers' ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('farmers')}>
+          </div>*/}
+          <div className={selected  ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('farmers')}>
             <p className="members-farmers-title">Farmers</p>
           </div>
-          <div className={selected == 'applications' ? "application-container2" :"application-container"} onClick={() => setSelected('applications')}>
+          {/*<div className={selected == 'applications' ? "application-container2" :"application-container"} onClick={() => setSelected('applications')}>
             <p className="members-application-title">Applications</p>
-          </div>
+          </div>*/}
         </div>
-        {selected == 'recent' && <Recent /> }
-        {selected == 'farmers' ? (selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
-          : (selected == 'farmers' && <Farmers setSelectedFarmer={ setSelectedFarmer } />)): ( selected == 'applications' && <Applications />)}
+        {/*selected == 'recent' && <Recent /> */}
+        {/*selected == 'farmers' ? (selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
+          : (selected == 'farmers' && <Farmers setSelectedFarmer={ setSelectedFarmer } />)): ( selected == 'applications' && <Applications />)*/}
+        {selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
+          : (selected && <Farmers setSelectedFarmer={ setSelectedFarmer } />)}
       </div>
     </div>
   )

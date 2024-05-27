@@ -34,6 +34,7 @@ export default function Farmer({selectedFarmer, setSelectedFarmer}) {
                     }}
                 )}
                 <div className="contact-delect-container">
+                    <button className="farmer-order-btn">Order</button>
                     <button className="farmer-contact-btn">Contact</button>
                     <button className="farmer-deregister">Deregister</button>
                 </div>
