@@ -23,6 +23,10 @@ const cropSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    availability: {
+        type: Number,
+        required: true
+    },
     plotSize: {
         type: Number,
         required: true
