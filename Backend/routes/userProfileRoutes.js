@@ -5,9 +5,10 @@ const {
   updateFarm, addCrop, updateCrop, getUserFarmAndCrops, getUsers, getUserDetails
 } = require('../controllers/userProfileController');
 const { isAuthenticated, authorizedRoles } = require('../middleware/authMiddleware');
+const cookieJwtAuth = require('../middleware/crackCookie');
 const router = express.Router();
 
-router.use(isAuthenticated)
+router.use(cookieJwtAuth);
 
 router.route('/profile').get(getUserProfile);
 router.route('/update/password').put(updateUserPassword);

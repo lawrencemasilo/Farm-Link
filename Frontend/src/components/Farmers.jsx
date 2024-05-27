@@ -2,32 +2,23 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
-import farmersData from '../dataTest';
-
-
-/*.map((farmer) => (
-    <tr key={farmer.id} onClick={() => handleClick(farmer.id)}>
-        <td>{farmer.id}</td>
-        <td>{farmer.name}</td>
-        <td>{farmer.farmSize}</td>
-        <td>{farmer.cropType}</td>
-    </tr>
-  ))*/
+import { usersData } from '../services/farmerService';
 
 export default function Farmers({setSelectedFarmer}) {
   const [select, setSelect] = useState('');
-  const [farmers, setFarmers] = useState([]); 
+  const [users, setUsers] = useState([]); 
   const [sortBy, setSortBy] = useState(false);
 
   const handleClick = (v) => {
     setSelectedFarmer(v);
   }
 
-  /*useEffect(() => {
+  //attempts to fetch the data and store it in farmers state
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await farmersData();
-        setFarmers(data);
+        const data = await usersData();
+        setUsers(data);
         console.log('request sent')
       } catch(err) {
         console.log(err);
@@ -36,7 +27,8 @@ export default function Farmers({setSelectedFarmer}) {
     fetchData();
   }, []);
 
-  console.log(farmers)*/
+  //tests what is inside what is supposed to be the data
+  console.log(users)
 
   return (
     <div className="farmers-container">
@@ -65,13 +57,17 @@ export default function Farmers({setSelectedFarmer}) {
             </tr>
           </thead>
           <tbody>
-            {farmersData.map((farmer) => (
-              <tr key={farmer.id} onClick={() => handleClick(farmer.id)}>
-                  <td>{farmer.name}</td>
-                  <td>{farmer.farmSize}</td>
-                  <td>{farmer.cropType}</td>
-                  <td>kg</td>
-              </tr>))}
+            {/* {users.map((user) => (
+              <tr key={user.id} onClick={() => handleClick(user.id)}>
+                <td>{user.name}</td>
+                <td>{user.farm.farmSize}</td>
+                <td>
+                  <ul>
+                    {user.farm.crops.map(crop=> (<li key={crop._id}>{crop.cropType}</li>))}
+                  </ul>
+                </td>
+                <td>kg</td>
+              </tr>))} */}
           </tbody>
         </table>
       </div>
