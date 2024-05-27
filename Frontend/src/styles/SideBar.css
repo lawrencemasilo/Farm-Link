@@ -1,9 +1,13 @@
 .sidebar-container {
     width: 20%;
     min-width: 10%;
-    height: 98%;
-    background-color: #ECF2F4;
+    height: auto;
+    /*background-color: #ECF2F4;*/
+    background-color: #0575e6;
+    color: #ffffff;
     border-top: 2px solid #B2B2B2;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .item-container, .item-container2 {
@@ -22,21 +26,25 @@
 }
 
 .item-container {
-    background-color: #ECF2F4;
+    /*background-color: #ECF2F4;*/
+    background-color: #0575e6;
 }
 
 .item-container2 {
-    background-color: #F6FDFF;
+    /*background-color: #F6FDFF;*/
+    background-color: #0575e6;
 }
 
 .item-container:hover, .item-container2:hover {
     cursor: pointer;
-    background-color: #F6FDFF;
+    /*background-color: #F6FDFF;*/
+    background-color: #0068d0;
 }
 
 .m1, .m2, .m3 {
     padding-left: 85px;
-    background-color: #F6FDFF;
+    /*background-color: #F6FDFF;*/
+    background-color: #0575e6;
 }
 
 .m3 {
@@ -45,8 +53,9 @@
 
 .icon {
     font-size: 18px;
-    color: #283712;
-    margin-right: 20px;
+    /*color: #283712;*/
+    color: #ffffff;
+    margin-right: 12px;
 }
 
 .item-title {

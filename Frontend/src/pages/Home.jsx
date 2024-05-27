@@ -1,12 +1,13 @@
 import '../styles/Home.css'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SideBar from '../components/SideBar'
-import Schedule from '../components/Schedule'
 import Members from '../components/Members'
 import { useState } from 'react'
+import Orders from '../components/Orders'
+import PlaceDelivery from '../components/PlaceDelivery'
 
 export default function Home() {
-  const [selectedSchedule, setSelectedSchedule] = useState('schedule');
+  const [navItem, setNavItem] = useState('members');
   const [selected, setSelected] = useState('recent');
 
   return (
@@ -15,8 +16,10 @@ export default function Home() {
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {<SideBar setSelectedSchedule={setSelectedSchedule} setSelectedItem={setSelected} />}
-        {selectedSchedule === 'schedule' ? <Schedule /> : <Members selectedItem={selected} />}
+        {<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />}
+        {navItem === 'order' &&  <Orders />}
+        {navItem === 'members' &&  <Members />}
+        {navItem === 'place delivery' && <PlaceDelivery />}
       </div>
     </div>
   )
