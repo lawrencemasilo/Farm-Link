@@ -18,7 +18,8 @@ connectDB();
 // Permited frontend url
 const corsOptions = {
   origin: 'http://localhost:5173',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  credentials: true
 }
 
 // Setup body parser
