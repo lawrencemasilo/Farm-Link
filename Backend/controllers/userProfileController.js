@@ -125,7 +125,7 @@ const updateFarm = catchAsyncErrors(async (req, res, next) => {
 
 const addCrop = catchAsyncErrors(async (req, res, next) => {
   const userId = req.user.id;
-  const { cropName, plantDate, harvestDate, produceYield, plotSize } = req.body;
+  const { cropName, plantDate, harvestDate, availability, produceYield, plotSize } = req.body;
 
   const user = await User.findById(userId).populate('farm');
   if (!user) {
@@ -142,12 +142,12 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Check if all required fields are provided
-  if (!cropName || !plantDate || !harvestDate || !produceYield || !plotSize) {
+  if (!cropName || !plantDate || !harvestDate || !availability || !produceYield || !plotSize) {
       return next(new ErrorHandler('Please fill in all the required fields', 400));
   }
 
   // Create a new crop document
-  const crop = await Crop.create({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, plotSize });
+  const crop = await Crop.create({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, availability, plotSize });
   
   // Add the crop's ObjectId to the farm's crop array
   farm.crops.push(crop._id);
@@ -164,7 +164,7 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
 //  Update crop details in the current user's farm
 const updateCrop = catchAsyncErrors(async (req, res, next) => {
   const cropId = req.params.cropId;
-  const { cropName, plantDate, harvestDate, produceYield, plotSize } = req.body;
+  const { cropName, plantDate, harvestDate, produceYield, availability, plotSize } = req.body;
 
   const user = await User.findById(req.user.id).populate({
     path: 'farm',
@@ -192,7 +192,8 @@ const updateCrop = catchAsyncErrors(async (req, res, next) => {
   crop.harvestDate = harvestDate || crop.harvestDate;
   crop.produceYield = produceYield || crop.produceYield;
   crop.plotSize = plotSize || crop.plotSize;
-
+  crop.availability = availability ||  crop.availability;
+  
   await user.farm.save();
 
   // Send response with the updated crop details

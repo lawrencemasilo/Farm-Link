@@ -73,7 +73,7 @@ const deleteDelivery = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Delivery not found!', 404));
     }
 
-    await delivery.remove();
+    await delivery.deleteOne();
 
     res.status(200).json({
         success: true,
