@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
-import { farmersData } from '../services/farmerService';
+import { usersData } from '../services/farmerService';
 
 export default function Farmers({setSelectedFarmer}) {
   const [select, setSelect] = useState('');
-  const [farmers, setFarmers] = useState([]); 
+  const [users, setUsers] = useState([]); 
   const [sortBy, setSortBy] = useState(false);
 
   const handleClick = (v) => {
@@ -17,8 +17,8 @@ export default function Farmers({setSelectedFarmer}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await farmersData();
-        setFarmers(data);
+        const data = await usersData();
+        setUsers(data);
         console.log('request sent')
       } catch(err) {
         console.log(err);
@@ -28,7 +28,7 @@ export default function Farmers({setSelectedFarmer}) {
   }, []);
 
   //tests what is inside what is supposed to be the data
-  console.log(farmers)
+  console.log(users)
 
   return (
     <div className="farmers-container">
@@ -57,13 +57,17 @@ export default function Farmers({setSelectedFarmer}) {
             </tr>
           </thead>
           <tbody>
-            {farmers.map((user) => (
+            {/* {users.map((user) => (
               <tr key={user.id} onClick={() => handleClick(user.id)}>
                 <td>{user.name}</td>
-                <td>{user.farmSize}</td>
-                <td>{user.cropType}</td>
+                <td>{user.farm.farmSize}</td>
+                <td>
+                  <ul>
+                    {user.farm.crops.map(crop=> (<li key={crop._id}>{crop.cropType}</li>))}
+                  </ul>
+                </td>
                 <td>kg</td>
-              </tr>))}
+              </tr>))} */}
           </tbody>
         </table>
       </div>
