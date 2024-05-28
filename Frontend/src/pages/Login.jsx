@@ -68,10 +68,8 @@ export default function Login() {
                   <Link className="forgot-password-link" to="/forgotpassword">Forgot Password</Link>
                 </div>
               </div>
-              
             </form>
           </div>
-          
         </div>
       </div>
     </div>
