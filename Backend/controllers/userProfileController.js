@@ -271,6 +271,30 @@ const getUserDetails =  catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Deletes user, farm and associated crops
+const adminDeleteUser = catchAsyncErrors(async (req, res, next) => {
+  const userId = req.params.userId;
+
+  const user = await User.findById(userId).populate('farm');
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  if (user.farm) {
+    const farmId = user.farm._id;
+
+    await Crop.deleteMany({ farm: farmId });
+    await Farm.findByIdAndDelete(farmId);
+  }
+
+  await User.findByIdAndDelete(userId);
+
+  res.status(200).json({
+    success: true,
+    message: 'User, farm, and crops were successfully delete'
+  });
+});
+
 module.exports = {
   getUserProfile,
   updateUserPassword,
@@ -282,5 +306,6 @@ module.exports = {
   updateCrop,
   getUserFarmAndCrops,
   getUsers,
-  getUserDetails
+  getUserDetails,
+  adminDeleteUser
 }
