@@ -16,6 +16,7 @@
 }
 
 .orders-wrapper {
+    width: auto;
     display: flex;
     flex-direction: column;
     padding: 0 50px;
@@ -40,19 +41,60 @@
     border-bottom: 3px solid #0575E6;
 }
 
-.order-form-container {
+.order-form-container{
     width: 100%;
     height: 300px;
-    border-top: 2px solid #D9D9D9;
+    /*border-top: 2px solid #D9D9D9;*/
     overflow-y: auto;
     margin-top: 30px;
 }
 
+.produce-form-container {
+    width: auto;
+    height: 300px;
+    /*border-top: 2px solid #D9D9D9;*/
+    overflow-y: auto;
+    margin-top: 30px;
+    margin-right: 50px;
+    margin-left: 50px;
+}
 .order-selectors {
     display: flex;
     margin-top: 30px;
 }
 
+.orders-s-crop-type-container, .orders-s-plantDate-container, .orders-s-harvestDate-container {
+    width: 191px;
+    /*border: 1px solid #585858;*/
+    position: relative;
+    margin-right: 20px;
+}
+
+.crop-type-dropDown, .plantDate-dropDown {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border: 1px solid #b1b1b1;
+    margin-top: 5px;
+    overflow-y: auto;
+    border-radius: 7px;
+    z-index: 1;
+    padding: 5px 0;
+}
+
+.plantDate-dropDown {
+    height: 120px;
+}
+.crop-type-dropDown p {
+    margin-bottom: 5px;
+    padding: 0 0 0 10px;
+}
+.crop-type-dropDown p:hover {
+    cursor: pointer;
+    background-color: #0575E6;
+    color: #ffffff;
+}
 .orders-s-farmer-btn, .orders-s-crop-type-btn, .orders-s-quantity-btn {
     position: relative;
     width: 120px;
@@ -69,19 +111,19 @@
     margin-right: 20px;
 }
 
-.orders-s-farmer-btn:hover, .orders-s-crop-type-btn:hover, .orders-s-quantity-btn:hover {
+.orders-s-farmer-btn:hover, .orders-s-crop-type-btn:hover, .orders-s-quantity-btn:hover, .orders-s-plantDate-btn:hover {
     cursor: pointer;
 }
 .orders-s-farmer-btn {
     width: 240px;
 }
 
-.orders-s-crop-type-btn {
+.orders-s-crop-type-btn, .orders-s-plantDate-btn {
     width: 180px;
 }
 
 .orders-s-quantity-btn {
-    width: 180px;
+    width: 100px;
 }
 
 .orders-s-quantity-btn input {
@@ -91,20 +133,27 @@
     outline: none;
 }
 
-.orders-arrowIcon {
+.orders-arrowIcon, .orders-arrowIcon2 {
     position: absolute;
     right: 0;
     margin-right: 10px;
     transform: rotate(180deg);
 }
 
-.order-s-farmer-title, .order-s-crops-title, .order-s-quantity-title {
+.orders-arrowIcon2 {
+    top: 50%;
+    font-size: 14px;
+    color: #585858;
+    margin-top: 5px;
+}
+
+.order-s-farmer-title, .order-s-crops-title, .order-s-quantity-title, .order-s-plantDate-title, .order-s-harvestDate-title {
     margin-bottom: 7px;
     font-size: 15px;
     font-weight: 450;
 }
 
-.add-order-container {
+.add-order-container, .add-produce-container {
     width: 70px;
     height: 30px;
     display: flex;
@@ -115,7 +164,7 @@
     margin-top: 10px;
 }
 
-.add-orderIcon {
+.add-orderIcon, .add-produceIcon {
     margin-left: 10px;
     font-size: 14px;
     font-weight: 450;
@@ -123,10 +172,10 @@
     margin-right: 5px;
 }
 
-.add-orderIcon:hover {
+.add-orderIcon:hover, .add-produceIcon:hover {
     color: #ffffff;
 }
-.add-order-container p {
+.add-order-container p, .add-produceIcon p {
     font-size: 14px;
     font-weight: 450;
     color: #585858;
@@ -136,4 +185,35 @@
     cursor: pointer;
     background-color: #0575E6;
     color: #ffffff;
+}
+
+.add-produce-container:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #0575E6;
+}
+.order-form-container {
+    width: auto;
+}
+
+.produce-title-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    color: #b1b1b1;
+    margin-bottom: 8px;
+}
+
+.produce-title-container p {
+    font-size: 16px;
+}
+
+.produce-title-produce {
+    width: 780px;
+}
+
+.product-title-produce-container {
+    width: auto;
+    display: flex;
+    justify-content: end;
 }
