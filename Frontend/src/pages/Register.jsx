@@ -83,10 +83,8 @@ export default function Register() {
                   <Link className="login-link" to="/login">Already have an account? <span className="clickable-login">Login</span></Link>
                 </div>
               </div>
-              
             </form>
           </div>
-          
         </div>
       </div>
     </div>
