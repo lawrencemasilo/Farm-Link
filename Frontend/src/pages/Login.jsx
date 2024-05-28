@@ -13,6 +13,7 @@ import { useState } from 'react';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -30,6 +31,8 @@ export default function Login() {
         navigate("/home/farmer"); //navigates to the farmer home page after authentication
       }
     } catch (err) {
+      console.error('Error object:', err);
+      setError(err.message || 'Something went wrong, please try again!');
       console.log(err.message);
     }
   }
@@ -50,6 +53,7 @@ export default function Login() {
         <div className="input-container">
           <div className="input-spacer"></div>
           <div className="input-content-container">
+          {error && <div className="error-alert">{error}</div>} {/* Error Alert */}
             <div className="login-title">
               <h1>Hello Again!</h1>
               <p>Welcome Back</p>
