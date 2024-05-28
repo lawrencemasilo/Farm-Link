@@ -3,6 +3,13 @@ import '../styles/Login.css'
 import { loginUser } from '../services/authService'
 import { useState } from 'react';
 
+/*
+{
+    "success": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGRlM2Y0YzNmNmMwMmUzYWIwMTVlNCIsImlhdCI6MTcxNjkwNjYwMywiZXhwIjoxNzE3MzM4NjAzfQ.ZoNlh6fryXGyiFAi0ZquLaO5tOTyKVlDYTKT8i7K2_s",
+    "role": "user"
+}
+*/
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,9 +21,14 @@ export default function Login() {
     //form input values (ex.Name) etc will be retrieved and sent to the backend from here.
     event.preventDefault();
 
+    //Passes email and password to backend for auth
     try {
       const data = await loginUser({ email, password });
-      navigate("/home") //navigates to the home page after authentication
+      if (data.role == "admin") {
+        navigate("/home") //navigates to the home page after authentication
+      } else if (data.role == "user") {
+        navigate("/home/farmer"); //navigates to the farmer home page after authentication
+      }
     } catch (err) {
       console.log(err.message);
     }
