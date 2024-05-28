@@ -217,3 +217,216 @@
     display: flex;
     justify-content: end;
 }
+
+
+/* Responsive*/
+
+@media (max-width: 1120px) {
+    .orders-container {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .orders-wrapper {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0 50px;
+        
+    }
+
+    .orders-nav-container {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        justify-content: left;
+        align-items: end;
+        border-bottom: 2px solid #b1b1b1;
+        color: #283712;
+        margin-bottom: -15px;
+    }
+
+    .order-selectors {
+        overflow-y: auto;
+        overflow-x: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .order-selectors::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .orders-title {
+        padding: 35px 0 15px 0px;
+    }
+    
+    .orders-title h1 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #283712;
+    }
+    
+    .orders-wrapper {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0 50px;
+    }
+
+    .order-selectors {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .orders-s-farmer-btn, .orders-s-crop-type-btn, .orders-s-quantity-btn, .orders-s-crop-type-btn {
+        position: relative;
+        width: 180px;
+        height: 30px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex-direction: row;
+        font-size: 14px;
+        color: #585858;
+        border: 1px solid #D9D9D9;
+        border-radius: 7px;
+        padding-left: 10px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+
+    .orders-s-plantDate-btn {
+        margin-bottom: 10px;
+    }
+
+    .plot-size {
+        margin-top: 10px;
+    }
+    .order-s-farmer-title, .order-s-crops-title, .order-s-quantity-title, .order-s-plantDate-title, .order-s-harvestDate-title {
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: 450;
+    }
+
+    .add-order-container, .add-produce-container {
+        /*margin-top: -15px;*/
+    }
+    .produce-form-container {
+        margin-top: 5px;
+    }
+    
+    .produce-form-container::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+@media (max-width: 375px) {
+    .orders-container {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 375px;
+        margin: 0 auto;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .orders-wrapper {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0 50px;
+        
+    }
+
+    .orders-nav-container {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        justify-content: left;
+        align-items: end;
+        border-bottom: 2px solid #b1b1b1;
+        color: #283712;
+        margin-bottom: -15px;
+    }
+
+    .order-selectors {
+        overflow-y: auto;
+        overflow-x: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .order-selectors::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .orders-title {
+        padding: 35px 0 15px 0px;
+    }
+    
+    .orders-title h1 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #283712;
+    }
+    
+    .orders-wrapper {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0 50px;
+    }
+
+    .order-selectors {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .orders-s-farmer-btn, .orders-s-crop-type-btn, .orders-s-quantity-btn, .orders-s-crop-type-btn {
+        position: relative;
+        width: 180px;
+        height: 30px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex-direction: row;
+        font-size: 14px;
+        color: #585858;
+        border: 1px solid #D9D9D9;
+        border-radius: 7px;
+        padding-left: 10px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+
+    .orders-s-plantDate-btn {
+        margin-bottom: 10px;
+    }
+
+    .plot-size {
+        margin-top: 10px;
+    }
+    .order-s-farmer-title, .order-s-crops-title, .order-s-quantity-title, .order-s-plantDate-title, .order-s-harvestDate-title {
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: 450;
+    }
+
+    .add-order-container, .add-produce-container {
+        margin-top: -15px;
+    }
+    .produce-form-container {
+        margin-top: 5px;
+    }
+    
+    .produce-form-container::-webkit-scrollbar {
+        width: 0;
+    }
+}

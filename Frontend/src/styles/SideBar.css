@@ -92,3 +92,46 @@
     transform: rotate(180deg);
 }
 
+/*responsive*/
+
+@media (max-width: 1181px) {
+    .item-container, .item-container2 {
+        width: auto;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 10px;
+        padding-top: 10px;
+        font-size: 10px;
+    }
+
+    .icon {
+        font-size: 12px;
+    }
+
+    .item-title {
+        font-size: 12px;
+        margin: 0px 0 0 -10px;
+    }
+
+    .sidebarF {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .item-container:hover, .item-container2:hover {
+        cursor: pointer;
+        /*background-color: #F6FDFF;*/
+        background-color: #0068d0;
+    }
+}
+
+@media (max-width: 780px) {
+    .item-title {
+        color: transparent;
+    }
+}
