@@ -20,7 +20,7 @@ export default function Register() {
     event.preventDefault();
     try {
       const data = await registerUser({ name, email, password, phone, location, farmSize });
-      navigate("/successfulregistration") //navigates to the successful registration if successful
+      navigate("/login") //navigates to the successful registration if successful
     } catch (err) {
       console.log(err.message);
     }
