@@ -100,10 +100,10 @@ export default function Produce() {
               <FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon2" />
             </div>
           </div>
-          <div className="orders-s-quantity-container">
+          <div className="orders-s-quantity-container plot-size">
             <p className="order-s-quantity-title">Plot Size</p>
             <div className="orders-s-quantity-btn">
-              <input type="number" placeholder={plot} value={plot} onChange={(e) => setPLot(e.target.value)} />
+              <input type="number" placeholder={plot} value={plot} onChange={(e) => setPLot(e.target.value)} required />
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function Produce() {
         </div>
         <div className="order-output-container">
           {add && produce.map((item, key) => (
-            item.selectedCrop != '--None--' && item.quantity > 0 ? 
+            item.selectedCrop != '--None--' && item.quantity > 0 && selectedPlantDate && selectedHarvestDate && plot ? 
               (
               <ProduceItem 
                 key={key} 
