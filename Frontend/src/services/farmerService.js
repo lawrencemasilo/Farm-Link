@@ -25,3 +25,13 @@ export const usersData = async () => {
     throw error.response.data;
   }
 };
+
+
+export const farmData = async () => {
+  try {
+    const response = await axiosInstance.get('/api/v1/profile/farm');
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
