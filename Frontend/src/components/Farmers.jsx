@@ -2,11 +2,57 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
-import { usersData } from '../services/farmerService';
+import { usersData, farmData } from '../services/farmerService';
 
+
+
+/* 
+[
+    {
+        "role": "user",
+        "orders": [],
+        "deliveries": [],
+        "_id": "664f1358535d2a48b7bfd906",
+        "name": " NeoAdmin",
+        "email": "neolawrencemasilo@gmail.com",
+        "farms": [
+            "664f1358535d2a48b7bfd908"
+        ],
+        "createdAt": "2024-05-23T09:58:48.608Z",
+        "resetPasswordExpire": "2024-05-23T17:01:12.988Z",
+        "resetPasswordToken": "896cbd7613efafc7f8793b478c472bd5d1889f94f4bf32c64f39459443749e4e"
+    },
+    {
+        "orders": [],
+        "deliveries": [],
+        "_id": "665450a0c8efacc6aef73bc6",
+        "name": "Admin2",
+        "email": "admin2@gmail.com",
+        "phone": "0712345678",
+        "role": "user",
+        "farms": [
+            "665450a1c8efacc6aef73bc8"
+        ],
+        "createdAt": "2024-05-27T09:21:37.052Z"
+    },
+    {
+        "role": "user",
+        "orders": [],
+        "deliveries": [],
+        "_id": "664de3f4c3f6c02e3ab015e4",
+        "name": "Neo",
+        "email": "admin1@gmail.com",
+        "farms": [
+            "664de3f4c3f6c02e3ab015e6"
+        ],
+        "createdAt": "2024-05-22T12:24:20.499Z"
+    }
+]
+*/
 export default function Farmers({setSelectedFarmer}) {
   const [select, setSelect] = useState('');
   const [users, setUsers] = useState([]); 
+  const [farms, setFarms] = useState([]);
   const [sortBy, setSortBy] = useState(false);
 
   const handleClick = (v) => {
@@ -18,12 +64,14 @@ export default function Farmers({setSelectedFarmer}) {
     const fetchData = async () => {
       try {
         const data = await usersData();
-        setUsers(data);
+        setUsers(data.data);
         console.log('request sent')
       } catch(err) {
         console.log(err);
       }
-    }
+    } 
+
+
     fetchData();
   }, []);
 
@@ -57,17 +105,17 @@ export default function Farmers({setSelectedFarmer}) {
             </tr>
           </thead>
           <tbody>
-            {/* {users.map((user) => (
+            {users && users.map((user) => (
               <tr key={user.id} onClick={() => handleClick(user.id)}>
                 <td>{user.name}</td>
-                <td>{user.farm.farmSize}</td>
+                <td>{/*user.farm.farmSize*/}</td>
                 <td>
                   <ul>
-                    {user.farm.crops.map(crop=> (<li key={crop._id}>{crop.cropType}</li>))}
+                    {/*user.farm.crops.map(crop=> (<li key={crop._id}>{crop.cropType}</li>))*/}
                   </ul>
                 </td>
                 <td>kg</td>
-              </tr>))} */}
+            </tr>))}
           </tbody>
         </table>
       </div>
