@@ -203,3 +203,110 @@
 .clickable-login:hover {
     cursor: pointer;
 }
+
+@media (max-width: 1300px) {
+    .registerContainer {
+        display: flex;
+        flex-direction: row;
+        background-color: #FFFFFF;
+        width: 1100px;
+        height: 600px;
+        border-radius: 30px;
+    }
+
+    .FarmLink-title {
+        font-size: 50px;
+        font-weight: 600;
+    }
+    
+    .Farmlink-slogans {
+        font-size: 18px;
+        font-weight: normal;
+    }
+    
+    .back-btn {
+        width: 113px;
+        height: 30px;
+        border-radius: 30px;
+        border: none;
+        color: #FFFFFF;
+        background-color: #0575e6;
+        margin-top: 40px;
+    }
+    
+    .back-btn:hover {
+        cursor: pointer;
+        box-shadow: 0 0 8px 4px #0575e6;
+        transition: box-shadow 0.6s ease;
+    }
+
+    /* Input Fields */
+
+    .name-container input, .email-container-r input, .password-container-r input, .phone-container input, .location-container input, .farm-size-container input, .production-container input {
+        width: 220px;
+        height: 50px;
+        color: #aeaeae;
+        border: 1px solid #d9d9d9;
+        border-radius: 30px;
+        margin: 0;
+        padding-left: 39px;
+        transition: box-shadow 0.6s ease;
+    }
+
+    .name-container input {
+        margin-bottom: -8px;
+        margin-top: -10px;
+    }
+    .password-container-r input, .phone-container input, .location-container input, .farm-size-container input, .production-container input, .registration-btn {
+        margin-top: 12px;
+    }
+
+    /* Register Btn */
+
+    .submit-btn-container {
+        width: 260px;
+        height: 50px;
+    }
+
+    .registration-btn {
+        width: 100%;
+        height: 100%;
+        background-color: #0575e6;
+        border: none;
+        color: #FFFFFF;
+        font-size: 16px;
+        border-radius: 30px;
+    }
+
+    .registration-btn:hover {
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 0 8px 4px #0575e6;
+        transition: box-shadow 0.6s ease;
+    }
+
+    /* Links */
+
+    .registration-links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 30px 0px 0 39px;
+    }
+
+    .login-link {
+        font-size: 14px;
+        text-decoration: none;
+        color: #676767;
+        cursor: default;
+        margin-right: 15px;
+    }
+
+    .clickable-login {
+        color: #0575e6;
+    }
+
+    .clickable-login:hover {
+        cursor: pointer;
+    }
+}

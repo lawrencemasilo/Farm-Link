@@ -17,9 +17,9 @@ export default function SideBarFarmer({setNavItem, setSelectedItem}) {
   }
   return (
     <div className="sidebar-container">
-        <div className={!selected ? "item-container 2": "item-container2 2"} onClick={handleProfile}>
-        <FontAwesomeIcon icon={faUser} className="icon" />
-            <p className="item-title profile">Profile</p>
+        <div className={!selected ? "item-container 2 sidebarF": "item-container2 2"} onClick={handleProfile}>
+          <FontAwesomeIcon icon={faUser} className="icon" />
+          <p className="item-title profile">Profile</p>
         </div>
         <div className="item-container 1" onClick={() => setNavItem('produce')}>
           <FontAwesomeIcon icon={faWheatAwn} className="icon" />

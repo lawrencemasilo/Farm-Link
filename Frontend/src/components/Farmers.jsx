@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
-import { usersData, farmData } from '../services/farmerService';
+import { usersData, farmerDatails } from '../services/farmerService';
 
 
 export default function Farmers({setSelectedFarmer}) {
@@ -11,9 +11,15 @@ export default function Farmers({setSelectedFarmer}) {
   const [farms, setFarms] = useState([]);
   const [sortBy, setSortBy] = useState(false);
 
-  const handleClick = (v) => {
-    setSelectedFarmer(v);
-  }
+  const handleClick = async (userId) => {
+    try {
+      const data = await farmerDatails(userId);
+      console.log('Fetched user details:', data);
+      setSelectedFarmer(data.data);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
 
   //attempts to fetch the data and store it in farmers state
   useEffect(() => {
@@ -60,16 +66,25 @@ export default function Farmers({setSelectedFarmer}) {
           </thead>
           <tbody>
             {users && users.map((user) => (
-              <tr key={user.id} onClick={() => handleClick(user.id)}>
+              <tr key={user._id} onClick={() => handleClick(user._id)}>
                 <td>{user.name}</td>
-                <td>{/*user.farm.farmSize*/}</td>
+                <td>{user.farm ? `${user.farm.farmSize} ha` : 'No Farm'}</td>
                 <td>
                   <ul>
-                    {/*user.farm.crops.map(crop=> (<li key={crop._id}>{crop.cropType}</li>))*/}
+                    {user.farm && user.farm.crops ? user.farm.crops.map(crop => (
+                      <li key={crop._id}>{crop.cropName}</li>
+                    )) : <li>No Crops</li>}
                   </ul>
                 </td>
-                <td>kg</td>
-            </tr>))}
+                <td>
+                  <ul>
+                    {user.farm && user.farm.crops ? user.farm.crops.map(crop => (
+                      <li key={crop._id}>{crop.availability} kg</li>
+                    )) : <li>-</li>}
+                  </ul>
+                </td>
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>

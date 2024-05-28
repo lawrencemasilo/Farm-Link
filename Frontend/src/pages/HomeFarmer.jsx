@@ -12,6 +12,7 @@ import Produce from '../components/Produce'
 export default function HomeFarmer() {
   const [navItem, setNavItem] = useState('profile');
   const [selected, setSelected] = useState('recent');
+
   return (
     <div className="home-container">
       <div className="home-header-container">

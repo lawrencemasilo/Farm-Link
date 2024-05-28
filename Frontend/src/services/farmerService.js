@@ -27,11 +27,13 @@ export const usersData = async () => {
 };
 
 
-export const farmData = async () => {
+export const farmerDatails = async (userId) => {
   try {
-    const response = await axiosInstance.get('/api/v1/profile/farm');
+    const response = await axiosInstance.get(`/api/v1/users/${userId}`);
+    console.log(`Response from API:`, response);
     return response.data;
   } catch (error) {
+    console.error('Error in API call:', error);
     throw error.response.data;
   }
 };
