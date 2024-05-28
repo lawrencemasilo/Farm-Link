@@ -20,7 +20,7 @@ export default function Register() {
     event.preventDefault();
     try {
       const data = await registerUser({ name, email, password, phone, location, farmSize });
-      navigate("/successfulregistration") //navigates to the successful registration if successful
+      navigate("/login") //navigates to the successful registration if successful
     } catch (err) {
       console.log(err.message);
     }
@@ -83,10 +83,8 @@ export default function Register() {
                   <Link className="login-link" to="/login">Already have an account? <span className="clickable-login">Login</span></Link>
                 </div>
               </div>
-              
             </form>
           </div>
-          
         </div>
       </div>
     </div>

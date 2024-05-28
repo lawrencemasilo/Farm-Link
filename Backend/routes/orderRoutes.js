@@ -1,15 +1,15 @@
 // Maps URL endpoints to controller functions.
 const express = require('express');
 const router = express.Router();
-const { isAuthenticated } = require('../middleware/authMiddleware');
+const {cookieJwtAuth, authorizedRoles } = require('../middleware/crackCookie');
 
 // Importing order controller methods
 const { createOrder, getOrder, getOrders, updateOrder, deleteOrder } = require('../controllers/orderController');
 
-router.route('/order').post(isAuthenticated, createOrder);
-router.route('/orders').get(isAuthenticated, getOrders);
-router.route('/order/:id').get(isAuthenticated, getOrder);
-router.route('/order/:id').put(isAuthenticated, updateOrder);
-router.route('/order/:id').delete(isAuthenticated, deleteOrder);
+router.route('/order').post(cookieJwtAuth, createOrder);
+router.route('/orders').get(cookieJwtAuth, getOrders);
+router.route('/order/:id').get(cookieJwtAuth, getOrder);
+router.route('/order/:id').put(cookieJwtAuth, updateOrder);
+router.route('/order/:id').delete(cookieJwtAuth, deleteOrder);
 
 module.exports = router;

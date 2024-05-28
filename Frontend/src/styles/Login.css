@@ -195,3 +195,14 @@
     background-color: #aeaeae;
     margin: 0 20px 0 20px;
 }
+
+/* Error Alert */
+.error-alert {
+    padding: 1em;
+    margin: 1em 0;
+    color: red;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: -70px;
+    font-weight: 550;
+  }
