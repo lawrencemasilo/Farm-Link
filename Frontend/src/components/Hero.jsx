@@ -10,7 +10,7 @@ export default function Hero() {
     <div className="hero-container">
         <div className="hero-wrapper">
             <div className="title-container">
-                <h1 className="title">Empowering... Revolutionzing Agriculture</h1>
+                <h1 className="title">Empowering... Revolutionizing Agriculture</h1>
             </div>
             <div className="description-container">
                 <p className="description">Link the future of farming with us.</p>
