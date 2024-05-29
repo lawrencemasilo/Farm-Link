@@ -1,5 +1,5 @@
 import React from 'react'
-import farmersData from '../dataTest'
+import { farmerDelete } from '../services/farmerService';
 import '../styles/Farmer.css'
 
 /*
@@ -13,7 +13,18 @@ import '../styles/Farmer.css'
       production: '1000 kg'
     },
 */
-export default function Farmer({selectedFarmer, setSelectedFarmer}) {
+export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
+    const handleDeregister = async () => {
+        try {
+            if (selectedFarmer && selectedFarmer._id) {
+                await farmerDelete(selectedFarmer._id);
+                alert('Farmer deregistered successfully');
+                setSelectedFarmer(null);
+            }
+        } catch (error) {
+            console.error('Error deregistering farmer:', error);
+        }
+    };
   return (
     <div className="indiv-farmer-container">
         <div className="indiv-farmer-wrapper">
@@ -45,9 +56,9 @@ export default function Farmer({selectedFarmer, setSelectedFarmer}) {
                     </div>
                     )}
                     <div className="contact-delect-container">
-                        <button className="farmer-order-btn">Order</button>
+                        <button className="farmer-order-btn" onClick={() => onOrderClick(selectedFarmer)}>Order</button>
                         <button className="farmer-contact-btn">Contact</button>
-                        <button className="farmer-deregister">Deregister</button>
+                        <button className="farmer-deregister" onClick={handleDeregister}>Deregister</button>
                     </div>
             </div>
         </div>

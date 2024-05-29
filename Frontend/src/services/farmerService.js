@@ -30,10 +30,17 @@ export const usersData = async () => {
 export const farmerDatails = async (userId) => {
   try {
     const response = await axiosInstance.get(`/api/v1/users/${userId}`);
-    console.log(`Response from API:`, response);
     return response.data;
   } catch (error) {
-    console.error('Error in API call:', error);
+    throw error.response.data;
+  }
+};
+
+export const farmerDelete = async (userId) => {
+  try {
+    const response = await axiosInstance.delete(`/api/v1/users/${userId}`);
+    return response.data;
+  } catch (error) {
     throw error.response.data;
   }
 };
