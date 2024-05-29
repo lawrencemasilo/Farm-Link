@@ -6,10 +6,10 @@ const {cookieJwtAuth, authorizedRoles } = require('../middleware/crackCookie');
 // Importing order controller methods
 const { createOrder, getOrder, getOrders, updateOrder, deleteOrder } = require('../controllers/orderController');
 
-router.route('/order').post(cookieJwtAuth, createOrder);
+router.route('/order/:id').post(cookieJwtAuth, authorizedRoles('admin'), createOrder);
 router.route('/orders').get(cookieJwtAuth, getOrders);
 router.route('/order/:id').get(cookieJwtAuth, getOrder);
-router.route('/order/:id').put(cookieJwtAuth, updateOrder);
-router.route('/order/:id').delete(cookieJwtAuth, deleteOrder);
+router.route('/order/:id').put(cookieJwtAuth, authorizedRoles('admin'), updateOrder);
+router.route('/order/:id').delete(cookieJwtAuth, authorizedRoles('admin'), deleteOrder);
 
 module.exports = router;

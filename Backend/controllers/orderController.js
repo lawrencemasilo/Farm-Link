@@ -6,8 +6,16 @@ const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 // Create a new order => /api/v1/order
 const createOrder = catchAsyncErrors(async (req, res, next) => {
     const { name, crop, quantity } = req.body;
+    const farmerId = req.params.id;
+
+    // Check if user is admin
+    if (req.user.role !== 'admin') {
+        return next(new ErrorHandler('Only admin can create orders!', 403));
+    }
+
     const order = await Order.create({
         user: req.user.id,
+        farmer: farmerId, // _id of farm schema
         name,
         crop,
         quantity

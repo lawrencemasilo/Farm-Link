@@ -4,10 +4,12 @@ import Recent from './Recent';
 import Farmers from './Farmers';
 import Applications from './Applications';
 import Farmer from './Farmer';
+import Orders from './Orders';
 
 export default function Members() {
   const [selected, setSelected] = useState('farmers');
   const [selectedFarmer, setSelectedFarmer] = useState();
+  const [showOrderForm, setShowOrderForm] = useState(false);
   
   /*useEffect(() => {
     if (selectedItem === 'recent') {
@@ -18,7 +20,10 @@ export default function Members() {
       setSelected('farmers');
     }
   }, [selectedItem])*/
- 
+  const handleOrderClick = (user) => {
+    setSelectedFarmer(user);
+    setShowOrderForm(true);
+  }
 
   return (
     <div className="members-container">
@@ -40,8 +45,17 @@ export default function Members() {
         {/*selected == 'recent' && <Recent /> */}
         {/*selected == 'farmers' ? (selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
           : (selected == 'farmers' && <Farmers setSelectedFarmer={ setSelectedFarmer } />)): ( selected == 'applications' && <Applications />)*/}
-        {selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
-          : (selected && <Farmers setSelectedFarmer={ setSelectedFarmer } />)}
+        {selectedFarmer && !showOrderForm && (
+          <Farmer
+            selectedFarmer={selectedFarmer}
+            setSelectedFarmer={selectedFarmer}
+            onOrderClick={handleOrderClick}
+          />
+        )}
+        {selectedFarmer && showOrderForm && (
+          <Orders user={selectedFarmer} />
+        )}
+        {(!selectedFarmer && <Farmers setSelectedFarmer={ setSelectedFarmer } />)}
       </div>
     </div>
   )

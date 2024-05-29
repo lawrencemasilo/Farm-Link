@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product'
 
-export default function Orders() {
+export default function Orders({ user }) {
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
@@ -21,14 +21,14 @@ export default function Orders() {
           <div className="orders-s-farmer-container">
             <p className="order-s-farmer-title">Farmer</p>
             <div className="orders-s-farmer-btn">
-              <p>None</p>
+              <p>{ user ? user.name : None}</p>
             < FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
           </div>
           <div className="orders-s-crop-type-container">
             <p className="order-s-crops-title">Crops</p>
             <div className="orders-s-crop-type-btn">
-              <p>Crop Type</p>
+              <p>{ user && user.farm ? user.farm.crops.map(crop => crop.cropName).join(', ') : 'Crop Name'}</p>
               <FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
           </div>
