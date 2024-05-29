@@ -37,7 +37,11 @@
     margin-right: 40px;
 }
 
-.home-link-container p:hover, .about_us-link-container p:hover {
+.about_us-link-container a, .home-link-container a {
+    text-decoration: none;
+    color: #000;
+}
+.home-link-container a:hover, .about_us-link-container a:hover {
     cursor: pointer;
     color: #0575e6;
 }

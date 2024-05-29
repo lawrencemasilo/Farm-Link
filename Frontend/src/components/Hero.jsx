@@ -13,11 +13,11 @@ export default function Hero() {
                 <h1 className="title">Empowering... Revolutionzing Agriculture</h1>
             </div>
             <div className="description-container">
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a nunc dui. Proin dui eros, fermentum sed ultricies eget, rhoncus sit amet libero. Donec sed efficitur lectus, posuere feugiat nisi.</p>
+                <p className="description">Link the future of farming with us.</p>
             </div>
             <div className="hero-btn-container">
                 <button className="get_started-btn" onClick={() => navigate("/register")}>Get started</button>
-                <button className="learn_more-btn" onClick={() => navigate("/aboutus")}>Learn More</button>
+                <button className="learn_more-btn" onClick={() => navigate("/login")}>Learn More</button>
             </div>
         </div>
     </div>
