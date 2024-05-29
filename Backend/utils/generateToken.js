@@ -19,7 +19,7 @@ const sendToken = (user, statusCode, res) => {
       .json({
         success : true,
         token : token,
-        role: user.role
+        role: user.role,
       })
 }
 
