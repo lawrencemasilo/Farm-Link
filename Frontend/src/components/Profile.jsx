@@ -4,9 +4,10 @@ import Recent from './Recent';
 import Farmers from './Farmers';
 import Applications from './Applications';
 import Farmer from './Farmer';
+import History from './History';
 
 export default function Profile() {
-  const [selected, setSelected] = useState('farmers');
+  const [selected, setSelected] = useState('history');
   const [selectedFarmer, setSelectedFarmer] = useState();
 
   return (
@@ -16,17 +17,17 @@ export default function Profile() {
           <h1>Profile</h1>
         </div>
         <div className="members-nav-container">
-          {<div className={selected == 'recent' ? "recent-container2" : "recent-container"} onClick={() => setSelected('recent')}>
+          {<div className={selected == 'history' ? "recent-container2" : "recent-container"} onClick={() => setSelected('history')}>
             <p className="members-recent-title">History</p>
           </div>}
-          <div className={selected  ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('farmers')}>
+          <div className={selected == 'pending' ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('pending')}>
             <p className="members-farmers-title">Pending</p>
           </div>
-          {<div className={selected == 'applications' ? "application-container2" :"application-container"} onClick={() => setSelected('applications')}>
+          {<div className={selected == 'details' ? "application-container2" :"application-container"} onClick={() => setSelected('details')}>
             <p className="members-application-title">Details</p>
           </div>}
         </div>
-        {/*selected == 'recent' && <Recent /> */}
+        {selected == 'history' && <History />}
         {/*selected == 'farmers' ? (selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
           : (selected == 'farmers' && <Farmers setSelectedFarmer={ setSelectedFarmer } />)): ( selected == 'applications' && <Applications />)*/}
         {/*selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />

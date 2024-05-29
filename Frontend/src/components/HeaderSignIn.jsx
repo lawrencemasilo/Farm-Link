@@ -3,6 +3,7 @@ import '../styles/HeaderSignIn.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faGear, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
+import { profile } from '../services/ProfileService';
 
 
 /*
@@ -15,6 +16,7 @@ export default function HeaderSignIn() {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 720);
   const [toggle, setToggle] = useState(false);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,6 +28,18 @@ export default function HeaderSignIn() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, [])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await profile();
+        setUser(data.data);
+      } catch(err) {
+        console.log(err);
+      }
+    } 
+    fetchData();
   }, [])
 
   return (
@@ -44,7 +58,7 @@ export default function HeaderSignIn() {
           </div>
           <div className="profile-container">
             <FontAwesomeIcon icon={faUser} className="profileIcon" />
-            <p className="userName-title">User</p>
+            <p className="userName-title">{user && user.name}</p>
           </div>
           <div className="logout-container">
             <button onClick={() => {navigate('/login')}}>Logout</button>
@@ -59,7 +73,7 @@ export default function HeaderSignIn() {
           </div>
           <div className="profile-container-nav">
             <FontAwesomeIcon icon={faUser} className="profileIconNav" />
-            <p className="userName-title-nav">User</p>
+            <p className="userName-title-nav">{user && user.name}</p>
           </div>
           <div className="logout-container-nav">
             <button onClick={() => {navigate('/login')}}>Logout</button>
