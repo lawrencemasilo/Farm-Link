@@ -10,11 +10,12 @@ export default function Farmers({setSelectedFarmer}) {
   const [users, setUsers] = useState([]); 
   const [farms, setFarms] = useState([]);
   const [sortBy, setSortBy] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('');
 
   const handleClick = async (userId) => {
     try {
       const data = await farmerDatails(userId);
-      console.log('Fetched user details:', data);
       setSelectedFarmer(data.data);
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -22,18 +23,27 @@ export default function Farmers({setSelectedFarmer}) {
   };
 
   //attempts to fetch the data and store it in farmers state
-  useEffect(() => {
+  
     const fetchData = async () => {
       try {
-        const data = await usersData();
+        const query = {};
+        if (searchTerm) query.search = searchTerm;
+        if (sortOption) query.sort = sortOption;
+        const data = await usersData(query);
         setUsers(data.data);
-        console.log('request sent')
+        console.log('request sent');
       } catch(err) {
         console.log(err);
       }
-    } 
+    };
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchTerm, sortOption]);
+
+  const handleSortOptionChange = (option) => {
+    setSortOption(option);
+    setSortBy(false);
+  }
 
   //tests what is inside what is supposed to be the data
   console.log(users)
@@ -43,16 +53,24 @@ export default function Farmers({setSelectedFarmer}) {
       <div className="header-farmers-containers">
         <div className="sort-container">
           <button className="sort-by-container" onClick={() => setSortBy((prev) => !prev)}>Sort By <span className="sortIcon"><FontAwesomeIcon icon={faSort} /></span></button>
-          {sortBy && <div className="sort-extent">
-            <div className="sort-options">
-              <p>Default</p>
-              <p>Name(asc)</p>
-              <p>Crop (asc)</p>
-              <p>Availability</p>
-            </div>
-          </div>}
+          {sortBy && (
+            <div className="sort-extent">
+              <div className="sort-options">
+                <p onClick={() => handleSortOptionChange('')}>Default</p>
+                <p onClick={() => handleSortOptionChange('name')}>Name(asc)</p>
+                <p onClick={() => handleSortOptionChange('farm.crops.cropName')}>Crop (asc)</p>
+                <p onClick={() => handleSortOptionChange('farm.crops.availability')}>Availability</p>
+              </div>
+          </div>
+        )}
         </div>
-        <input type="text" className="searchFarmersContainer" placeholder="Search..." />
+        <input 
+          type="text"
+          className="searchFarmersContainer"
+          placeholder="Search..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <div className="table-container">
         <table>

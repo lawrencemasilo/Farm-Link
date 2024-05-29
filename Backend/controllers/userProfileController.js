@@ -229,6 +229,7 @@ const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
 const getUsers =  catchAsyncErrors(async (req, res, next) => {
   const appFilters = new FarmLinkFilters(User.find(), req.query)
       .filter()
+      .searchByQuery()
       .sort()
       .limitFields()
       .pagination();

@@ -48,7 +48,7 @@ export default function Members() {
         {selectedFarmer && !showOrderForm && (
           <Farmer
             selectedFarmer={selectedFarmer}
-            setSelectedFarmer={selectedFarmer}
+            setSelectedFarmer={setSelectedFarmer}
             onOrderClick={handleOrderClick}
           />
         )}
