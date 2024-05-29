@@ -17,9 +17,10 @@ export const getFarmers = async () => {
 };*/
 
 
-export const usersData = async () => {
+export const usersData = async (params = {}) => {
   try {
-    const response = await axiosInstance.get('/api/v1/users');
+    const queryString = new URLSearchParams(params).toString();
+    const response = await axiosInstance.get(`/api/v1/users?${queryString}`);
     return response.data;
   } catch (error) {
     throw error.response.data;

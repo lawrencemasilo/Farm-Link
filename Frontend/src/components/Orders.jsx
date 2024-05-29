@@ -1,10 +1,16 @@
 import React from 'react'
+import { useState } from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product'
 
 export default function Orders({ user }) {
+  const [selectedCrop, setSelectedCrop] = useState('');
+  const handleCropChange = (e) => {
+    setSelectedCrop(e.target.value);
+  };
+
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
@@ -28,7 +34,12 @@ export default function Orders({ user }) {
           <div className="orders-s-crop-type-container">
             <p className="order-s-crops-title">Crops</p>
             <div className="orders-s-crop-type-btn">
-              <p>{ user && user.farm ? user.farm.crops.map(crop => crop.cropName).join(', ') : 'Crop Name'}</p>
+              <select value={selectedCrop} onChange={handleCropChange}>
+                <option value="">Select Crop</option>
+                { user && user.farm ? user.farm.crops.map(crop => (
+                  <option key={crop._id} value={crop.cropName}>{crop.cropName}</option>
+                )) : <option value="">No Crops</option>}
+              </select>
               <FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
           </div>
