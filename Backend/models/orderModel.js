@@ -7,6 +7,11 @@ const orderSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
+    farmer: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Farm'
+    },
     name: {
         type: String,
         required: true
