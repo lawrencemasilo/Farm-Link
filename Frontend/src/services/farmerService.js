@@ -49,7 +49,16 @@ export const farmerDelete = async (userId) => {
 
 export const allFarmerDatails =  async () => {
   try {
-    const response = await axiosInstance.get('/profile/farm');
+    const response = await axiosInstance.get('/api/v1/profile/farm');
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
+
+export const updateFarmerDatails =  async (userData) => {
+  try {
+    const response = await axiosInstance.put('/api/v1/profile/farm', userData);
     return response.data;
   } catch (error) {
     throw error.response.data;
