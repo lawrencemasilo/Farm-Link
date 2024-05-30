@@ -5,6 +5,7 @@ import Farmers from './Farmers';
 import Applications from './Applications';
 import Farmer from './Farmer';
 import History from './History';
+import Details from './Details';
 
 export default function Profile() {
   const [selected, setSelected] = useState('history');
@@ -28,6 +29,7 @@ export default function Profile() {
           </div>}
         </div>
         {selected == 'history' && <History />}
+        {selected == 'details' && <Details />}
         {/*selected == 'farmers' ? (selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
           : (selected == 'farmers' && <Farmers setSelectedFarmer={ setSelectedFarmer } />)): ( selected == 'applications' && <Applications />)*/}
         {/*selectedFarmer ? <Farmer selectedFarmer={selectedFarmer} setSelectedFarmer={setSelectedFarmer} />
