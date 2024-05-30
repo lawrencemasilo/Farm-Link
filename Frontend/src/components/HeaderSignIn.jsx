@@ -52,10 +52,10 @@ export default function HeaderSignIn() {
       </div>
       {isMobile ? <FontAwesomeIcon icon={faBars} className="headerBar" onClick={() => setToggle((prev) => !prev)} /> : <div className="signin-wrapper">
         <div className="logout-btn-container">
-          <div className="setting-container">
+          {/*<div className="setting-container">
             <FontAwesomeIcon icon={faGear} className="settingsIcon"/>
             <p className="settings-title">Settings</p>
-          </div>
+          </div>*/}
           <div className="profile-container">
             <FontAwesomeIcon icon={faUser} className="profileIcon" />
             <p className="userName-title">{user && user.name}</p>
