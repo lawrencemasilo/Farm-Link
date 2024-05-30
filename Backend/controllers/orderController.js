@@ -1,25 +1,30 @@
 // Logic for order-related operations
 const Order = require('../models/orderModel');
+const Crop = require('../models/cropModel')
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Create a new order => /api/v1/order
 const createOrder = catchAsyncErrors(async (req, res, next) => {
-    const { name, crop, quantity } = req.body;
-    const farmerId = req.params.id;
+    const { cropId, quantity } = req.body;
+    const adminId = req.user._id;
 
-    // Check if user is admin
-    if (req.user.role !== 'admin') {
-        return next(new ErrorHandler('Only admin can create orders!', 403));
+    const crop = await Crop.findById(cropId);
+    if (!crop) {
+        return next(new ErrorHandler('Crop not found!', 404));
     }
 
-    const order = await Order.create({
-        user: req.user.id,
-        farmer: farmerId, // _id of farm schema
-        name,
-        crop,
+    const order = new Order({
+        admin: adminId,
+        crop:cropId,
         quantity
     });
+
+    await order.save();
+
+    // Add order to crop
+    crop.orders.push(order._id);
+    await crop.save();
 
     res.status(201).json({
         success: true,

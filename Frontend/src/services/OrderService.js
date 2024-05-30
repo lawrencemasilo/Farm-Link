@@ -1,8 +1,8 @@
 import axiosInstance from '../axiosConfig';
 
-export const placeOrder = async (userData) => {
+export const placeOrder = async (orderData) => {
     try {
-      const response = await axiosInstance.post('api/v1/', userData);
+      const response = await axiosInstance.post('api/v1/order', orderData);
       return response.data;
     } catch (error) {
       throw error.response.data;
