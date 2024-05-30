@@ -43,10 +43,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Farm'
   },
-  orders: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order'
-  }],
+  // orders: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Order'
+  // }],
   deliveries: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Delivery'
