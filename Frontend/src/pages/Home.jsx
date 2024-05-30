@@ -2,14 +2,35 @@ import '../styles/Home.css'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SideBar from '../components/SideBar'
 import Members from '../components/Members'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Orders from '../components/Orders'
 import PlaceDelivery from '../components/PlaceDelivery'
+import Farmers from '../components/Farmers'
+import '../styles/Members.css'
 
 export default function Home() {
   const [navItem, setNavItem] = useState('members');
   const [selected, setSelected] = useState('recent');
+  const [showOrderForm, setShowOrderForm] = useState(false);
+  const [selectedFarmer, setSelectedFarmer] = useState();
 
+  const handleOrderClick = (user) => {
+    if (user != null) {
+      setShowOrderForm(true);
+      setSelectedFarmer(user);
+    }
+    if (user === null) {
+      setShowOrderForm(false);
+      setSelectedFarmer(null);
+      setNavItem('order')
+    }
+  }
+
+  /*useEffect(() => {
+    if (selectedFarmer && showOrderForm) {
+      setNavItem('')
+    }
+  },[])*/
   return (
     <div className="home-container">
       <div className="home-header-container">
@@ -17,9 +38,17 @@ export default function Home() {
       </div>
       <div className="main-content-container">
         {<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />}
-        {navItem === 'order' &&  <Orders />}
-        {navItem === 'members' &&  <Members />}
-        {navItem === 'place delivery' && <PlaceDelivery />}
+        {selectedFarmer && showOrderForm && (
+          <Orders user={selectedFarmer} handleOrderClick={handleOrderClick}/>)}
+        {navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
+        {navItem === 'members' && !showOrderForm &&  
+          <Members 
+            handleOrderClick={handleOrderClick} 
+            selectedFarmer={selectedFarmer} 
+            setSelectedFarmer={setSelectedFarmer}
+            showOrderForm={showOrderForm}/>}
+        {/*navItem === 'members' && !selectedFarmer&& <Members />*/}
+        {/*navItem === 'place delivery' && <PlaceDelivery />*/}
       </div>
     </div>
   )
