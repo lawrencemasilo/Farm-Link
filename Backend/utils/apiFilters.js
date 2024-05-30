@@ -8,7 +8,7 @@ class FarmLinkFilters {
     const queryCopy = {...this.queryString};
   
     // Remove fields from the query
-    const removeFields = ['fields', 'sort', 'sesha', 'limit', 'page'];
+    const removeFields = ['fields', 'sort', 'search', 'limit', 'page'];
     removeFields.forEach(el => delete queryCopy[el]);
   
     let queryStr = JSON.stringify(queryCopy);
@@ -40,9 +40,9 @@ class FarmLinkFilters {
   }
 
   searchByQuery() {
-    if(this.queryString.sesha) {
-      const serch = this.queryString.sesha.split('-').join(' ');
-      this.query = this.query.find({$text: {$search: "\""+ serch +"\""}});
+    if(this.queryString.search) {
+      const searchTerm = this.queryString.search.split('-').join(' ');
+      this.query = this.query.find({$text: {$search: "\""+ searchTerm +"\""}});
     }
 
     return this;

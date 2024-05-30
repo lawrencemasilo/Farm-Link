@@ -18,7 +18,8 @@ connectDB();
 // Permited frontend url
 const corsOptions = {
   origin: 'http://localhost:5173',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  credentials: true
 }
 
 // Setup body parser
@@ -41,10 +42,13 @@ const auth = require('./routes/userRoutes');
 // const crops = require('./routes/cropRoutes');
 // const farm = require('./routes/farmRoutes');
 const profile = require('./routes/userProfileRoutes');
-
+const orderRoutes = require('./routes/orderRoutes');
+const deliveryRoutes = require('./routes/deliveryRoutes');
 
 app.use('/api/v1', auth);
 app.use('/api/v1', profile);
+app.use('/api/v1', orderRoutes);
+app.use('/api/v1', deliveryRoutes);
 
 // The routes end here
 

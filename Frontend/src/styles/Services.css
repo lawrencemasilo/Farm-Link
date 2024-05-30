@@ -11,10 +11,12 @@
 
 .description-container {
     width: 100%;
+    margin-bottom: 25px;
 }
 
 .services-title {
-    font-size: 72px;
+    font-size: 70px;
+    color: #283712;
 }
 
 .services {
@@ -22,4 +24,28 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+}
+
+.service {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin-left: 40px;
+    margin-top: 30px;
+    border-radius: 25px;
+}
+
+.icon-container {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #303030;
+}
+
+.service-title {
+    font-size: 18px;
+    color: #204E51;
 }

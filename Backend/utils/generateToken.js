@@ -18,8 +18,8 @@ const sendToken = (user, statusCode, res) => {
       .cookie('token', token, options)
       .json({
         success : true,
-        token : token
-
+        token : token,
+        role: user.role,
       })
 }
 

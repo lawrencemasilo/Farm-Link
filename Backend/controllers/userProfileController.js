@@ -5,7 +5,8 @@ const Crop = require('../models/cropModel');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require('../utils/generateToken');
-const FarmLinkFilters = require('../utils/apiFilters')
+const FarmLinkFilters = require('../utils/apiFilters');
+const { populate } = require('../models/orderModel');
 
 // Get detailes of the currently logged in user: /api/v1/profile
 const getUserProfile =  catchAsyncErrors(async (req, res, next) => {
@@ -125,7 +126,7 @@ const updateFarm = catchAsyncErrors(async (req, res, next) => {
 
 const addCrop = catchAsyncErrors(async (req, res, next) => {
   const userId = req.user.id;
-  const { cropName, plantDate, harvestDate, produceYield, plotSize } = req.body;
+  const { cropName, plantDate, harvestDate, availability, produceYield, plotSize } = req.body;
 
   const user = await User.findById(userId).populate('farm');
   if (!user) {
@@ -142,12 +143,12 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Check if all required fields are provided
-  if (!cropName || !plantDate || !harvestDate || !produceYield || !plotSize) {
+  if (!cropName || !plantDate || !harvestDate || !availability || !produceYield || !plotSize) {
       return next(new ErrorHandler('Please fill in all the required fields', 400));
   }
 
   // Create a new crop document
-  const crop = await Crop.create({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, plotSize });
+  const crop = await Crop.create({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, availability, plotSize });
   
   // Add the crop's ObjectId to the farm's crop array
   farm.crops.push(crop._id);
@@ -164,7 +165,7 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
 //  Update crop details in the current user's farm
 const updateCrop = catchAsyncErrors(async (req, res, next) => {
   const cropId = req.params.cropId;
-  const { cropName, plantDate, harvestDate, produceYield, plotSize } = req.body;
+  const { cropName, plantDate, harvestDate, produceYield, availability, plotSize } = req.body;
 
   const user = await User.findById(req.user.id).populate({
     path: 'farm',
@@ -192,7 +193,8 @@ const updateCrop = catchAsyncErrors(async (req, res, next) => {
   crop.harvestDate = harvestDate || crop.harvestDate;
   crop.produceYield = produceYield || crop.produceYield;
   crop.plotSize = plotSize || crop.plotSize;
-
+  crop.availability = availability ||  crop.availability;
+  
   await user.farm.save();
 
   // Send response with the updated crop details
@@ -208,7 +210,10 @@ const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(userId).populate({
     path: 'farm',
     populate: {
-      path: 'crops'
+      path: 'crops',
+      populate: {
+        path: 'orders'
+      }
     }
   });
 
@@ -228,6 +233,7 @@ const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
 const getUsers =  catchAsyncErrors(async (req, res, next) => {
   const appFilters = new FarmLinkFilters(User.find(), req.query)
       .filter()
+      .searchByQuery()
       .sort()
       .limitFields()
       .pagination();
@@ -270,6 +276,30 @@ const getUserDetails =  catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Deletes user, farm and associated crops
+const adminDeleteUser = catchAsyncErrors(async (req, res, next) => {
+  const userId = req.params.userId;
+
+  const user = await User.findById(userId).populate('farm');
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  if (user.farm) {
+    const farmId = user.farm._id;
+
+    await Crop.deleteMany({ farm: farmId });
+    await Farm.findByIdAndDelete(farmId);
+  }
+
+  await User.findByIdAndDelete(userId);
+
+  res.status(200).json({
+    success: true,
+    message: 'User, farm, and crops were successfully delete'
+  });
+});
+
 module.exports = {
   getUserProfile,
   updateUserPassword,
@@ -281,5 +311,6 @@ module.exports = {
   updateCrop,
   getUserFarmAndCrops,
   getUsers,
-  getUserDetails
+  getUserDetails,
+  adminDeleteUser
 }

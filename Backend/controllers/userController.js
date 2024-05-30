@@ -38,7 +38,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
   // Check if all required fields are provided
   if ( !email || !password ) {
-    return next(new ErrorHandler('Please enter both email and password', 400));
+    return res.status(400).json({ message: 'Please enter both email and password' });
   }
 
   // Find the related user from the database
@@ -46,7 +46,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
   // Check is the provided email exists
   if (!user) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    return res.status(401).json({ message: 'Invalid email or password' });
   }
 
   // Check if the provided password corresponds with password in database
@@ -54,7 +54,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
   // Check is the password entered is correct
   if (!isPasswordCorrect) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    return res.status(401).json({ message: 'Invalid email or password' });
   }
   
   // Create a json web token
