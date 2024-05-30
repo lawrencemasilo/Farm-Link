@@ -3,6 +3,7 @@ import { profile } from '../services/ProfileService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Details.css'
+import { farmerDatails, allFarmerDatails } from '../services/farmerService';
 
 //user
 /*
@@ -23,6 +24,7 @@ import '../styles/Details.css'
 //name, location, streetName, houseNumber, city, farmSize
 export default function Details() {
   const [user, setUser] = useState();
+  const [id, setId] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
@@ -37,6 +39,23 @@ export default function Details() {
       try {
         const data = await profile();
         setUser(data.data);
+        if (data.data._id) {
+          setId(data.data._id)
+          //console.log(data.data._id)
+        }
+      } catch(err) {
+        console.log(err);
+      }
+    } 
+    fetchData();
+  }, [])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await allFarmerDatails();
+        console.log(data);
+
       } catch(err) {
         console.log(err);
       }
