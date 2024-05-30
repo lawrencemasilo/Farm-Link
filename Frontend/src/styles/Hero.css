@@ -1,0 +1,102 @@
+.hero-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 720px;
+    background-image: url('../assets/images/Farmlink_imgs/hero.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.hero-container::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 60%;
+    z-index: 0;
+}
+
+
+.hero-wrapper {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.title-container {
+    width: 100%;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: -50px;
+    /*border: 1px solid #ffffff;*/
+}
+
+.title {
+    font-size: 80px;
+    color: #ffffff;
+    line-height: 100%;
+}
+
+.description-container {
+    width: 65%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: -50px;
+}
+
+.description {
+    font-size: 14px;
+    color: #efefef;
+    opacity: 85%;
+}
+
+.hero-btn-container button {
+    width: 138px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: -20px;
+}
+
+.get_started-btn {
+    background-color: #0575e6;
+    color: #ffffff;
+    border: none;
+}
+
+.learn_more-btn {
+    color: #ffffff;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    margin-left: 30px;
+}
+
+.learn_more-btn:hover, .get_started-btn:hover {
+    cursor: pointer;
+}
+
+.learn_more-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.get_started-btn:hover {
+    background-color: transparent;
+    color: #0575e6;
+    border: 1px solid #0575e6;
+}

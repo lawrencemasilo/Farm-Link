@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.outer-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    width: 1317px;
+    height: 700px;
+    border-radius: 30px;
+}
+
+/* Image Section */
+
+.image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-image: url('../assets/images/Farmlink_imgs/login.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 60%;
+    height: 100%;
+    border-radius: 30px 0 0 30px;
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 40%;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 30px 0 0 30px;
+}
+.login-spacer{
+    width: 160px;
+}
+
+/* Title_slogan */
+
+.title_slogan-container {
+    margin: 10px 0 0 0;
+    padding: 0;
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.FarmLink-title {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.Farmlink-slogans {
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.back-btn {
+    width: 123px;
+    height: 34px;
+    border-radius: 30px;
+    border: none;
+    color: #FFFFFF;
+    background-color: #0575e6;
+    margin-top: 40px;
+}
+
+.back-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 8px 4px #0575e6;
+    transition: box-shadow 0.6s ease;
+}
+
+/* Input section */
+
+.input-container {
+    display: flex;
+    justify-content: row;
+    color: #363636;
+    width: 40%;
+    height: 100%;
+}
+
+.input-spacer {
+    width: 105px;
+    height: 100%;
+}
+
+.input-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Title Section */
+
+.title h1 {
+    font-size: 32px;
+}
+
+.title p {
+    font-size: 20px;
+    margin-top: 26px;
+}
+
+/* Input Fields */
+
+.email-container input, .password-container input {
+    width: 280px;
+    height: 53px;
+    color: #aeaeae;
+    border: 1px solid #d9d9d9;
+    border-radius: 30px;
+    padding: 0 39px;
+    transition: box-shadow 0.6s ease;
+}
+
+.email-container input:focus, .password-container input:focus {
+    outline: none;
+    box-shadow: 0 0 8px 4px #0575e6;
+}
+
+.email-container {
+    margin-top: 36px;
+}
+
+.password-container, .login-btn {
+    margin-top: 19px;
+}
+
+/* Login Btn */
+
+.submit-btn-container-l {
+    width: 360px;
+    height: 53px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 100%;
+    background-color: #0575e6;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 30px;
+}
+
+.login-btn:hover {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 8px 4px #0575e6;
+    transition: box-shadow 0.6s ease;
+}
+
+/* Links */
+
+.login-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 30px 0 0 80px;
+}
+
+.register-link, .forgot-password-link {
+    font-size: 14px;
+    text-decoration: none;
+    color: #676767;
+}
+
+.register-link:hover, .forgot-password-link:hover {
+    color: #0575e6;
+}
+
+.link-divider {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #aeaeae;
+    margin: 0 20px 0 20px;
+}
+
+.error-alert {
+    padding: 1em;
+    margin: 1em 0;
+    color: red;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: -70px;
+    font-weight: 550;
+}
+
+@media (max-width: 1300px) {
+    .loginContainer {
+        display: flex;
+        flex-direction: row;
+        background-color: #FFFFFF;
+        width: 1100px;
+        height: 600px;
+        border-radius: 30px;
+    }
+
+    .FarmLink-title {
+        font-size: 50px;
+        font-weight: 600;
+    }
+    
+    .Farmlink-slogans {
+        font-size: 18px;
+        font-weight: normal;
+    }
+    
+    .back-btn {
+        width: 113px;
+        height: 30px;
+        border-radius: 30px;
+        border: none;
+        color: #FFFFFF;
+        background-color: #0575e6;
+        margin-top: 40px;
+    }
+    
+    .back-btn:hover {
+        cursor: pointer;
+        box-shadow: 0 0 8px 4px #0575e6;
+        transition: box-shadow 0.6s ease;
+    }
+
+    /* Input Fields */
+
+    .email-container input, .password-container input {
+        width: 220px;
+        height: 53px;
+        color: #aeaeae;
+        border: 1px solid #d9d9d9;
+        border-radius: 30px;
+        padding: 0 39px;
+        transition: box-shadow 0.6s ease;
+    }
+
+    .email-container input:focus, .password-container input:focus {
+        outline: none;
+        box-shadow: 0 0 8px 4px #0575e6;
+    }
+
+    .email-container {
+        margin-top: 36px;
+    }
+
+    .password-container, .login-btn {
+        margin-top: 19px;
+    }
+
+    /* Login Btn */
+
+    .submit-btn-container-l {
+        width: 300px;
+        height: 53px;
+    }
+
+    .login-btn {
+        width: 100%;
+        height: 100%;
+        background-color: #0575e6;
+        border: none;
+        color: #FFFFFF;
+        font-size: 16px;
+        border-radius: 30px;
+    }
+
+    .login-btn:hover {
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 0 8px 4px #0575e6;
+        transition: box-shadow 0.6s ease;
+    }
+
+    .login-links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 30px 0 0 39px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .image-container {
+        display: flex;
+        align-items: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 0%;
+        height: 100%;
+        border-radius: 30px 0 0 30px;
+    }
+    
+    .image-container::before {
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 0%;
+        background: #000000;
+        opacity: 40%;
+        pointer-events: none;
+        z-index: 0;
+        border-radius: 30px 0 0 30px;
+    }
+}

@@ -1,0 +1,22 @@
+.home-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.home-header-container {
+    width: 100%;
+    height: 10vh;
+}
+
+.main-content-container {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.produce-title-container h1{
+    font-size: 20px;
+    font-weight: 400;
+}
