@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Register.css'
 import { registerUser } from '../services/authService';
 import { useState } from 'react';
-//Name(persons name), email, password, phone, location(township), farmSize.
+
 
 export default function Register() {
   const [name, setName] = useState('');

@@ -69,7 +69,6 @@ export default function Orders({ user, handleOrderClick }) {
                   <option key={crop._id} value={crop.cropName}>{crop.cropName}</option>
                 )) : <option value="">No Crops</option>}
               </select>
-              {/*<FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />*/}
             </div>
           </div>
           <div className="orders-s-quantity-container">
@@ -89,7 +88,6 @@ export default function Orders({ user, handleOrderClick }) {
         </div>}
         <div className="order-form-container">
           <div className="order-output-container">
-            {/*<Product />*/}
           </div>  
         </div>
       </div>

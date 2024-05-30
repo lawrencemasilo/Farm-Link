@@ -53,7 +53,7 @@ export default function Login() {
         <div className="input-container">
           <div className="input-spacer"></div>
           <div className="input-content-container">
-          {error && <div className="error-alert">{error}</div>} {/* Error Alert */}
+          {error && <div className="error-alert">{error}</div>}
             <div className="login-title">
               <h1>Hello Again!</h1>
               <p>Welcome Back</p>
