@@ -21,9 +21,9 @@ export default function Profile() {
           {<div className={selected == 'history' ? "recent-container2" : "recent-container"} onClick={() => setSelected('history')}>
             <p className="members-recent-title">History</p>
           </div>}
-          <div className={selected == 'pending' ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('pending')}>
+          {/*<div className={selected == 'pending' ? "farmers-container2" :"farmers-container"} onClick={() => setSelected('pending')}>
             <p className="members-farmers-title">Pending</p>
-          </div>
+          </div>*/}
           {<div className={selected == 'details' ? "application-container2" :"application-container"} onClick={() => setSelected('details')}>
             <p className="members-application-title">Details</p>
           </div>}
