@@ -212,7 +212,7 @@ const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
     populate: {
       path: 'crops',
       populate: {
-        path: 'Orders'
+        path: 'orders'
       }
     }
   });
