@@ -14,7 +14,9 @@ export default function History() {
       try {
         const userData = await profile();
         setUser(userData.data);
-        setId(user._id)
+        if (user._id) {
+          setId(user._id)
+        }
       } catch (err) {
         console.log(err)
       }
@@ -25,8 +27,10 @@ export default function History() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userOrders = await getOrder(id);
-        setOrders(userOrders.data)
+        if (user._id) {
+          const userOrders = await getOrder(id);
+          setOrders(userOrders.data)
+        }
       } catch (err) {
         console.log(err)
       }
