@@ -40,10 +40,10 @@ export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick 
                                 <p><span>Farm Name:</span> {selectedFarmer.farm.name}</p>
                                 <p><span>Location:</span> {selectedFarmer.farm.location}</p>
                                 <p><span>Farm Size:</span> {selectedFarmer.farm.farmSize} ha</p>
-                                <h4>Crops:</h4>
+                                {/*<h4>Crops:</h4>*/}
                                 <ul>
                                     {selectedFarmer.farm.crops.map(crop => (
-                                        <li key={crop._id}>
+                                        <li key={crop._id} className="croplist">
                                             <p><span>Crop Name:</span> {crop.cropName}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.plantDate).toLocaleDateString()}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.harvestDate).toLocaleDateString()}</p>

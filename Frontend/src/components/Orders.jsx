@@ -30,7 +30,6 @@ export default function Orders({ user, handleOrderClick }) {
       cropId,
       quantity: Number(quantity),
     }
-
     try {
       const response = await placeOrder(orderDetails);
       console.log('Order response:', response);
@@ -90,7 +89,7 @@ export default function Orders({ user, handleOrderClick }) {
         </div>}
         <div className="order-form-container">
           <div className="order-output-container">
-            {<Product />}
+            {/*<Product />*/}
           </div>  
         </div>
       </div>
