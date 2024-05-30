@@ -29,10 +29,10 @@ export default function SideBar({setNavItem, setSelectedItem}) {
           <FontAwesomeIcon icon={faWheatAwn} className="icon" />
           <p className="item-title schedule">Order</p>
         </div>
-        <div className="item-container 1" onClick={() => setNavItem('place delivery')}>
+        {/*<div className="item-container 1" onClick={() => setNavItem('place delivery')}>
           <FontAwesomeIcon icon={faCalendarDays} className="icon" />
           <p className="item-title schedule">Place Delivery</p>
-        </div>
+          </div>*/}
     
         {/*selected && <div className="item-container m1" onClick={() => setSelectedItem('recent')}>
             <p className="item-title recent">Recent</p>

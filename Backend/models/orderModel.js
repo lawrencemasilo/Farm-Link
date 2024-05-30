@@ -2,19 +2,10 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    user: {
+    admin: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
-    },
-    farmer: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Farm'
-    },
-    name: {
-        type: String,
-        required: true
     },
     crop: {
         type: mongoose.Schema.Types.ObjectId,

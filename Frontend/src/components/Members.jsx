@@ -6,10 +6,10 @@ import Applications from './Applications';
 import Farmer from './Farmer';
 import Orders from './Orders';
 
-export default function Members() {
+export default function Members({handleOrderClick, selectedFarmer, setSelectedFarmer, showOrderForm}) {
   const [selected, setSelected] = useState('farmers');
-  const [selectedFarmer, setSelectedFarmer] = useState();
-  const [showOrderForm, setShowOrderForm] = useState(false);
+  //const [selectedFarmer, setSelectedFarmer] = useState();
+  //const [showOrderForm, setShowOrderForm] = useState(false);
   
   /*useEffect(() => {
     if (selectedItem === 'recent') {
@@ -20,10 +20,10 @@ export default function Members() {
       setSelected('farmers');
     }
   }, [selectedItem])*/
-  const handleOrderClick = (user) => {
+  /*const handleOrderClick = (user) => {
     setSelectedFarmer(user);
     setShowOrderForm(true);
-  }
+  }*/
 
   return (
     <div className="members-container">
@@ -52,9 +52,9 @@ export default function Members() {
             onOrderClick={handleOrderClick}
           />
         )}
-        {selectedFarmer && showOrderForm && (
+        {/*selectedFarmer && showOrderForm && (
           <Orders user={selectedFarmer} />
-        )}
+        )*/}
         {(!selectedFarmer && <Farmers setSelectedFarmer={ setSelectedFarmer } />)}
       </div>
     </div>

@@ -5,7 +5,8 @@ const Crop = require('../models/cropModel');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require('../utils/generateToken');
-const FarmLinkFilters = require('../utils/apiFilters')
+const FarmLinkFilters = require('../utils/apiFilters');
+const { populate } = require('../models/orderModel');
 
 // Get detailes of the currently logged in user: /api/v1/profile
 const getUserProfile =  catchAsyncErrors(async (req, res, next) => {
@@ -209,7 +210,10 @@ const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(userId).populate({
     path: 'farm',
     populate: {
-      path: 'crops'
+      path: 'crops',
+      populate: {
+        path: 'Orders'
+      }
     }
   });
 
