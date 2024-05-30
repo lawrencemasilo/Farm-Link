@@ -135,3 +135,7 @@ tbody tr:hover {
     background-color: #0575e6;
     color: #ffffff;
 }
+
+tbody tr td ul li {
+    list-style: none;
+}
