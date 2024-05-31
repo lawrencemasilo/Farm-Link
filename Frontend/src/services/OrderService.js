@@ -10,10 +10,10 @@ export const placeOrder = async (orderData) => {
     }
 };
 
-export const getOrder = async (userId) => {
+export const getOrder = async () => {
   //gets all the orders for a particular user
     try {
-      const response = await axiosInstance.get(`api/v1/order/${userId}`);
+      const response = await axiosInstance.get('api/v1/profile/farm');
       return response.data;
     } catch (error) {
       throw error.response.data;
