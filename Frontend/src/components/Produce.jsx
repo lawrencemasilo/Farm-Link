@@ -20,6 +20,7 @@ export default function Produce() {
   const [plot, setPLot] = useState();
 
   const handleSelect = (crop) => {
+    //stores selected crop to state
     setSelectedCrop(crop);
     setDropDown(false);
   }
@@ -31,7 +32,6 @@ export default function Produce() {
     setProduce([...produce, newProduce])
   }
 
-  //console.log(selectedDate)
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
@@ -44,14 +44,6 @@ export default function Produce() {
           </div>
         </div>
         <div className="order-selectors">
-          
-          {/*<div className="orders-s-farmer-container">
-            <p className="order-s-farmer-title">Farmer</p>
-            <div className="orders-s-farmer-btn">
-              <p>None</p>
-            < FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
-            </div>
-          </div>*/}
           <div className="orders-s-crop-type-container">
             <p className="order-s-crops-title">Crops</p>
             <div className="orders-s-crop-type-btn" onClick={() => setDropDown((prev) => !prev)}>
@@ -87,7 +79,6 @@ export default function Produce() {
           <div className="orders-s-harvestDate-container">
             <p className="order-s-harvestDate-title">Havested</p>
             <div className="orders-s-harvestDate-btn" onClick={() => setDropDownPlantDate((prev) => !prev)}>
-              {/*<Calender selectedDate={selectedDate} setSelectedDate={setSelectedDate} />)*/}
               <div className="calender-container">
                 <DatePicker
                   selected={selectedHarvestDate}

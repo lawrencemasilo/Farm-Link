@@ -15,8 +15,7 @@ export default function PasswordReset() {
     try {
       if (password == comfirmPassword) {
         const response = await axiosInstance.put(`api/v1/password/reset/${token}`, {password});
-        console.log("sent back");
-        navigate('/login');
+        navigate('/login'); //redirects on success
       }
     } catch (err) {
       console.log(err.message);

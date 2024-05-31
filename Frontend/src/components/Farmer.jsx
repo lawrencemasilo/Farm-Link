@@ -2,19 +2,9 @@ import React from 'react'
 import { farmerDelete } from '../services/farmerService';
 import '../styles/Farmer.css'
 
-/*
-{
-      id: 1,
-      name: 'John',
-      email: 'john@gmail.com',
-      address: '123 Main St',
-      farmSize: '50 hectare',
-      cropType: 'Wheat',
-      production: '1000 kg'
-    },
-*/
 export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
     const handleDeregister = async () => {
+        //Handles the Deregistration of a user
         try {
             if (selectedFarmer && selectedFarmer._id) {
                 await farmerDelete(selectedFarmer._id);
@@ -40,10 +30,9 @@ export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick 
                                 <p><span>Farm Name:</span> {selectedFarmer.farm.name}</p>
                                 <p><span>Location:</span> {selectedFarmer.farm.location}</p>
                                 <p><span>Farm Size:</span> {selectedFarmer.farm.farmSize} ha</p>
-                                <h4>Crops:</h4>
                                 <ul>
                                     {selectedFarmer.farm.crops.map(crop => (
-                                        <li key={crop._id}>
+                                        <li key={crop._id} className="croplist">
                                             <p><span>Crop Name:</span> {crop.cropName}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.plantDate).toLocaleDateString()}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.harvestDate).toLocaleDateString()}</p>

@@ -5,23 +5,6 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Details.css'
 import { farmerDatails, allFarmerDatails, updateFarmerDatails } from '../services/farmerService';
 
-//user
-/*
-{
-    "_id": "6655ec89c48b74f0d219071c",
-    "name": "admin3",
-    "email": "admin3@gmail.com",
-    "phone": "09834718920",
-    "role": "user",
-    "orders": [],
-    "deliveries": [],
-    "createdAt": "2024-05-28T14:39:05.256Z",
-    "__v": 0
-}
-*/
-
-//farm:
-//name, location, streetName, houseNumber, city, farmSize
 export default function Details() {
   const [user, setUser] = useState();
   const [farm, setFarm] = useState();
@@ -37,6 +20,7 @@ export default function Details() {
   const [selected, setSelected] = useState();
 
   useEffect(() => {
+    //fetches the information of the current user
     const fetchData = async () => {
       try {
         const data = await profile();
@@ -55,6 +39,7 @@ export default function Details() {
   }, [])
 
   useEffect(() => {
+    //fetches all the information of the farmer
     const fetchData = async () => {
       try {
         const data = await allFarmerDatails();
@@ -71,8 +56,9 @@ export default function Details() {
     fetchData();
   }, [])
 
-  //console.log({location, streetName, houseNumber, city, farmSize})
+
   const handleUpdate = async () => {
+    //updates the current users information
     if (selected) {
       try {
         const data = await updateFarmerDatails({name, location, streetName, houseNumber, city, farmSize});
