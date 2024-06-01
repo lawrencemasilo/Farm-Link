@@ -19,3 +19,12 @@ export const getOrder = async () => {
       throw error.response.data;
     }
 };
+
+export const updateOrderStatus = async (orderId, status) => {
+  try {
+    const response = await axiosInstance.put(`api/v1/orders/${orderId}/status`, { status });
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
