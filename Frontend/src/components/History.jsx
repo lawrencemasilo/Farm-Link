@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/History.css'
-import { getOrder } from '../services/OrderService';
+import { getOrder, updateOrderStatus } from '../services/OrderService';
 
 export default function History() {
   const [select, setSelect] = useState('');
@@ -16,10 +16,11 @@ export default function History() {
         if (Array.isArray(crops)) {
             const extractedOrders = crops.flatMap(crop =>
             crop.orders.map(order => ({
+              _id: order._id,
               cropName: crop.cropName,
               quantity: order.quantity,
               date: order.createdAt,
-              status: 'pending'
+              status: order.status || 'pending'
             }))
           );
           setOrders(extractedOrders);
@@ -33,13 +34,22 @@ export default function History() {
     fetchOrders();
   }, []);
 
-  const handleDispatch = (index) => {
-    setOrders(prevOrders => {
-      const newOrders = [...prevOrders];
-      newOrders[index].status = 'dispatched';
-      return newOrders;
-    });
-  }
+  const handleDispatch = async (index) => {
+    const order = orders[index];
+    const confirmed = window.confirm('Are you sure this order is dispatched?')
+    if (confirmed) {
+      try {
+        await updateOrderStatus(order._id, 'dispatched');
+        setOrders(prevOrders => {
+          const newOrders = [...prevOrders];
+          newOrders[index].status = 'dispatched';
+          return newOrders;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <div className="history-container">
       <div className="header-history-containers">
