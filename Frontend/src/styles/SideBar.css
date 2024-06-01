@@ -60,7 +60,7 @@
 
 .sidebar-settings-wrapper {
     width: auto;
-    height: 84.6%;
+    height: auto;
     display: flex;
     align-items: end;
 }
