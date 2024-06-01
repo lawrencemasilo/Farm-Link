@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product'
 import { placeOrder } from '../services/OrderService'
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function Orders({ user, handleOrderClick }) {
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [add, setAdd] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const handleCropChange = (e) => {
     setSelectedCrop(e.target.value);
@@ -43,15 +45,15 @@ export default function Orders({ user, handleOrderClick }) {
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
-        <div className="orders-title">
+        <div className={`orders-title ${theme}`}>
           <h1>Place Order</h1>
         </div>
-        <div className="orders-nav-container">
-          <div className="orders-title-container">
-            <p className="Orders-nav-title">Order</p>
+        <div className={`orders-nav-container ${theme}`}>
+          <div className={`orders-title-container ${theme}`}>
+            <p className={`Orders-nav-title ${theme}`}>Order</p>
           </div>
         </div>
-        <div className="order-selectors">
+        <div className={`order-selectors ${theme}`}>
           
           <div className="orders-s-farmer-container">
             <p className="order-s-farmer-title">Farmer</p>
@@ -60,9 +62,9 @@ export default function Orders({ user, handleOrderClick }) {
             < FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
           </div>
-          <div className="orders-s-crop-type-container">
-            <p className="order-s-crops-title">Crops</p>
-            <div className="orders-s-crop-type-btn">
+          <div className={`orders-s-crop-type-container ${theme}`}>
+            <p className={`order-s-crops-title ${theme}`}>Crops</p>
+            <div className={`orders-s-crop-type-btn ${theme}`}>
               <select value={selectedCrop} onChange={handleCropChange} className=" crop-type-sel">
                 <option value=""></option>
                 { user && user.farm ? user.farm.crops.map(crop => (

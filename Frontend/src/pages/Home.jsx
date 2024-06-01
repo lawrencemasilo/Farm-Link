@@ -2,18 +2,19 @@ import '../styles/Home.css'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SideBar from '../components/SideBar'
 import Members from '../components/Members'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Orders from '../components/Orders'
-import PlaceDelivery from '../components/PlaceDelivery'
-import Farmers from '../components/Farmers'
+import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/Members.css'
 import ListOrders from '../components/ListOrders'
+import Settings from '../components/Settings'
 
 export default function Home() {
   const [navItem, setNavItem] = useState('members');
   const [selected, setSelected] = useState('recent');
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [selectedFarmer, setSelectedFarmer] = useState();
+  const { theme } = useContext(ThemeContext);
 
   const handleOrderClick = (user) => {
     if (user != null) {
@@ -27,7 +28,7 @@ export default function Home() {
     }
   }
   return (
-    <div className="home-container">
+    <div className={`home-container ${theme}`}>
       <div className="home-header-container">
         {<HeaderSignIn />}
       </div>
@@ -43,6 +44,7 @@ export default function Home() {
             setSelectedFarmer={setSelectedFarmer}
             showOrderForm={showOrderForm}/>}
         {navItem === 'listOrders' && <ListOrders />}
+        {navItem === 'settings' && <Settings />}
       </div>
     </div>
   )

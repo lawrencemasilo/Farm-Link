@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import '../styles/SideBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWheatAwn, faUserGroup, faCalendarDays } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { faWheatAwn, faUserGroup, faCalendarDays, faGear } from '@fortawesome/free-solid-svg-icons'
+import { useContext, useState } from 'react'
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function SideBar({setNavItem, setSelectedItem}) {
   const [selected, setSelected] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const handleMembers = () => {
     setNavItem('members');
@@ -17,15 +19,21 @@ export default function SideBar({setNavItem, setSelectedItem}) {
   }
 
   return (
-    <div className="sidebar-container">
-        <div className={!selected ? "item-container 2": "item-container2 2"} onClick={handleMembers}>
+    <div className={`sidebar-container ${theme}`}>
+        <div className={!selected ? (`item-container ${theme}`): (`item-container2 ${theme} 2`)} onClick={handleMembers}>
             <FontAwesomeIcon icon={faUserGroup} className="icon" />
             <p className="item-title members">Members</p>
         </div>
-        {<div className="item-container 1" onClick={() => setNavItem('listOrders')}>
+        <div className={`item-container ${theme}`} onClick={() => setNavItem('listOrders')}>
           <FontAwesomeIcon icon={faWheatAwn} className="icon" />
           <p className="item-title schedule">Orders</p>
-        </div>}
+        </div>
+        <div className={`sidebar-settings-wrapper ${theme}`}>
+          <div className={`item-container-settings ${theme} item-container ${theme}`} onClick={() => setNavItem('settings')}>
+            <FontAwesomeIcon icon={faGear} className="icon"/>
+            <p className="item-title schedule">Settings</p>
+          </div>
+        </div>
     </div>
   )
 }

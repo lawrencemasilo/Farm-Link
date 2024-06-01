@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/ListOrder.css'
 import { getUserOrders } from '../services/usersServices.js';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function ListOrders() {
   const [selected, setSelected] = useState();
   //const [allOrders, setAllOrders] = useState();
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchData = async () =>  {
       try {
         const theData = await getUserOrders();
-        //console.log(data)
+        console.log(data)
       } catch (error) {
         console.log(error)
       } 
@@ -20,15 +22,15 @@ export default function ListOrders() {
   return (
     <div className="list-orders-container">
       <div className="list-orders-wrapper">
-        <div className="orders-list-title">
+        <div className={`orders-list-title ${theme}`}>
           <h1>Orders</h1>
         </div>
-        <div className="list-orders-nav-container">
-          <div className={selected ? "order-history-container2": "order-history-container"} onClick={() => setSelected('history')}>
-            <p className="order-history-title">history</p>
+        <div className={`list-orders-nav-container ${theme}`}>
+          <div className={`order-history-container2 ${theme}`} onClick={() => setSelected('history')}>
+            <p className={`order-history-title ${theme}`}>History</p>
           </div>
         </div>
-        <div className="list-order-history-table-container">
+        <div className={`list-order-history-table-container ${theme}`}>
           <table>
             <thead>
                 <tr>

@@ -21,6 +21,13 @@
     color: #283712;
 }
 
+.orders-list-title.dark h1 {
+    font-size: 27px;
+    font-weight: 500;
+    color: #ebebeb;
+}
+
+
 .list-orders-nav-container {
     width: 100%;
     height: 40px;
@@ -29,6 +36,17 @@
     align-items: end;
     border-bottom: 2px solid #b1b1b1;
     color: #283712;
+    margin: 0;
+}
+
+.list-orders-nav-container.dark {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: left;
+    align-items: end;
+    border-bottom: 2px solid #ebebeb;
+    color: #ebebeb;
     margin: 0;
 }
 
@@ -49,9 +67,24 @@
     border-bottom: 3px solid #0575E6;
 }
 
+.order-history-container2.dark {
+    cursor: pointer;
+    padding-bottom: 7px;
+    margin: 0 15px -3px 0;
+    color: #ebebeb;
+    border-bottom: 3px solid #ebebeb;
+}
+
 .list-order-history-table-container {
     margin-top: 50px;
 }
+
+.list-order-history-table-container.dark {
+    margin-top: 50px;
+    color: #ebebeb;
+    border: 1px solid #ebebeb;
+}
+
 
 table {
     width: 100%;
