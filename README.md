@@ -34,7 +34,7 @@ git clone https://github.com/lawrencemasilo/Farm-Link.git
 cd Farm-Link
 ```
 
-3. **Install dependencies in both Frontend & Backend directories**:
+3. **Install dependencies in root, Frontend & Backend directories**:
 ```bash
 npm install
 ```
