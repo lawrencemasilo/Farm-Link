@@ -6,12 +6,6 @@ import { useEffect, useState } from 'react';
 import { profile } from '../services/ProfileService';
 
 
-/*
-<div className="home-search-container">
-  <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
-  <input type="text" placeholder="Search..." />
-</div>
-*/
 export default function HeaderSignIn() {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 720);
@@ -52,10 +46,6 @@ export default function HeaderSignIn() {
       </div>
       {isMobile ? <FontAwesomeIcon icon={faBars} className="headerBar" onClick={() => setToggle((prev) => !prev)} /> : <div className="signin-wrapper">
         <div className="logout-btn-container">
-          <div className="setting-container">
-            <FontAwesomeIcon icon={faGear} className="settingsIcon"/>
-            <p className="settings-title">Settings</p>
-          </div>
           <div className="profile-container">
             <FontAwesomeIcon icon={faUser} className="profileIcon" />
             <p className="userName-title">{user && user.name}</p>

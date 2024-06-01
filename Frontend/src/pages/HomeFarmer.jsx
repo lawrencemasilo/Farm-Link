@@ -22,9 +22,6 @@ export default function HomeFarmer() {
         {<SideBarFarmer setNavItem={setNavItem} setSelectedItem={setSelected} />}
         {navItem === 'profile' && <Profile />}
         {navItem === 'produce' && <Produce />}
-        {/*navItem === 'order' &&  <Orders />*/}
-        {/*navItem === 'members' &&  <Members />*/}
-        {/*navItem === 'place delivery' && <PlaceDelivery />*/}
       </div>
     </div>
   )

@@ -31,7 +31,6 @@ export default function Farmers({setSelectedFarmer}) {
         if (sortOption) query.sort = sortOption;
         const data = await usersData(query);
         setUsers(data.data);
-        //console.log('request sent');
       } catch(err) {
         console.log(err);
       }
@@ -44,9 +43,6 @@ export default function Farmers({setSelectedFarmer}) {
     setSortOption(option);
     setSortBy(false);
   }
-
-  //tests what is inside what is supposed to be the data
-  //console.log(users)
 
   return (
     <div className="farmers-container">

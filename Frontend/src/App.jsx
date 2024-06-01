@@ -11,7 +11,7 @@ import PasswordReset from './pages/PasswordReset'
 import HomeFarmer from './pages/HomeFarmer'
 
 function App() {
-
+  //handles all the routing for the application.
   return (
     <BrowserRouter>
       <Routes>

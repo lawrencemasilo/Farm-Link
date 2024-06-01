@@ -32,6 +32,19 @@ const createOrder = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+// Update order status endpoint
+const updateOrderStatus = catchAsyncErrors(async (req, res, next) => {
+    const { orderId } = req.params;
+    const { status } = req.body;
+
+    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
+    if (!order) {
+        return next(new ErrorHandler('Order not found!', 404));
+    }
+
+    res.status(200).json(order);
+});
+
 // GET single order details => /api/v1/order/:id
 const getOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findById(req.params.id).populate('crop');
@@ -97,5 +110,6 @@ module.exports = {
     getOrder,
     getOrders,
     updateOrder,
-    deleteOrder
+    deleteOrder,
+    updateOrderStatus
 };

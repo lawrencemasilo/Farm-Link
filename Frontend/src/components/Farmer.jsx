@@ -2,6 +2,13 @@ import React from 'react'
 import { farmerDelete } from '../services/farmerService';
 import '../styles/Farmer.css'
 
+// Styles for the swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+
 /*
 {
       id: 1,
@@ -15,6 +22,7 @@ import '../styles/Farmer.css'
 */
 export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
     const handleDeregister = async () => {
+        //Handles the Deregistration of a user
         try {
             if (selectedFarmer && selectedFarmer._id) {
                 await farmerDelete(selectedFarmer._id);
@@ -41,16 +49,18 @@ export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick 
                                 <p><span>Location:</span> {selectedFarmer.farm.location}</p>
                                 <p><span>Farm Size:</span> {selectedFarmer.farm.farmSize} ha</p>
                                 <h4>Crops:</h4>
-                                <ul>
+                                <Swiper className='swiper-container' spaceBetween={30} slidesPerView={3} navigation pagination={{clickable: true}} style={{ width: '100%' }}>
                                     {selectedFarmer.farm.crops.map(crop => (
-                                        <li key={crop._id}>
+                                        <SwiperSlide key={crop._id}>
+                                            <div className='crop-slide'>
                                             <p><span>Crop Name:</span> {crop.cropName}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.plantDate).toLocaleDateString()}</p>
                                             <p><span>Plant Date:</span> {new Date(crop.harvestDate).toLocaleDateString()}</p>
                                             <p><span>Availability:</span> {crop.availability} kg</p>
-                                        </li>
+                                            </div>
+                                        </SwiperSlide>
                                     ))}
-                                </ul>
+                                </Swiper>
                             </>
                         )}
                     </div>

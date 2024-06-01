@@ -25,12 +25,6 @@ export default function Home() {
       setNavItem('order')
     }
   }
-
-  /*useEffect(() => {
-    if (selectedFarmer && showOrderForm) {
-      setNavItem('')
-    }
-  },[])*/
   return (
     <div className="home-container">
       <div className="home-header-container">
@@ -47,8 +41,6 @@ export default function Home() {
             selectedFarmer={selectedFarmer} 
             setSelectedFarmer={setSelectedFarmer}
             showOrderForm={showOrderForm}/>}
-        {/*navItem === 'members' && !selectedFarmer&& <Members />*/}
-        {/*navItem === 'place delivery' && <PlaceDelivery />*/}
       </div>
     </div>
   )
