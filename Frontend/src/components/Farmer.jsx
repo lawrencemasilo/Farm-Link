@@ -22,6 +22,7 @@ import 'swiper/css/pagination';
 */
 export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
     const handleDeregister = async () => {
+        //Handles the Deregistration of a user
         try {
             if (selectedFarmer && selectedFarmer._id) {
                 await farmerDelete(selectedFarmer._id);

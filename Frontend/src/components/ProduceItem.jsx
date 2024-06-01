@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/ProduceItem.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
@@ -14,13 +14,19 @@ export default function ProduceItem({ crop, quantityL, selectedPlantDate, select
   const [plotSize, setPlotSize] = useState(plot);
   const [availability, setAvailability] = useState(quantityL);
 
-  //Sends request to store crop data
-  try {
-    const data = addCrop({cropName, plantDate, harvestDate, produceYield, plotSize, availability})
-    console.log('crop sent')
-  } catch (err) {
-    console.log(err.message);
-  }
+  useEffect(() => {
+    //Sends request to store crop data
+    const postData = async () => {
+      try {
+        const data = await addCrop({cropName, plantDate, harvestDate, produceYield, plotSize, availability})
+        console.log('crop sent')
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    postData();
+  }, [])
+  
 
   return (
     <div className="produceItem-container">

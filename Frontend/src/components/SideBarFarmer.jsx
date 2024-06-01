@@ -25,10 +25,6 @@ export default function SideBarFarmer({setNavItem, setSelectedItem}) {
           <FontAwesomeIcon icon={faWheatAwn} className="icon" />
           <p className="item-title produce">Produce</p>
         </div>
-        {/*<div className="item-container 1" onClick={() => setNavItem('place delivery')}>
-          <FontAwesomeIcon icon={faCalendarDays} className="icon" />
-          <p className="item-title schedule">Place Delivery</p>
-        </div>*/}
     </div>
   )
 }
