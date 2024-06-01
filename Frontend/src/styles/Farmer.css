@@ -32,6 +32,23 @@
     border-radius: 4px;
 }
 
+
+.farmer-back-container.dark {
+    position: absolute;
+    width: 26px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    margin-top: 60px;
+    margin-right: 40px;
+    border: 1px solid #ebebeb;
+    color: #ebebeb;
+    border-radius: 4px;
+}
+
 .farmer-back-container:hover {
     cursor: pointer;
     background-color: rgb(254, 44, 20);
@@ -55,6 +72,17 @@
     text-align: left;
     flex-direction: column;
     margin-top: 60px;
+}
+
+.farmer-info.dark {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    flex-direction: column;
+    margin-top: 60px;
+    color: #ebebeb; 
 }
 
 .farmer-info p {
