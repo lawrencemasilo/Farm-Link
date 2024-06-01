@@ -5,12 +5,13 @@ import { getOrder, updateOrderStatus } from '../services/OrderService';
 export default function History() {
   const [select, setSelect] = useState('');
   const [orders, setOrders] = useState([]);
+  const [isDispatched, setIsDispatched] = useState(false)
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const farmData = await getOrder();
-        console.log('farmData', farmData);
+        //console.log('farmData', farmData);
 
         const {crops} = farmData.data;
         if (Array.isArray(crops)) {
@@ -43,6 +44,7 @@ export default function History() {
         setOrders(prevOrders => {
           const newOrders = [...prevOrders];
           newOrders[index].status = 'dispatched';
+          setIsDispatched(true)
           return newOrders;
         });
       } catch (error) {
@@ -72,17 +74,21 @@ export default function History() {
                 <td>{order.quantity}</td>
                 <td>{new Date(order.date).toLocaleDateString()}</td>
                 <td>
-                    <button 
+                  {order.status != 'dispatched' &&
+                    <button className="history-dispatch-btn"
                       onClick={() => handleDispatch(index)}
                       disabled={order.status === 'dispatched'}
                     >
+                      {/*!isDispatched ? 'Dispatched' : 'Dispatch'*/}
                       Dispatch
-                    </button>
-                    <button 
+                    </button>}
+                  {order.status === 'dispatched' &&
+                    <button className="history-dispatched-btn"
                       disabled
                       >
-                        {order.status === 'dispatched' ? 'Dispatched' : 'Pending'}
-                    </button>
+                        {/*order.status === 'dispatched' ? 'Dispatched' : 'Pending'*/}
+                        {order.status === 'dispatched' && 'Dispatched'}
+                    </button>}
                 </td>
             </tr>
           ))}
