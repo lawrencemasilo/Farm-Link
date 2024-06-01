@@ -7,6 +7,7 @@ import Orders from '../components/Orders'
 import PlaceDelivery from '../components/PlaceDelivery'
 import Farmers from '../components/Farmers'
 import '../styles/Members.css'
+import ListOrders from '../components/ListOrders'
 
 export default function Home() {
   const [navItem, setNavItem] = useState('members');
@@ -41,6 +42,7 @@ export default function Home() {
             selectedFarmer={selectedFarmer} 
             setSelectedFarmer={setSelectedFarmer}
             showOrderForm={showOrderForm}/>}
+        {navItem === 'listOrders' && <ListOrders />}
       </div>
     </div>
   )
