@@ -8,7 +8,7 @@
 
 .indiv-farmer-wrapper {
     position: relative;
-    width: 40%;
+    width: 80%;
     height: 500px;
     display: flex;
     justify-content: center;
@@ -41,10 +41,14 @@
 
 .farmer-info-wrapper {
     margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .farmer-info {
-    width: 100%;
+    width: 80%;
     height: auto;
     display: flex;
     justify-content: center;
@@ -97,6 +101,27 @@
     opacity: 100%;
 }
 
-.croplist {
-    list-style: none;
+.crop-slide {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+}
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-container {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 3 -10px);
 }
