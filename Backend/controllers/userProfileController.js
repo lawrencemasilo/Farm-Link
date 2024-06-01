@@ -147,6 +147,12 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
       return next(new ErrorHandler('Please fill in all the required fields', 400));
   }
 
+  // check for existing crop to avoid duplicates
+  const existingCrop = await Crop.findOne({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, availability, plotSize });
+  if (existingCrop) {
+    return next(new ErrorHandler('Crop already exists', 400));
+  }
+
   // Create a new crop document
   const crop = await Crop.create({ farm: farm._id, cropName, plantDate, harvestDate, produceYield, availability, plotSize });
   
@@ -160,6 +166,34 @@ const addCrop = catchAsyncErrors(async (req, res, next) => {
       data: crop,
       message: 'Crop was successfuly added!'
   });
+});
+
+// Retrieve crops of the currently logged in user
+const getCrops = catchAsyncErrors(async (req, res, next) => {
+  const userId = req.user._id;
+
+  const user = await User.findById(userId).populate({
+    path: 'farm',
+    populate: {
+      path: 'crops'
+    }
+  });
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  if (!user.farm) {
+    return next(new ErrorHandler('User does not have a farm', 400));
+  }
+
+  const crops = user.farm.crops;
+
+  res.status(200).json({
+    success: true,
+    data: crops
+  });
+
 });
 
 //  Update crop details in the current user's farm
@@ -308,6 +342,7 @@ module.exports = {
   createFarm,
   updateFarm,
   addCrop,
+  getCrops,
   updateCrop,
   getUserFarmAndCrops,
   getUsers,

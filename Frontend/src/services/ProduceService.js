@@ -9,3 +9,23 @@ export const addCrop = async (userData) => {
       throw error.response.data;
     }
 };
+
+export const fetchCrops = async () => {
+  //handles updating crops on the database
+    try {
+      const response = await axiosInstance.get('api/v1/profile/farm/crops');
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+};
+
+export const updateCrops = async (cropId, updatedData) => {
+  //handles fetching crops from the database
+    try {
+      const response = await axiosInstance.put(`api/v1/profile/farm/crops/${cropId}`, updatedData);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+};
