@@ -1,6 +1,8 @@
 // Logic for order-related operations
 const Order = require('../models/orderModel');
 const Crop = require('../models/cropModel')
+const Farm = require('../models/farmModel')
+const User = require('../models/userModel')
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
@@ -59,14 +61,57 @@ const getOrder = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-// GET all orders for the logged in user
+// GET all orders for the admin side
 const getOrders = catchAsyncErrors(async (req, res, next) => {
-    const orders = await Order.find({ user: req.user.id }).populate('crop');
-
-    res.status(200).json({
-        success: true,
-        orders
-    });
+    try{
+        const orders = await Order.aggregate([
+           {
+            $lookup: {
+                from: 'crops',
+                localField: 'crop',
+                foreignField: '_id',
+                as: 'cropDetails'
+            }
+           },
+           {$unwind: '$cropDetails'},
+           {
+            $lookup: {
+                from: 'farms',
+                localField: 'cropDetails.farm',
+                foreignField: '_id',
+                as: 'farmDetails'
+            }
+           },
+           {$unwind: '$farmDetails'},
+           {
+            $lookup: {
+                from: 'users',
+                localField: 'farmDetails.user',
+                foreignField: '_id',
+                as: 'farmerDetails'
+            }
+           },
+           {$unwind: '$farmerDetails'},
+           {
+             $project: {
+                _id: 1,
+                quantity: 1,
+                dateIssued: '$createdAt',
+                status: 'Pending',
+                'cropDetails.cropName': 1,
+                'farmDetails.name': 1,
+                'farmerDetails.name': 1
+             }
+           }
+        ]);
+    
+        res.status(200).json({
+            success: true,
+            orders
+        });
+    } catch (error) {
+        console.error(error);
+    }  
 });
 
 // Update an order => /api/v1/order/:id

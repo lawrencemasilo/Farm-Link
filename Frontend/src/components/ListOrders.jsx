@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react'
 import '../styles/ListOrder.css'
-import { getUserOrders } from '../services/usersServices.js';
+import { getOrders } from '../services/OrderService';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function ListOrders() {
   const [selected, setSelected] = useState();
-  //const [allOrders, setAllOrders] = useState();
+  const [orders, setOrders] = useState([]);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchData = async () =>  {
       try {
-        const theData = await getUserOrders();
-        console.log(data)
+        const response = await getOrders();
+        setOrders(response.orders);
       } catch (error) {
         console.log(error)
       } 
     }
     fetchData();
-  }, [])
+  }, []);
+
   return (
     <div className="list-orders-container">
       <div className="list-orders-wrapper">
@@ -34,6 +35,8 @@ export default function ListOrders() {
           <table>
             <thead>
                 <tr>
+                <th>Farmer</th>
+                <th>Farm Name</th>
                 <th>Crop Name</th>
                 <th>Quantity(kg)</th>
                 <th>Date Issued</th>
@@ -41,28 +44,16 @@ export default function ListOrders() {
                 </tr>
             </thead>
             <tbody>
-                {/*orders && orders.map((order, index) => (
-                <tr key={index}>
-                    <td>{order.cropName}</td>
+                {orders.map((order, index) => (
+                  <tr key={index}>
+                    <td>{order.farmerDetails.name}</td>
+                    <td>{order.farmDetails.name}</td>
+                    <td>{order.cropDetails.cropName}</td>
                     <td>{order.quantity}</td>
-                    <td>{new Date(order.date).toLocaleDateString()}</td>
-                    <td>
-                    {order.status != 'dispatched' &&
-                        <button className="history-dispatch-btn"
-                        onClick={() => handleDispatch(index)}
-                        disabled={order.status === 'dispatched'}
-                        >
-                        Dispatch
-                        </button>}
-                    {order.status === 'dispatched' &&
-                        <button className="history-dispatched-btn"
-                        disabled
-                        >
-                            {order.status === 'dispatched' && 'Dispatched'}
-                        </button>}
-                    </td>
-                </tr>
-                ))*/}
+                    <td>{new Date(order.dateIssued).toLocaleDateString()}</td>
+                    <td>{order.status}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
