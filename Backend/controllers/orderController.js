@@ -39,11 +39,19 @@ const updateOrderStatus = catchAsyncErrors(async (req, res, next) => {
     const { orderId } = req.params;
     const { status } = req.body;
 
+    console.log(`Received request to update order ID: ${orderId} with status: ${status}`)
+    const validStatuses = ['pending', 'dispatched', 'received'];
+    if (!validStatuses.includes(status)) {
+        return next(new ErrorHandler('Invalid status update!', 400));
+    }
+
     const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
     if (!order) {
+        console.log('Order not found!');
         return next(new ErrorHandler('Order not found!', 404));
     }
 
+    console.log('Order after update:', order);
     res.status(200).json(order);
 });
 
@@ -97,7 +105,7 @@ const getOrders = catchAsyncErrors(async (req, res, next) => {
                 _id: 1,
                 quantity: 1,
                 dateIssued: '$createdAt',
-                status: 'Pending',
+                status: 1,
                 'cropDetails.cropName': 1,
                 'farmDetails.name': 1,
                 'farmerDetails.name': 1
