@@ -58,7 +58,13 @@ export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick 
                     )}
                     <div className="contact-delect-container">
                         <button className="farmer-order-btn" onClick={() => onOrderClick(selectedFarmer)}>Order</button>
-                        <button className="farmer-contact-btn">Contact</button>
+                        {selectedFarmer && selectedFarmer.email ? (
+                            <a href={`mailto:${selectedFarmer.email}`}>
+                                <button className="farmer-contact-btn">Contact</button>
+                            </a>
+                        ) : (
+                            <button className="farmer-contact-btn" onClick={() => alert('No email address available')}>Contact</button>
+                        )}
                         <button className="farmer-deregister" onClick={handleDeregister}>Deregister</button>
                     </div>
             </div>
