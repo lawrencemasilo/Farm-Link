@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
 import { usersData, farmerDatails } from '../services/farmerService';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 
 export default function Farmers({setSelectedFarmer}) {
@@ -12,6 +13,7 @@ export default function Farmers({setSelectedFarmer}) {
   const [sortBy, setSortBy] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const { theme } = useContext(ThemeContext);
 
   const handleClick = async (userId) => {
     try {
@@ -45,13 +47,13 @@ export default function Farmers({setSelectedFarmer}) {
   }
 
   return (
-    <div className="farmers-container">
-      <div className="header-farmers-containers">
+    <div className={`farmers-container ${theme}`}>
+      <div className={`header-farmers-containers ${theme}`}>
         <div className="sort-container">
-          <button className="sort-by-container" onClick={() => setSortBy((prev) => !prev)}>Sort By <span className="sortIcon"><FontAwesomeIcon icon={faSort} /></span></button>
+          <button className={`sort-by-container ${theme}`} onClick={() => setSortBy((prev) => !prev)}>Sort By <span className="sortIcon"><FontAwesomeIcon icon={faSort} /></span></button>
           {sortBy && (
-            <div className="sort-extent">
-              <div className="sort-options">
+            <div className={`sort-extent ${theme}`}>
+              <div className={`sort-options ${theme}`}>
                 <p onClick={() => handleSortOptionChange('')}>Default</p>
                 <p onClick={() => handleSortOptionChange('name')}>Name(asc)</p>
                 <p onClick={() => handleSortOptionChange('farm.crops.cropName')}>Crop (asc)</p>
@@ -68,7 +70,7 @@ export default function Farmers({setSelectedFarmer}) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="table-container">
+      <div className={`table-container ${theme}`}>
         <table>
           <thead>
             <tr>
@@ -80,7 +82,7 @@ export default function Farmers({setSelectedFarmer}) {
           </thead>
           <tbody>
             {users && users.map((user) => (
-              <tr key={user._id} onClick={() => handleClick(user._id)}>
+              <tr key={user._id} className={`table-tr-container ${theme}`} onClick={() => handleClick(user._id)}>
                 <td>{user.name}</td>
                 <td>{user.farm ? `${user.farm.farmSize} ha` : 'No Farm'}</td>
                 <td>

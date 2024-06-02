@@ -28,3 +28,13 @@ export const updateOrderStatus = async (orderId, status) => {
     throw error.response.data;
   }
 };
+
+export const getAllOrders = async () => {
+  //pull all orders from the database
+    try {
+      const response = await axiosInstance.get('api/v1/orders');
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+};

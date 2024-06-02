@@ -1,33 +1,34 @@
-.members-container {
+.list-orders-container {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.members-title {
-    padding: 35px 0 15px 0px;
-}
-
-.members-title h1 {
-    font-size: 27px;
-    font-weight: 500;
-    color: #283712;
-}
-
-.members-title-title.dark {
-    font-size: 27px;
-    font-weight: 500;
-    color: #ffffff;
-}
-
-.members-wrapper {
+.list-orders-wrapper {
     display: flex;
     flex-direction: column;
     padding: 0 50px;
 }
 
-.members-nav-container {
+.orders-list-title {
+    padding: 35px 0 15px 0px;
+}
+
+.orders-list-title h1 {
+    font-size: 27px;
+    font-weight: 500;
+    color: #283712;
+}
+
+.orders-list-title.dark h1 {
+    font-size: 27px;
+    font-weight: 500;
+    color: #ebebeb;
+}
+
+
+.list-orders-nav-container {
     width: 100%;
     height: 40px;
     display: flex;
@@ -38,28 +39,27 @@
     margin: 0;
 }
 
-.members-nav-container.dark {
+.list-orders-nav-container.dark {
     width: 100%;
     height: 40px;
     display: flex;
     justify-content: left;
     align-items: end;
     border-bottom: 2px solid #ebebeb;
-    color: #283712;
+    color: #ebebeb;
     margin: 0;
 }
 
-.recent-container, .farmers-container, .application-container {
+.order-history-container {
     padding-bottom: 7px;
     margin: 0 15px -3px 0;
-
 }
 
-.recent-container:hover, .farmers-container:hover, .application-container:hover {
+.order-history-container:hover {
     cursor: pointer;
 }
 
-.recent-container2, .farmers-container2, .application-container2 {
+.order-history-container2 {
     cursor: pointer;
     padding-bottom: 7px;
     margin: 0 15px -3px 0;
@@ -67,15 +67,32 @@
     border-bottom: 3px solid #0575E6;
 }
 
-.farmers-container2.dark {
+.order-history-container2.dark {
     cursor: pointer;
     padding-bottom: 7px;
     margin: 0 15px -3px 0;
-    color: #ffffff;
-    border-bottom: 3px solid #ffffff;
+    color: #ebebeb;
+    border-bottom: 3px solid #ebebeb;
+}
+
+.list-order-history-table-container {
+    margin-top: 50px;
+}
+
+.list-order-history-table-container.dark {
+    margin-top: 50px;
+    color: #ebebeb;
+    border: 1px solid #ebebeb;
 }
 
 
-.members-main-container {
-    /*padding-left: 50px;*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr, th {
+    height: 30px;
+    border: 1px solid #D9D9D9;
+    text-align: left;
 }
