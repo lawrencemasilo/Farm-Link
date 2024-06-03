@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { profile } from '../services/ProfileService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Details.css'
 import { farmerDatails, allFarmerDatails, updateFarmerDatails } from '../services/farmerService';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function Details() {
   const [user, setUser] = useState();
@@ -18,6 +19,7 @@ export default function Details() {
   const [city, setCity] = useState();
   const [farmSize, setFarmSize] = useState();
   const [selected, setSelected] = useState();
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     //fetches the information of the current user
@@ -70,11 +72,11 @@ export default function Details() {
   }
 
   return (
-    <div className="details-container">
-      <div className="details-wrapper">
-        <div className="details-selectors">
+    <div className={`details-container ${theme}`}>
+      <div className={`details-wrapper ${theme}`}>
+        <div className={`details-selectors ${theme}`}>
           <div className="details-farmer-container">
-            <p className="details-farmer-title details-title">Name</p>
+            <p className={`details-farmer-title details-title  ${theme}`}>Name</p>
             <div className="details-farmer-input">
               <div className="details-name-container">
                 <p className="details-name details-value">{user && user.name}</p>
@@ -82,7 +84,7 @@ export default function Details() {
             </div>
           </div>
           <div className="details-email-container">
-            <p className="details-email-title details-title">Email</p>
+            <p className={`details-email-title details-title ${theme}`}>Email</p>
             <div className="details-email-input">
               <div className="details-email2-container">
                 <p className="details-email details-value">{user && user.email}</p>
@@ -90,13 +92,13 @@ export default function Details() {
             </div>
           </div>
           <div className="details-phone-container">
-            <p className="details-phone-title details-title">Phone</p>
+            <p className={`details-phone-title details-title ${theme}`}>Phone</p>
             <div className="details-phone-btn">
               <p className="details-phone" >{user && user.phone}</p>
             </div>
           </div>
           <div className="details-location-container" onClick={() => setSelected('location')}>
-            <p className="details-location-title details-title">Location</p>
+            <p className={`details-location-title details-title ${theme}`}>Location</p>
             {!farm || selected == 'location'? <div className="details-location-btn">
               <input type="text" placeholder="" className="details-input-container" required onChange={(e) => setLocation(e.target.value)} />
             </div>:
@@ -105,7 +107,7 @@ export default function Details() {
             </div>}
           </div>
           <div className="details-street-container" onClick={() => setSelected('street')}>
-            <p className="details-street-title details-title">Street</p>
+            <p className={`details-street-title details-title ${theme}`}>Street</p>
             {!farm || selected == 'street' ? <div className="details-street-btn">
               <input type="text" placeholder="" className="details-input-container" required onChange={(e) => setStreetName(e.target.value)}/>
             </div>: 
@@ -114,7 +116,7 @@ export default function Details() {
             </div>}
           </div>
           <div className="details-house-container" onClick={() => setSelected('house')}>
-            <p className="details-house-title details-title">House Number</p>
+            <p className={`details-house-title details-title ${theme}`}>House Number</p>
             {!farm || selected == 'house' ?<div className="details-house-btn">
               <input type="number" placeholder="" className="details-input-container" required onChange={(e) => setHouseNumber(e.target.value)} />
             </div>:
@@ -123,7 +125,7 @@ export default function Details() {
             </div>}
           </div>
           <div className="details-city-container" onClick={() => setSelected('city')}>
-            <p className="details-city-title details-title">City</p>
+            <p className={`details-city-title details-title ${theme}`}>City</p>
             {!farm || selected == 'city' ?<div className="details-city-btn">
               <input type="text" placeholder="" className="details-input-container" required onChange={(e) => setCity(e.target.value)}/>
             </div>:
@@ -132,7 +134,7 @@ export default function Details() {
             </div>}
           </div>
           <div className=" details-plot-container" onClick={() => setSelected('plot')}>
-            <p className="details-title">Plot Size</p>
+            <p className={`details-title ${theme}`}>Plot Size</p>
             {!farm || selected == 'plot' ?<div className="details-plot-btn">
               <input type="number" placeholder="" className="details-input-container" required onChange={(e) => setFarmSize(e.target.value)}/>
             </div>:
@@ -141,7 +143,7 @@ export default function Details() {
             </div>}
           </div>
         </div>
-        <div className="update-details-container" onClick={handleUpdate}>
+        <div className={`update-details-container ${theme}`} onClick={handleUpdate}>
           <FontAwesomeIcon icon={faCirclePlus} className="update-detailsIcon" />
           <p>Update</p>
         </div>

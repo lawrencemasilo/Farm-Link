@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWheatAwn, faUserGroup, faCalendarDays, faGear } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext';
+import { SidebarContext } from '../contexts/SideBarContext';
 
-export default function SideBar({setNavItem, setSelectedItem}) {
+export default function SideBar() {
   const [selected, setSelected] = useState(false);
   const { theme } = useContext(ThemeContext);
+  const { navItem, setNavItem } = useContext(SidebarContext);
 
   const handleMembers = () => {
     setNavItem('members');
@@ -20,7 +22,11 @@ export default function SideBar({setNavItem, setSelectedItem}) {
 
   return (
     <div className={`sidebar-container ${theme}`}>
-        <div className={!selected ? (`item-container ${theme}`): (`item-container2 ${theme} 2`)} onClick={handleMembers}>
+        {/*<div className={!selected ? (`item-container ${theme}`): (`item-container2 ${theme} 2`)} onClick={() => handleMembers}>
+            <FontAwesomeIcon icon={faUserGroup} className="icon" />
+            <p className="item-title members">Members</p>
+        </div>*/}
+        <div className={`item-container ${theme}`} onClick={() => setNavItem('members')}>
             <FontAwesomeIcon icon={faUserGroup} className="icon" />
             <p className="item-title members">Members</p>
         </div>

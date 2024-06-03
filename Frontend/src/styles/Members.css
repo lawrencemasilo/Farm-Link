@@ -35,7 +35,7 @@
     align-items: end;
     border-bottom: 2px solid #b1b1b1;
     color: #283712;
-    margin: 0;
+    margin-bottom: 0px;
 }
 
 .members-nav-container.dark {
@@ -49,7 +49,14 @@
     margin: 0;
 }
 
-.recent-container, .farmers-container, .application-container {
+.recent-container.light, .farmers-container.light, .application-container.light {
+    padding-bottom: 7px;
+    margin: 0 15px -3px 0;
+
+}
+
+
+.recent-container.dark, .farmers-container.dark, .application-container.dark {
     padding-bottom: 7px;
     margin: 0 15px -3px 0;
 
@@ -59,13 +66,22 @@
     cursor: pointer;
 }
 
-.recent-container2, .farmers-container2, .application-container2 {
+.recent-container2.light, .farmers-container2.light, .application-container2.light {
     cursor: pointer;
     padding-bottom: 7px;
     margin: 0 15px -3px 0;
     color: #0575E6;
     border-bottom: 3px solid #0575E6;
 }
+
+.recent-container2.dark, .farmers-container2.dark, .application-container2.dark {
+    cursor: pointer;
+    padding-bottom: 7px;
+    margin: 0 15px -3px 0;
+    color: #ebebeb;
+    border-bottom: 3px solid #ebebeb;
+}
+
 
 .farmers-container2.dark {
     cursor: pointer;
@@ -76,6 +92,9 @@
 }
 
 
-.members-main-container {
-    /*padding-left: 50px;*/
+.application-container.dark, .recent-container.dark {
+    cursor: pointer;
+    padding-bottom: 7px;
+    margin: 0 15px -3px 0;
+    color: #8b8b8b;
 }

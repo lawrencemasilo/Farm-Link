@@ -51,3 +51,13 @@ export const updateFarmerDatails =  async (userData) => {
     throw error.response.data;
   }
 }
+
+export const addFarmerDatails =  async (userData) => {
+  //handles the adding of Farmer details
+  try {
+    const response = await axiosInstance.post('/api/v1/profile/farm', userData);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}

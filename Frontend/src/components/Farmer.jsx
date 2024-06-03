@@ -8,9 +8,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
+export default function Farmer({ onOrderClick }) {
     const { theme } = useContext(ThemeContext);
+    const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext)
 
     const handleDeregister = async () => {
         //Handles the Deregistration of a user
