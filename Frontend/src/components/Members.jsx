@@ -2,18 +2,20 @@ import { useContext, useEffect, useState } from 'react'
 import '../styles/Members.css'
 import Farmers from './Farmers';
 import Farmer from './Farmer';
-import { ThemeContext } from '../contexts/ThemeContext';
 import Orders from './Orders';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Members({ handleOrderClick, showOrderForm, setShowOrderForm}) {
+export default function Members({handleOrderClick, selectedFarmer, setSelectedFarmer, showOrderForm, setShowOrderForm }) {
   const [selected, setSelected] = useState('farmers');
   //const [showOrderForm, setShowOrderForm] = useState(false);
   //const [selectedFarmer, setSelectedFarmer] = useState();
   const { theme } = useContext(ThemeContext);
-  const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext)
 
-  
+  const handleOrderClose = () => {
+    setShowOrderForm(false);
+    selectedFarmer(null);
+  }
 
   return (
     <div className={`members-container ${theme}`}>
@@ -26,11 +28,14 @@ export default function Members({ handleOrderClick, showOrderForm, setShowOrderF
             <p className={`members-farmers-title ${theme}`}>Farmers</p>
           </div>
         </div>
+        {selectedFarmer && showOrderForm && (
+          <Orders user={selectedFarmer} handleOrderClose={handleOrderClose} />
+        )}
         {selectedFarmer && !showOrderForm && (
           <Farmer
             selectedFarmer={selectedFarmer}
             setSelectedFarmer={setSelectedFarmer}
-            onOrderClick={handleOrderClick}
+            onOrderClick={() => setShowOrderForm(true)}
           />
         )}
         {(!selectedFarmer && <Farmers setSelectedFarmer={ setSelectedFarmer } />)}

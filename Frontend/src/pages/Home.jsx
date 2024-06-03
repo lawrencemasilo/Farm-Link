@@ -36,6 +36,10 @@ export default function Home() {
     }
   }
 
+  const handleOrderClose = () => {
+    setShowOrderForm(false);
+    setSelectedFarmer(null);
+  }
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
@@ -45,23 +49,16 @@ export default function Home() {
         {/*<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />*/}
         {<SideBar />}
         {selectedFarmer && showOrderForm && (
-          <Orders user={selectedFarmer} />)}
-        {/*navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
-        {navItem === 'members' && !showOrderForm &&  
-          <Members 
-            handleOrderClick={handleOrderClick} 
-            selectedFarmer={selectedFarmer} 
-            setSelectedFarmer={setSelectedFarmer}
-        showOrderForm={showOrderForm}/>}*/}
-        {/*selectedFarmer && showOrderForm && (
-          <Orders user={selectedFarmer} />)*/}
+          <Orders user={selectedFarmer} handleOrderClose={handleOrderClose}/>)}
         {navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
-        {navItem === 'members' && !showOrderForm &&  
+        {navItem === 'members' && !showOrderForm &&  (
           <Members 
             handleOrderClick={handleOrderClick} 
             selectedFarmer={selectedFarmer} 
             setSelectedFarmer={setSelectedFarmer}
-            showOrderForm={showOrderForm}/>}
+            showOrderForm={showOrderForm}
+            setShowOrderForm={setShowOrderForm}
+            />)}
         {navItem === 'listOrders' && <ListOrders />}
         {navItem === 'settings' && <Settings />}
       </div>
