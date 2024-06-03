@@ -38,6 +38,10 @@ export default function HeaderSignIn() {
     fetchData();
   }, [])
 
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
   return (
     <div className={`header_signin-container ${theme}`}>
       <div className={`logo_signin-container ${theme}`}>
@@ -68,7 +72,7 @@ export default function HeaderSignIn() {
             <p className="userName-title-nav">{user && user.name}</p>
           </div>
           <div className="logout-container-nav">
-            <button onClick={() => {navigate('/login')}}>Logout</button>
+            <button onClick={() => handleLogin}>Logout</button>
           </div>
       </div>)}
     </div>
