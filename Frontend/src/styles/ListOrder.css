@@ -221,3 +221,83 @@ tr, th {
     border: 1px solid #ebebeb;
     text-align: left;
 }
+
+.list-order-history-table-tr.dark:hover {
+    cursor: pointer;
+    background-color: #ebebeb;
+    color: #464646;
+}
+
+.list-order-history-table-tr.light:hover {
+    cursor: pointer;
+    background-color: #0575e6;
+    color: #ebebeb;
+}
+
+.list-orders-panding-btn.light {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #f5ff34;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.list-orders-panding-btn.dark {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #a5ae00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.list-orders-dispatch-btn {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #ffffff;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.list-orders-dispatched-btn {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: rgb(0, 198, 0);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.list-orders-dispatch-btn.dark {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #ebebeb;
+    background-color: #212121;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.list-orders-dispatch-btn:hover {
+    cursor: pointer;
+    /*background-color: #0575e6;*/
+    background-color: red;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.list-orders-dispatched-btn.dark {
+    color: #ffffff;
+    background-color: rgb(0, 155, 0);
+    border: none;
+}

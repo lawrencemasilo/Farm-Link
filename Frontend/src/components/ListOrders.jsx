@@ -83,7 +83,7 @@ export default function ListOrders() {
             </thead>
             <tbody>
                 {orders.map((order, index) => (
-                  <tr key={index}>
+                  <tr key={index} className={`list-order-history-table-tr ${theme}`}>
                     <td>{order.farmerDetails.name}</td>
                     <td>{order.farmDetails.name}</td>
                     <td>{order.cropDetails.cropName}</td>
@@ -93,7 +93,7 @@ export default function ListOrders() {
                       {order.status === 'dispatched' && (
                         <button 
                           onClick={() => handleReceive(order._id, index)}
-                          className="history-dispatch-btn"
+                          className={`list-orders-dispatch-btn ${theme}`}
                         >
                           Dispatched
                         </button>
@@ -101,8 +101,8 @@ export default function ListOrders() {
                        {order.status !== 'dispatched' && 
                        <button 
                         className={
-                          order.status === 'received' ? "history-dispatched-btn" :
-                          order.status === 'pending' ?  "history-panding-btn": ''
+                          order.status === 'received' ? (`list-orders-dispatched-btn ${theme}`) :
+                          order.status === 'pending' ?  (`list-orders-panding-btn ${theme}`): ''
                         }
                           >
                         {order.status}
