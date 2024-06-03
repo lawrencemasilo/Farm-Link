@@ -36,7 +36,7 @@ export const FarmPopUp = ({ setPopUp }) => {
                     <input type="text" placeholder="Farm Size in Ha" onChange={(e) => setFarmSize(e.target.value)} required/>
                 </div>
                 <div className="popup-btn">
-                    <button onClick={() => handleSumbit()}>Sumbit</button>
+                    <button onClick={() => handleSumbit()}>Submit</button>
                 </div>
             </div>
         </div>
