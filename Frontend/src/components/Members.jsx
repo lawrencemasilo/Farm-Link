@@ -3,14 +3,21 @@ import '../styles/Members.css'
 import Farmers from './Farmers';
 import Farmer from './Farmer';
 import { ThemeContext } from '../contexts/ThemeContext';
+import Orders from './Orders';
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Members({handleOrderClick, selectedFarmer, setSelectedFarmer, showOrderForm}) {
+export default function Members({ handleOrderClick, showOrderForm, setShowOrderForm}) {
   const [selected, setSelected] = useState('farmers');
+  //const [showOrderForm, setShowOrderForm] = useState(false);
+  //const [selectedFarmer, setSelectedFarmer] = useState();
   const { theme } = useContext(ThemeContext);
+  const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext)
+
+  
 
   return (
     <div className={`members-container ${theme}`}>
-      <div className={`members-wrapper ${theme}`}>
+      <div className={`members-wrapper  ${theme}`}>
         <div className={`members-title ${theme}`}>
           <h1 className={`members-title-title ${theme}`}>Members</h1>
         </div>

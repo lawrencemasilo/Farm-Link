@@ -8,13 +8,21 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/Members.css'
 import ListOrders from '../components/ListOrders'
 import Settings from '../components/Settings'
+import { SidebarContext } from '../contexts/SideBarContext'
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import Farmers from '../components/Farmers'
+import Farmer from '../components/Farmer'
+import '../styles/Members.css'
+
 
 export default function Home() {
-  const [navItem, setNavItem] = useState('members');
-  const [selected, setSelected] = useState('recent');
-  const [showOrderForm, setShowOrderForm] = useState(false);
-  const [selectedFarmer, setSelectedFarmer] = useState();
+  //const [navItem, setNavItem] = useState('members');
+  //const [selected, setSelected] = useState('recent');*/
+  //const [showOrderForm, setShowOrderForm] = useState(false);
+  //const [selectedFarmer, setSelectedFarmer] = useState();
   const { theme } = useContext(ThemeContext);
+  const { navItem, setNavItem} = useContext(SidebarContext);
+  const { selectedFarmer, setSelectedFarmer, showOrderForm, setShowOrderForm } = useContext(SelectedFarmerContext)
 
   const handleOrderClick = (user) => {
     if (user != null) {
@@ -27,15 +35,26 @@ export default function Home() {
       setNavItem('order')
     }
   }
+
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />}
+        {/*<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />*/}
+        {<SideBar />}
         {selectedFarmer && showOrderForm && (
-          <Orders user={selectedFarmer} handleOrderClick={handleOrderClick}/>)}
+          <Orders user={selectedFarmer} />)}
+        {/*navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
+        {navItem === 'members' && !showOrderForm &&  
+          <Members 
+            handleOrderClick={handleOrderClick} 
+            selectedFarmer={selectedFarmer} 
+            setSelectedFarmer={setSelectedFarmer}
+        showOrderForm={showOrderForm}/>}*/}
+        {/*selectedFarmer && showOrderForm && (
+          <Orders user={selectedFarmer} />)*/}
         {navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
         {navItem === 'members' && !showOrderForm &&  
           <Members 
