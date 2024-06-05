@@ -1,14 +1,14 @@
 // Map URL endpoints to controller functions
-// const express = require('express');
-// const router = express.Router();
-// const { isAuthenticated } = require('../middleware/authMiddleware');
+const express = require('express');
+const router = express.Router();
+const { cookieJwtAuth } = require('../middleware/crackCookie');
 
 // // Import crop controller methods
-// const { addCrop, updateCrop, getCrop, getCrops } = require('../controllers/cropController');
+const { addCrop, updateCrop, getCrops } = require('../controllers/cropController');
 
-// router.route('/crop').post(addCrop);
-// router.route('/crop/:id').put(updateCrop);
-// router.route('/crop/:id').get(getCrop);
-// router.route('/crop').get(getCrops);
+router.use(cookieJwtAuth);
 
-// module.exports = router;
+router.route('/profile/farm/crops').post(addCrop).get(getCrops);
+router.route('/profile/farm/crops/:cropId').put(updateCrop);
+
+module.exports = router;
