@@ -80,8 +80,10 @@ export default function Farmers() {
             <tr>
               <th>Name</th>
               <th>Farm Size</th>
+              <th>Location</th>
               <th>Crop Type</th>
               <th>Availability</th>
+              <th>Last Visited</th>
             </tr>
           </thead>
           <tbody>
@@ -89,6 +91,7 @@ export default function Farmers() {
               <tr key={user._id} className={`table-tr-container ${theme}`} onClick={() => handleClick(user._id)}>
                 <td>{user.name}</td>
                 <td>{user.farm ? `${user.farm.farmSize} ha` : 'No Farm'}</td>
+                <td>{user.farm ? `${user.farm.location}` : 'Not specified'}</td>
                 <td>
                   <ul>
                     {user.farm && user.farm.crops ? user.farm.crops.map(crop => (
@@ -103,6 +106,7 @@ export default function Farmers() {
                     )) : <li>-</li>}
                   </ul>
                 </td>
+                <td>{user.lastVisited ? new Date(user.lastVisited).toLocaleDateString() : 'Never'}</td>
             </tr>
           ))}
           </tbody>
