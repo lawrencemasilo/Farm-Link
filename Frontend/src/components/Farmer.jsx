@@ -41,8 +41,8 @@ export default function Farmer({ onOrderClick }) {
                                 <p><span>Farm Name:</span> {selectedFarmer.farm.name}</p>
                                 <p><span>Location:</span> {selectedFarmer.farm.location}</p>
                                 <p><span>Farm Size:</span> {selectedFarmer.farm.farmSize} ha</p>
-                                <h4>Crops:</h4>
-                                {/*<Swiper className='swiper-container' spaceBetween={30} slidesPerView={3} navigation pagination={{clickable: true}} style={{ width: '100%' }}>
+                                {/*<h4>Crops:</h4>
+                                <Swiper className='swiper-container' spaceBetween={30} slidesPerView={3} navigation pagination={{clickable: true}} style={{ width: '100%' }}>
                                     {selectedFarmer.farm.crops.map(crop => (
                                         <SwiperSlide key={crop._id}>
                                             <div className='crop-slide'>

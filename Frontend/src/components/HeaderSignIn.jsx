@@ -63,10 +63,10 @@ export default function HeaderSignIn() {
       </div>}
       {toggle && (
         <div className="logout-btn-container-nav">
-          <div className="setting-nav">
+          {/*<div className="setting-nav">
             <FontAwesomeIcon icon={faGear} className="settingsIconNav"/>
             <p className="settings-title-nav">Settings</p>
-          </div>
+          </div>*/}
           <div className="profile-container-nav">
             <FontAwesomeIcon icon={faUser} className="profileIconNav" />
             <p className="userName-title-nav">{user && user.name}</p>
