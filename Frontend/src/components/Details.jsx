@@ -116,7 +116,7 @@ export default function Details() {
             </div>}
           </div>
           <div className="details-house-container" onClick={() => setSelected('house')}>
-            <p className={`details-house-title details-title ${theme}`}>House Number</p>
+            <p className={`details-house-title details-title ${theme}`}>Property Number</p>
             {!farm || selected == 'house' ?<div className="details-house-btn">
               <input type="number" placeholder="" className="details-input-container" required onChange={(e) => setHouseNumber(e.target.value)} />
             </div>:
