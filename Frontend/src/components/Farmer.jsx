@@ -8,9 +8,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick }) {
+export default function Farmer({ onOrderClick }) {
     const { theme } = useContext(ThemeContext);
+    const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext)
 
     const handleDeregister = async () => {
         //Handles the Deregistration of a user
@@ -39,8 +41,8 @@ export default function Farmer({selectedFarmer, setSelectedFarmer, onOrderClick 
                                 <p><span>Farm Name:</span> {selectedFarmer.farm.name}</p>
                                 <p><span>Location:</span> {selectedFarmer.farm.location}</p>
                                 <p><span>Farm Size:</span> {selectedFarmer.farm.farmSize} ha</p>
-                                <h4>Crops:</h4>
-                                {/*<Swiper className='swiper-container' spaceBetween={30} slidesPerView={3} navigation pagination={{clickable: true}} style={{ width: '100%' }}>
+                                {/*<h4>Crops:</h4>
+                                <Swiper className='swiper-container' spaceBetween={30} slidesPerView={3} navigation pagination={{clickable: true}} style={{ width: '100%' }}>
                                     {selectedFarmer.farm.crops.map(crop => (
                                         <SwiperSlide key={crop._id}>
                                             <div className='crop-slide'>

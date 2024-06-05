@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
@@ -7,6 +7,7 @@ import Calender from './Calender'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/Calender.css'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 export default function Produce() {
   const [selectedCrop, setSelectedCrop] = useState('--None--');
@@ -18,6 +19,7 @@ export default function Produce() {
   const [selectedPlantDate, setSelectedPlantDate] = useState(null);
   const [selectedHarvestDate, setSelectedHarvestDate] = useState(null);
   const [plot, setPLot] = useState();
+  const { theme } = useContext(ThemeContext);
 
   const handleSelect = (crop) => {
     //stores selected crop to state
@@ -33,24 +35,24 @@ export default function Produce() {
   }
 
   return (
-    <div className="orders-container">
-      <div className="orders-wrapper">
-        <div className="orders-title">
+    <div className={`orders-container ${theme}`}>
+      <div className={`orders-wrapper ${theme}`}>
+        <div className={`orders-title ${theme}`}>
           <h1>Available Produce</h1>
         </div>
-        <div className="orders-nav-container">
-          <div className="orders-title-container">
-            <p className="Orders-nav-title">Produce</p>
+        <div className={`orders-nav-container ${theme}`}>
+          <div className={`orders-title-container ${theme}`}>
+            <p className={`Orders-nav-title ${theme}`}>Produce</p>
           </div>
         </div>
-        <div className="order-selectors">
+        <div className={`order-selectors ${theme}`}>
           <div className="orders-s-crop-type-container">
             <p className="order-s-crops-title">Crops</p>
-            <div className="orders-s-crop-type-btn" onClick={() => setDropDown((prev) => !prev)}>
+            <div className={`orders-s-crop-type-btn ${theme}`} onClick={() => setDropDown((prev) => !prev)}>
               <p>{selectedCrop}</p>
               <FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
-            {dropDown && <div className="crop-type-dropDown">
+            {dropDown && <div className={`crop-type-dropDown ${theme}`}>
               <p onClick={() => handleSelect("--None--")}>--None--</p>
               <p onClick={() => handleSelect("Tomatos")}>Tomatos</p>
               <p onClick={() => handleSelect("Mushrooms")}>Mushrooms</p>
@@ -63,10 +65,10 @@ export default function Produce() {
               <p onClick={() => handleSelect("Peppers")}>Peppers</p>
             </div>}
           </div>
-          <div className="orders-s-quantity-container">
+          <div className={`orders-s-quantity-container ${theme}`}>
             <p className="order-s-quantity-title">Quantity</p>
-            <div className="orders-s-quantity-btn">
-              <input type="number" placeholder={quantity} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+            <div className={`orders-s-quantity-btn ${theme}`}>
+              <input  type="number" placeholder={quantity} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
             </div>
           </div>
           <div className="orders-s-plantDate-container">
@@ -93,13 +95,13 @@ export default function Produce() {
           </div>
           <div className="orders-s-quantity-container plot-size">
             <p className="order-s-quantity-title">Plot Size</p>
-            <div className="orders-s-quantity-btn">
+            <div className={`orders-s-quantity-btn ${theme}`}>
               <input type="number" placeholder={plot} value={plot} onChange={(e) => setPLot(e.target.value)} required />
             </div>
           </div>
         </div>
-        <div className="add-produce-container" onClick={() => handleAdd(true)}>
-          <FontAwesomeIcon icon={faCirclePlus} className="add-produceIcon" />
+        <div className={`add-produce-container ${theme}`} onClick={() => handleAdd(true)}>
+          <FontAwesomeIcon icon={faCirclePlus} className={`add-produceIcon ${theme}`} />
           <p>Add</p>
         </div>
       </div>

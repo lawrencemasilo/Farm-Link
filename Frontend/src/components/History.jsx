@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/History.css'
 import { getOrder, updateOrderStatus } from '../services/OrderService';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function History() {
   const [select, setSelect] = useState('');
   const [orders, setOrders] = useState([]);
   const [isDispatched, setIsDispatched] = useState(false)
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -57,7 +59,7 @@ export default function History() {
       <div className="header-history-containers">
 
       </div>
-      <div className="history-table-container">
+      <div className={`history-table-container ${theme}`}>
         <table>
           <thead>
             <tr>
@@ -69,13 +71,13 @@ export default function History() {
           </thead>
           <tbody>
             {orders && orders.map((order, index) => (
-              <tr key={index}>
+              <tr key={index} className={`history-table-tr ${theme}`}>
                 <td>{order.cropName}</td>
                 <td>{order.quantity}</td>
                 <td>{new Date(order.date).toLocaleDateString()}</td>
                 <td>
                   {order.status != 'dispatched' &&
-                    <button className="history-dispatch-btn"
+                    <button className={`history-dispatch-btn ${theme}`}
                       onClick={() => handleDispatch(index)}
                       disabled={order.status === 'dispatched'}
                     >
@@ -83,7 +85,7 @@ export default function History() {
                       Dispatch
                     </button>}
                   {order.status === 'dispatched' &&
-                    <button className="history-dispatched-btn"
+                    <button className={`history-dispatched-btn  ${theme}`}
                       disabled
                       >
                         {/*order.status === 'dispatched' ? 'Dispatched' : 'Pending'*/}

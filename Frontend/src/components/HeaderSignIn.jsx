@@ -38,6 +38,10 @@ export default function HeaderSignIn() {
     fetchData();
   }, [])
 
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
   return (
     <div className={`header_signin-container ${theme}`}>
       <div className={`logo_signin-container ${theme}`}>
@@ -59,16 +63,16 @@ export default function HeaderSignIn() {
       </div>}
       {toggle && (
         <div className="logout-btn-container-nav">
-          <div className="setting-nav">
+          {/*<div className="setting-nav">
             <FontAwesomeIcon icon={faGear} className="settingsIconNav"/>
             <p className="settings-title-nav">Settings</p>
-          </div>
+          </div>*/}
           <div className="profile-container-nav">
             <FontAwesomeIcon icon={faUser} className="profileIconNav" />
             <p className="userName-title-nav">{user && user.name}</p>
           </div>
           <div className="logout-container-nav">
-            <button onClick={() => {navigate('/login')}}>Logout</button>
+            <button onClick={() => handleLogin}>Logout</button>
           </div>
       </div>)}
     </div>

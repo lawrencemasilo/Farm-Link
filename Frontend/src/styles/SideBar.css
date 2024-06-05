@@ -130,7 +130,7 @@
 /*responsive*/
 
 @media (max-width: 1181px) {
-    .item-container, .item-container2 {
+    .item-container, .item-container2, .item-container-settings, .sidebar-settings-wrapper {
         width: auto;
         height: 50px;
         display: flex;
@@ -141,7 +141,6 @@
         padding-top: 10px;
         font-size: 10px;
     }
-
     .icon {
         font-size: 12px;
     }

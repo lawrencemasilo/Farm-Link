@@ -3,11 +3,14 @@ import '../styles/ListOrder.css'
 import '../styles/History.css'
 import { getOrders, updateOrderStatus } from '../services/OrderService';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSort, faSortDesc } from '@fortawesome/free-solid-svg-icons'
 
 export default function ListOrders() {
   const [selected, setSelected] = useState();
   const [orders, setOrders] = useState([]);
   const { theme } = useContext(ThemeContext);
+  const [sortBy, setSortBy] = useState(false);
 
   useEffect(() => {
     const fetchData = async () =>  {
@@ -51,6 +54,21 @@ export default function ListOrders() {
             <p className={`order-history-title ${theme}`}>History</p>
           </div>
         </div>
+        <div className="list-sort-wrapper">
+          <div className="list-order-sort-container">
+            <div className="list-order-sort-by-btn-contain">
+              <button className={`list-order-sort-by-container ${theme}`} onClick={() => setSortBy((prev) => !prev)}>Sort By <span className="sortIcon"><FontAwesomeIcon icon={faSort} /></span></button>
+            </div>
+            {sortBy && <div className={`list-order-sort-extent ${theme}`}>
+                <div className={`list-order-sort-options ${theme}`}>
+                  <p>Default</p>
+                  <p>Name(asc)</p>
+                  <p>Crop (asc)</p>
+                  <p>Availability</p>
+                </div>
+            </div>}
+          </div>
+        </div>
         <div className={`list-order-history-table-container ${theme}`}>
           <table>
             <thead>
@@ -65,7 +83,7 @@ export default function ListOrders() {
             </thead>
             <tbody>
                 {orders.map((order, index) => (
-                  <tr key={index}>
+                  <tr key={index} className={`list-order-history-table-tr ${theme}`}>
                     <td>{order.farmerDetails.name}</td>
                     <td>{order.farmDetails.name}</td>
                     <td>{order.cropDetails.cropName}</td>
@@ -75,7 +93,7 @@ export default function ListOrders() {
                       {order.status === 'dispatched' && (
                         <button 
                           onClick={() => handleReceive(order._id, index)}
-                          className="history-dispatch-btn"
+                          className={`list-orders-dispatch-btn ${theme}`}
                         >
                           Dispatched
                         </button>
@@ -83,8 +101,8 @@ export default function ListOrders() {
                        {order.status !== 'dispatched' && 
                        <button 
                         className={
-                          order.status === 'received' ? "history-dispatched-btn" :
-                          order.status === 'pending' ?  "history-panding-btn": ''
+                          order.status === 'received' ? (`list-orders-dispatched-btn ${theme}`) :
+                          order.status === 'pending' ?  (`list-orders-panding-btn ${theme}`): ''
                         }
                           >
                         {order.status}

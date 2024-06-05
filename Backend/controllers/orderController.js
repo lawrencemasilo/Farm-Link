@@ -34,24 +34,45 @@ const createOrder = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+// Update the last date a farmer was visited
+const updateLastVisited = async (userId) => {
+    await User.findByIdAndUpdate(userId, { lastVisited: Date.now() });
+};
+
 // Update order status endpoint
 const updateOrderStatus = catchAsyncErrors(async (req, res, next) => {
     const { orderId } = req.params;
     const { status } = req.body;
 
-    console.log(`Received request to update order ID: ${orderId} with status: ${status}`)
     const validStatuses = ['pending', 'dispatched', 'received'];
     if (!validStatuses.includes(status)) {
         return next(new ErrorHandler('Invalid status update!', 400));
     }
 
-    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
+    const order = await Order.findByIdAndUpdate(orderId).populate({
+        path: 'crop',
+        populate: {
+            path: 'farm',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+        }
+    });
     if (!order) {
-        console.log('Order not found!');
         return next(new ErrorHandler('Order not found!', 404));
     }
 
-    console.log('Order after update:', order);
+    // Update the order status
+    order.status = status;
+    await order.save();
+
+    // Update last visited date for the user is the status is dispatched
+    if (status === 'dispatched') {
+        const userId = order.crop.farm.user._id;
+        await updateLastVisited(userId);
+    }
+
     res.status(200).json(order);
 });
 

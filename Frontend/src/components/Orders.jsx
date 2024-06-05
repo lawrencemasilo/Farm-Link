@@ -6,12 +6,16 @@ import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Product from './Product'
 import { placeOrder } from '../services/OrderService'
 import { ThemeContext } from '../contexts/ThemeContext';
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import { SidebarContext } from '../contexts/SideBarContext'
 
-export default function Orders({ user, handleOrderClick }) {
+export default function Orders({ user, handleOrderClose }) {
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [add, setAdd] = useState(false);
   const { theme } = useContext(ThemeContext);
+  //const { setSelectedFarmer, setShowOrderForm } = useContext(SelectedFarmerContext);
+  //const { setNavItem} = useContext(SidebarContext);
 
   const handleCropChange = (e) => {
     setSelectedCrop(e.target.value);
@@ -37,6 +41,7 @@ export default function Orders({ user, handleOrderClick }) {
       console.log('Order response:', response);
       setSelectedCrop('');
       setQuantity(0);
+      handleOrderClose();
     } catch (error) {
       console.error('Error placing order:', error);
     }
