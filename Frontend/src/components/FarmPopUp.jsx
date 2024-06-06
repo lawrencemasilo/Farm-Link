@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useContext, useState } from 'react'
 import '../styles/FarmPopUp.css'
 import { addFarmerDatails } from '../services/farmerService'
 import { UserContext } from '../contexts/UserContext'

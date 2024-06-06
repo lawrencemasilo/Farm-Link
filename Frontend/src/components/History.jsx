@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../styles/History.css'
 import { getOrder, updateOrderStatus } from '../services/OrderService';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -13,8 +13,6 @@ export default function History() {
     const fetchOrders = async () => {
       try {
         const farmData = await getOrder();
-        //console.log('farmData', farmData);
-
         const {crops} = farmData.data;
         if (Array.isArray(crops)) {
             const extractedOrders = crops.flatMap(crop =>
@@ -81,14 +79,12 @@ export default function History() {
                       onClick={() => handleDispatch(index)}
                       disabled={order.status === 'dispatched'}
                     >
-                      {/*!isDispatched ? 'Dispatched' : 'Dispatch'*/}
                       Dispatch
                     </button>}
                   {order.status === 'dispatched' &&
                     <button className={`history-dispatched-btn  ${theme}`}
                       disabled
                       >
-                        {/*order.status === 'dispatched' ? 'Dispatched' : 'Pending'*/}
                         {order.status === 'dispatched' && 'Dispatched'}
                     </button>}
                 </td>

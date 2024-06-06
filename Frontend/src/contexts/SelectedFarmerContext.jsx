@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { createContext, useState } from 'react';
 
 export const SelectedFarmerContext = createContext();
 
@@ -11,17 +12,4 @@ export const SelectedFarmerProvider = ({ children }) => {
     </SelectedFarmerContext.Provider>
   )
 }
-
-
-/*export const ShowFormContext = createContext();
-
-export const ShowFormProvider = ({ children }) => {
-    const [showOrderForm, setShowOrderForm] = useState(false);
-
-    return (
-      <ShowFormContext.Provider value={{showOrderForm, setShowOrderForm}}>
-        {children}
-      </ShowFormContext.Provider>
-    )
-  }*/
   
