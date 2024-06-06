@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../styles/Farmers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
@@ -8,9 +8,7 @@ import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
 
 export default function Farmers() {
-  const [select, setSelect] = useState('');
   const [users, setUsers] = useState([]); 
-  const [farms, setFarms] = useState([]);
   const [sortBy, setSortBy] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
@@ -66,13 +64,6 @@ export default function Farmers() {
           </div>
           )}
         </div>
-        {/*<input 
-          type="text"
-          className="searchFarmersContainer"
-          placeholder="Search..." 
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />*/}
       </div>
       <div className={`table-container ${theme}`}>
         <table>

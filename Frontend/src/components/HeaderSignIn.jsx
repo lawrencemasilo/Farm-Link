@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import '../styles/HeaderSignIn.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faGear, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useEffect, useState } from 'react';
 import { profile } from '../services/ProfileService';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { Logout } from '../services/authService';
 
 
 export default function HeaderSignIn() {
@@ -38,7 +39,12 @@ export default function HeaderSignIn() {
     fetchData();
   }, [])
 
-  const handleLogin = () => {
+  const handleLogout = async () => {
+    try {
+        const data = await Logout();
+      } catch(err) {
+        console.log(err);
+      }
     navigate('/login')
   }
 
@@ -63,16 +69,12 @@ export default function HeaderSignIn() {
       </div>}
       {toggle && (
         <div className="logout-btn-container-nav">
-          {/*<div className="setting-nav">
-            <FontAwesomeIcon icon={faGear} className="settingsIconNav"/>
-            <p className="settings-title-nav">Settings</p>
-          </div>*/}
           <div className="profile-container-nav">
             <FontAwesomeIcon icon={faUser} className="profileIconNav" />
             <p className="userName-title-nav">{user && user.name}</p>
           </div>
           <div className="logout-container-nav">
-            <button onClick={() => handleLogin}>Logout</button>
+            <button onClick={() => handleLogout}>Logout</button>
           </div>
       </div>)}
     </div>

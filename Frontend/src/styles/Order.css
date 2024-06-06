@@ -70,7 +70,6 @@
 .order-form-container{
     width: 100%;
     height: 300px;
-    /*border-top: 2px solid #D9D9D9;*/
     overflow-y: auto;
     margin-top: 30px;
 }
@@ -78,7 +77,6 @@
 .produce-form-container {
     width: auto;
     height: 300px;
-    /*border-top: 2px solid #D9D9D9;*/
     overflow-y: auto;
     margin-top: 30px;
     margin-right: 50px;
@@ -97,14 +95,12 @@
 
 .orders-s-crop-type-container, .orders-s-plantDate-container, .orders-s-harvestDate-container {
     width: 191px;
-    /*border: 1px solid #585858;*/
     position: relative;
     margin-right: 20px;
 }
 
 .orders-s-crop-type-btn.dark {
     width: 191px;
-    /*border: 1px solid #585858;*/
     position: relative;
     margin-right: 20px;
     background-color: #ffffff;
@@ -207,8 +203,10 @@
     margin-right: 20px;
 }
 
-
-
+.produce-s-quantity-btn-input.dark {
+    background-color: #ffffff;
+    
+}
 .orders-s-farmer-btn:hover, .orders-s-crop-type-btn:hover, .orders-s-quantity-btn:hover, .orders-s-plantDate-btn:hover {
     cursor: pointer;
 }
@@ -234,6 +232,12 @@
     height: 100%;
     border: none;
     outline: none;
+
+}
+
+.crop-type-sel.dark, .orders-s-quantity-input-btn.dark, .orders-s-quantity-btn.dark {
+    background-color: #212121;
+    color: #efefef;
 }
 
 .orders-arrowIcon, .orders-arrowIcon2 {
@@ -257,7 +261,14 @@
     font-weight: 450;
 }
 
-.add-order-container, .add-produce-container {
+.place-order-btn-container {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.add-order-container, .add-produce-container, .cancel-order-container {
     width: 70px;
     height: 30px;
     display: flex;
@@ -266,6 +277,12 @@
     border: 1px solid #D9D9D9;
     border-radius: 7px;
     margin-top: 10px;
+}
+
+.cancel-order-container {
+    justify-content: center;
+    margin-left: 10px;
+    color: #585858;
 }
 
 .add-produce-container.dark {
@@ -299,15 +316,22 @@
 .add-orderIcon:hover, .add-produceIcon:hover {
     color: #ffffff;
 }
+
 .add-order-container p, .add-produceIcon p {
     font-size: 14px;
     font-weight: 450;
     color: #585858;
 }
 
-.add-order-container:hover {
+.add-order-container:hover, .add-order-btn-container p:hover {
     cursor: pointer;
     background-color: #0575E6;
+    color: #ffffff;
+}
+
+.cancel-order-container:hover {
+    cursor: pointer;
+    background-color: rgb(235, 0, 0);
     color: #ffffff;
 }
 
@@ -449,7 +473,7 @@
         font-weight: 450;
     }
 
-    .add-order-container, .add-produce-container {
+    .add-order-container:hover {
         /*margin-top: -15px;*/
     }
     .produce-form-container {

@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useContext, useState } from 'react'
 import '../styles/Members.css'
 import Farmers from './Farmers';
 import Farmer from './Farmer';
@@ -6,11 +7,10 @@ import Orders from './Orders';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Members({handleOrderClick, selectedFarmer, setSelectedFarmer, showOrderForm, setShowOrderForm }) {
+export default function Members({  showOrderForm, setShowOrderForm }) {
   const [selected, setSelected] = useState('farmers');
-  //const [showOrderForm, setShowOrderForm] = useState(false);
-  //const [selectedFarmer, setSelectedFarmer] = useState();
   const { theme } = useContext(ThemeContext);
+  const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext);
 
   const handleOrderClose = () => {
     setShowOrderForm(false);
