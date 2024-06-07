@@ -7,6 +7,8 @@ import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { placeOrder } from '../services/OrderService'
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import Swal from 'sweetalert2';
+import '../styles/AlertStyles.css'
 
 export default function Orders({ user }) {
   const [selectedCrop, setSelectedCrop] = useState('');
@@ -24,7 +26,15 @@ export default function Orders({ user }) {
 
   const handleOrder = async () => {
     if (!user || !selectedCrop || quantity <= 0) {
-      alert('Please select a crop and enter a valid quantity');
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please select a crop and enter a valid quantity',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button-ok'
+        }
+      });
       return;
     }
 
@@ -40,13 +50,34 @@ export default function Orders({ user }) {
       handleOrderClose();
     } catch (error) {
       console.error('Error placing order:', error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error placing your order. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'confirm-error-placing-order'
+        }
+      });
     }
   };
 
   const handleOrderClose = () => {
     /* handles closing the order page after placing an order */
-    setShowOrderForm(false);
-    setSelectedFarmer(null);
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Order has been placed successfully!',
+        icon: 'success',
+        confirmButtonText: 'Close',
+        customClass: {
+          confirmButton: 'custom-confirm-button'
+        }
+      }).then(() => {
+      setShowOrderForm(false);
+      setSelectedFarmer(null);
+      });
+    }, 1500); // wait 1.5 seconds before closing
   }
 
   return (
