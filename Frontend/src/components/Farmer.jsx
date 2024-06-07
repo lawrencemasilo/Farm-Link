@@ -1,24 +1,59 @@
 /* eslint-disable react/prop-types */
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { farmerDelete } from '../services/farmerService';
-import '../styles/Farmer.css'
+import '../styles/Farmer.css';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
+import Swal from 'sweetalert2';
+import '../styles/AlertStyles.css'
 
 export default function Farmer({ onOrderClick }) {
     const { theme } = useContext(ThemeContext);
     const { selectedFarmer, setSelectedFarmer } = useContext(SelectedFarmerContext)
 
     const handleDeregister = async () => {
-        //Handles the Deregistration of a user
+        //Handles the De-registration of a user
         try {
             if (selectedFarmer && selectedFarmer._id) {
-                await farmerDelete(selectedFarmer._id);
-                alert('Farmer deregistered successfully');
-                setSelectedFarmer(null);
+                const result = await Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to de-register this farmer?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, de-register',
+                    cancelButtonText: 'No, keep farmer',
+                    customClass: {
+                        confirmButton: 'confirm-deregister',
+                        cancelButton: 'cancel-deregister'
+                    }
+                });
+
+                if (result.isConfirmed) {
+                    await farmerDelete(selectedFarmer._id);
+                    setSelectedFarmer(null);
+
+                    await Swal.fire({
+                        title: 'Success!',
+                        text: 'Farmer de-registered successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            confirmButton: 'acknowledge-deregister-button'
+                        }
+                    });
+                }
             }
         } catch (error) {
-            console.error('Error deregistering farmer:', error);
+            console.error('Error de-registering farmer:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was an error de-registering the farmer. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'confirm-deregister-error'
+                }
+            });
         }
     };
   return (
