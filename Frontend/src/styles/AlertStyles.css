@@ -1,3 +1,4 @@
+/** Admin placed order successfully **/
 .custom-confirm-button {
     background-color: #0575E6 !important;
     color: white;
@@ -10,6 +11,7 @@
     background-color: #033368;
 }
 
+/** Styles for order-placing errors **/
 .custom-confirm-button-ok {
     background-color: rgb(253, 16, 16) !important;
     color: white;
@@ -33,5 +35,58 @@
 
 .confirm-error-placing-order:hover {
     background-color: rgb(253, 16, 16);
+    opacity: 70%;
+}
+
+/** User de-registration styles **/
+.confirm-deregister-error {
+    background-color: rgb(253, 16, 16) !important;
+    color: white;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.confirm-deregister-error:hover {
+    background-color: rgb(253, 16, 16);
+    opacity: 70%;
+}
+
+.confirm-deregister {
+    background-color: rgb(253, 16, 16) !important;
+    color: white;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.confirm-deregister:hover {
+    background-color: rgb(253, 16, 16);
+    opacity: 70%;
+}
+
+.cancel-deregister {
+    background-color: #0575E6 !important;
+    color: white;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.cancel-deregister:hover {
+    background-color: #0575E6;
+    opacity: 70%;
+}
+
+.acknowledge-deregister-button {
+    background-color: #0575E6 !important;
+    color: white;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.acknowledge-deregister-button:hover {
+    background-color: #0575E6 !important;
     opacity: 70%;
 }
