@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { profile } from '../services/ProfileService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Details.css'
-import { farmerDatails, allFarmerDatails, updateFarmerDatails } from '../services/farmerService';
+import { allFarmerDatails, updateFarmerDatails } from '../services/farmerService';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function Details() {

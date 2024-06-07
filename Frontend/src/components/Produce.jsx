@@ -67,8 +67,8 @@ export default function Produce() {
           </div>
           <div className={`orders-s-quantity-container ${theme}`}>
             <p className="order-s-quantity-title">Quantity</p>
-            <div className={`orders-s-quantity-btn ${theme}`}>
-              <input  type="number" placeholder={quantity} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+            <div className={`orders-s-quantity-btn produce-s-quantity-btn ${theme}`}>
+              <input type="number" className={`produce-s-quantity-btn-input ${theme}`} placeholder={quantity} value={quantity} onChange={(e) => setQuantity(e.target.value)} />
             </div>
           </div>
           <div className="orders-s-plantDate-container">

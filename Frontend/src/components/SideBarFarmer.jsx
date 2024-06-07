@@ -5,7 +5,7 @@ import { faWheatAwn, faGear, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext';
 
-export default function SideBarFarmer({setNavItem, setSelectedItem}) {
+export default function SideBarFarmer({setNavItem}) {
   const [selected, setSelected] = useState(false);
   const { theme } = useContext(ThemeContext);
 
@@ -14,9 +14,6 @@ export default function SideBarFarmer({setNavItem, setSelectedItem}) {
     setSelected(false);
   }
   
-  const handleSelected = () => {
-    setSelected((prevState) => !prevState);
-  }
   return (
     <div className={`sidebar-container ${theme}`}>
         <div className={!selected ? (`item-container 2 sidebarF ${theme}`) : (`item-container2 2 ${theme}`)} onClick={handleProfile}>

@@ -1,21 +1,20 @@
-import React, { useContext, useEffect } from 'react'
+/* eslint-disable react/prop-types */
+import { useContext } from 'react'
 import { useState } from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import Product from './Product'
 import { placeOrder } from '../services/OrderService'
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
-import { SidebarContext } from '../contexts/SideBarContext'
+import Swal from 'sweetalert2';
+import '../styles/AlertStyles.css'
 
-export default function Orders({ user, handleOrderClose }) {
+export default function Orders({ user }) {
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState(0);
-  const [add, setAdd] = useState(false);
   const { theme } = useContext(ThemeContext);
-  //const { setSelectedFarmer, setShowOrderForm } = useContext(SelectedFarmerContext);
-  //const { setNavItem} = useContext(SidebarContext);
+  const { setSelectedFarmer, setShowOrderForm } = useContext(SelectedFarmerContext);
 
   const handleCropChange = (e) => {
     setSelectedCrop(e.target.value);
@@ -27,7 +26,15 @@ export default function Orders({ user, handleOrderClose }) {
 
   const handleOrder = async () => {
     if (!user || !selectedCrop || quantity <= 0) {
-      alert('Please select a crop and enter a valid quantity');
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please select a crop and enter a valid quantity',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button-ok'
+        }
+      });
       return;
     }
 
@@ -38,14 +45,40 @@ export default function Orders({ user, handleOrderClose }) {
     }
     try {
       const response = await placeOrder(orderDetails);
-      console.log('Order response:', response);
       setSelectedCrop('');
       setQuantity(0);
       handleOrderClose();
     } catch (error) {
       console.error('Error placing order:', error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error placing your order. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'confirm-error-placing-order'
+        }
+      });
     }
   };
+
+  const handleOrderClose = () => {
+    /* handles closing the order page after placing an order */
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Order has been placed successfully!',
+        icon: 'success',
+        confirmButtonText: 'Close',
+        customClass: {
+          confirmButton: 'custom-confirm-button'
+        }
+      }).then(() => {
+      setShowOrderForm(false);
+      setSelectedFarmer(null);
+      });
+    }, 1500); // wait 1.5 seconds before closing
+  }
 
   return (
     <div className="orders-container">
@@ -70,7 +103,7 @@ export default function Orders({ user, handleOrderClose }) {
           <div className={`orders-s-crop-type-container ${theme}`}>
             <p className={`order-s-crops-title ${theme}`}>Crops</p>
             <div className={`orders-s-crop-type-btn ${theme}`}>
-              <select value={selectedCrop} onChange={handleCropChange} className=" crop-type-sel">
+              <select value={selectedCrop} onChange={handleCropChange} className={`crop-type-sel ${theme}`}>
                 <option value=""></option>
                 { user && user.farm ? user.farm.crops.map(crop => (
                   <option key={crop._id} value={crop.cropName}>{crop.cropName}</option>
@@ -78,21 +111,26 @@ export default function Orders({ user, handleOrderClose }) {
               </select>
             </div>
           </div>
-          <div className="orders-s-quantity-container">
-            <p className="order-s-quantity-title">Quantity</p>
-            <div className="orders-s-quantity-btn">
-              <input type="number" placeholder="0" required value={quantity} onChange={handleQuantityChange}/>
+          <div className={`orders-s-quantity-container ${theme}`}>
+            <p className={`order-s-quantity-title ${theme}`}>Quantity</p>
+            <div className={`orders-s-quantity-btn ${theme}`}>
+              <input type="number" className={`orders-s-quantity-input-btn ${theme}`} placeholder="0" required value={quantity} onChange={handleQuantityChange}/>
             </div>
           </div>
         </div>
-        {user ? <div className="add-order-container" onClick={handleOrder}>
-          <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
-          <p>Add</p>
-        </div> :
-        <div className="add-order-container">
-          <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
-          <p>Add</p>
-        </div>}
+        <div className="place-order-btn-container">
+          {user ? <div className="add-order-container add-order-btn-container" onClick={handleOrder}>
+            <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
+            <p>Add</p>
+          </div> :
+          <div className="add-order-container add-order-btn-container">
+            <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
+            <p>Add</p>
+          </div>}
+          <div className="cancel-order-container" onClick={handleOrderClose}>
+            <p>Cancel</p>
+          </div>
+        </div>
         <div className="order-form-container">
           <div className="order-output-container">
           </div>  
