@@ -44,7 +44,7 @@ export default function Map() {
   /*(Starts here) Handles the Configuration of the api( not the Map configures itself, that's below...)*/
   const { isLoaded } = useJsApiLoader({
     /*loads the Map api and addtional services, using the key*/
-    googleMapsApiKey: 'AIzaSyBoy9iqOcx0Zap0oPYYvrCKIy-NNVWUFIs',
+    googleMapsApiKey: '',
     libraries: ['places'],
   });
 
