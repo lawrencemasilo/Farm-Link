@@ -80,6 +80,11 @@ export default function Orders({ user }) {
     }, 1500); // wait 1.5 seconds before closing
   }
 
+  const handleCancel = () => {
+    setShowOrderForm(false);
+    setSelectedFarmer(null);
+  }
+
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
@@ -127,7 +132,7 @@ export default function Orders({ user }) {
             <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
             <p>Add</p>
           </div>}
-          <div className="cancel-order-container" onClick={handleOrderClose}>
+          <div className="cancel-order-container" onClick={handleCancel}>
             <p>Cancel</p>
           </div>
         </div>
