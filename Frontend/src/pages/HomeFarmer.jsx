@@ -15,7 +15,6 @@ export default function HomeFarmer() {
   const [popUp, setPopUp] = useState(true);
   const { user } = useContext(UserContext);
   
-  console.log(user)
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
