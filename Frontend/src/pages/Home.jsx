@@ -8,6 +8,7 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/Members.css'
 import ListOrders from '../components/ListOrders'
 import Settings from '../components/Settings'
+import PlaceDelivery from '../components/PlaceDelivery'
 import { SidebarContext } from '../contexts/SideBarContext'
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
 import '../styles/Members.css'
@@ -34,6 +35,7 @@ export default function Home() {
             setShowOrderForm={setShowOrderForm}
             />)}
         {navItem === 'listOrders' && <ListOrders />}
+        {navItem === 'delivery' && <PlaceDelivery />}
         {navItem === 'settings' && <Settings />}
       </div>
     </div>
