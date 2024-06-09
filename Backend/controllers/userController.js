@@ -10,7 +10,7 @@ const crypto = require('crypto');
 
 // Register a new user along with their farm details : /api/v1/register
 const registerUser =  catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, phone, fcmToken } = req.body;
 
   // Check if all required fields are provided
   if (!name || !email || !password || !phone) {
@@ -18,7 +18,7 @@ const registerUser =  catchAsyncErrors(async (req, res, next) => {
   }
 
   // Create user and farm documents within the same session
-  const user = await User.create({ name, email, password, phone });
+  const user = await User.create({ name, email, password, phone, fcmToken });
   // const farm = await Farm.create({ user: user._id, location, farmSize });
 
   // Associate farm with the user and save changes
@@ -34,7 +34,7 @@ const registerUser =  catchAsyncErrors(async (req, res, next) => {
 
 // Login a registered user : : /api/v1/login
 const userLogin = catchAsyncErrors(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, fcmToken } = req.body;
 
   // Check if all required fields are provided
   if ( !email || !password ) {
@@ -57,10 +57,30 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
   
+  // Update the user's fcmToken
+  if (fcmToken) {
+    user.fcmToken = fcmToken;
+    await user.save();
+  }
+  
   // Create a json web token
   sendToken(user, 200, res);
 
 })
+
+// Endpoint to update FCM token
+const updateFcmToken = catchAsyncErrors(async (req, res, next) => {
+  const { fcmToken } = req.body;
+  const userId = req.user.id;
+
+  // Finds user by ID and updates the FCM token
+  await User.findByIdAndUpdate(userId, { fcmToken });
+
+  res.status(200).json({
+    success: true,
+    message: 'FCM token updated successfully'
+  });
+});
 
 // Forgot Password : /api/v1/forgot/password
 const forgotPassword = catchAsyncErrors(async (req, res, next) => {
@@ -142,6 +162,7 @@ const userLogout = catchAsyncErrors(async (req, res, next) => {
 module.exports = {
   registerUser,
   userLogin,
+  updateFcmToken,
   forgotPassword,
   passwordReset,
   userLogout

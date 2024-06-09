@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { reset } = require('nodemon');
 const validator = require('validator');
 const crypto = require('crypto');
+const { type } = require('os');
 
 
 const userSchema = new mongoose.Schema({
@@ -22,6 +23,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
     select: false
+  },
+  fcmToken: {
+    type: String,
+    require: false
   },
   phone: {
     type: String,

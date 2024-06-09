@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const errorMiddleware = require('./middleware/errors');
 const ErrorHandler = require('./utils/errorHandler');
 const connectDB = require('./config/db');
+const firebase = require('./firebase');
 
 
 // Setting up .env file variables
@@ -44,6 +45,7 @@ const farm = require('./routes/farmRoutes');
 const profile = require('./routes/userProfileRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const deliveryRoutes = require('./routes/deliveryRoutes');
+const autoOrderRoutes = require('./routes/autoOrderRoutes');
 
 app.use('/api/v1', auth);
 app.use('/api/v1', crops);
@@ -51,6 +53,7 @@ app.use('/api/v1', farm);
 app.use('/api/v1', profile);
 app.use('/api/v1', orderRoutes);
 app.use('/api/v1', deliveryRoutes);
+app.use('/api/v1', autoOrderRoutes);
 
 // The routes end here
 
