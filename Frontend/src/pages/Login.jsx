@@ -3,6 +3,7 @@ import '../styles/Login.css';
 import { loginUser } from '../services/authService';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import { getFcmToken } from '../firebaseConfig';
 
 // Shows an error alert when incorrect credentials are entered
 const showErrorAlert = (message) => {
@@ -32,6 +33,20 @@ export default function Login() {
     //Passes email and password to backend for auth
     try {
       const data = await loginUser({ email, password });
+      //Retrieve FCM token
+      const fcmToken = await getFcmToken();
+
+      if (fcmToken) {
+        //send token to the backend
+        await fetch('/api/v1/user/fcm-token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fcmToken })
+        });
+      }
+
       if (data.role == "admin") {
         navigate("/home") //navigates to the home page after authentication
       } else if (data.role == "user") {
