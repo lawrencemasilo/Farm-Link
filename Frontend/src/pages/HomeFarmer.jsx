@@ -15,13 +15,32 @@ export default function HomeFarmer() {
   const [popUp, setPopUp] = useState(true);
   const { user } = useContext(UserContext);
   
+
+  const handleGetLocation = () => {
+    navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+      enableHighAccuracy: true
+    })
+  }
+    
+
+  const successLocation = (position) => {
+    console.log(position) //test
+  }
+
+  const errorLocation = (error) => {
+    console.log(error) //test
+  }
+
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {user && !user.farm  && popUp && <FarmPopUp setPopUp={setPopUp} />}
+        {/*getting current Location test */}
+        {user && handleGetLocation()}
+        {/*getting current Location test */}
+        {user && user.farm  && popUp && <FarmPopUp setPopUp={setPopUp} />}
         {<SideBarFarmer setNavItem={setNavItem} />}
         {navItem === 'profile' && <Profile />}
         {navItem === 'produce' && <Produce />}
