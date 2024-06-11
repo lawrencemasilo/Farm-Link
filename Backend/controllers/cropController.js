@@ -5,7 +5,7 @@ const Farm = require('../models/farmModel');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
-// // Allow user to add a new crop
+// Allow user to add a new crop
 const addCrop = catchAsyncErrors(async (req, res, next) => {
     const userId = req.user.id;
     const { cropName, plantDate, harvestDate, availability, produceYield, plotSize } = req.body;

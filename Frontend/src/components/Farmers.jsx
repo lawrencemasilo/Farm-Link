@@ -64,6 +64,13 @@ export default function Farmers() {
           </div>
           )}
         </div>
+        <input 
+          type="text"
+          className="searchFarmersContainer"
+          placeholder="Search..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <div className={`table-container ${theme}`}>
         <table>
