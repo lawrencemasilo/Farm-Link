@@ -33,24 +33,25 @@ export default function Login() {
     //Passes email and password to backend for auth
     try {
       const data = await loginUser({ email, password });
+      if (data.role == "admin") {
+        navigate("/home") //navigates to the home page after authentication
+      } else if (data.role == "user") {
+        navigate("/home/farmer"); //navigates to the farmer home page after authentication
+      }
+
       //Retrieve FCM token
       const fcmToken = await getFcmToken();
 
       if (fcmToken) {
         //send token to the backend
-        await fetch('/api/v1/user/fcm-token', {
+        await fetch('/api/v1/user/fcmToken', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + data.token,
           },
           body: JSON.stringify({ fcmToken })
         });
-      }
-
-      if (data.role == "admin") {
-        navigate("/home") //navigates to the home page after authentication
-      } else if (data.role == "user") {
-        navigate("/home/farmer"); //navigates to the farmer home page after authentication
       }
     } catch (err) {
       console.error('Error object:', err);
