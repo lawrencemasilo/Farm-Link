@@ -73,8 +73,25 @@ const updateFcmToken = catchAsyncErrors(async (req, res, next) => {
   const { fcmToken } = req.body;
   const userId = req.user.id;
 
+  if (!fcmToken) {
+    return res.status(400).json({
+      success: false,
+      message: 'FCM token is required'
+    });
+  }
+
   // Finds user by ID and updates the FCM token
-  await User.findByIdAndUpdate(userId, { fcmToken });
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: 'User not found'
+    });
+  }
+
+  user.fcmToken = fcmToken;
+  await user.save();
 
   res.status(200).json({
     success: true,

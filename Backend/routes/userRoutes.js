@@ -8,7 +8,7 @@ const { registerUser, userLogin, updateFcmToken, forgotPassword, passwordReset, 
 
 router.route('/register').post(registerUser);
 router.route('/login').post(userLogin);
-router.route('/fcmToken').put(cookieJwtAuth, updateFcmToken);
+router.route('/fcmToken').post(cookieJwtAuth, updateFcmToken);
 router.route('/forgot/password').post(forgotPassword);
 router.route('/password/reset/:token').put(passwordReset);
 router.route('/logout').get(cookieJwtAuth, userLogout);
