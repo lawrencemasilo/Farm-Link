@@ -19,23 +19,37 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 // Request permission to send notifications and get the token
-export const getFcmToken = async () => {
+export const getFcmToken = async (registration) => {
+  try {
+    const currentToken = await getToken(messaging, { vapidKey: 'BAQ7l61hwNoO8Yhdi-B8GQxL2QeftR5P4pu5BrKV09jPV4-024c5zqqB09odlZWCp8qI7SVkBhC7yrijRQO5OSo', serviceWorkerRegistration: registration });
+    if (currentToken) {
+      console.log('FCM Token:', currentToken);
+      return currentToken;
+    } else {
+      console.log('No registration token available. Request permission to generate one.');
+    }
+  } catch (err) {
+    console.log('An error occurred while retrieving token. ', err);
+  }
+};
+
+// Initialize notifications
+export const initNotification = async () => {
   try {
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
       console.log('Notification permission granted.');
-      const currentToken = await getToken(messaging, { vapidKey: 'BAQ7l61hwNoO8Yhdi-B8GQxL2QeftR5P4pu5BrKV09jPV4-024c5zqqB09odlZWCp8qI7SVkBhC7yrijRQO5OSo' });
-      if (currentToken) {
-        console.log('FCM Token:', currentToken);
-        return currentToken;
-      } else {
-        console.log('No registration token available. Request permission to generate one.');
-      }
+
+      const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+      console.log('Service Worker registered with scope:', registration.scope);
+
+      const fcmToken = await getFcmToken(registration);
+      return fcmToken;
     } else {
       console.log('Unable to get permission to notify.');
     }
   } catch (err) {
-    console.log('An error occurred while retrieving token. ', err);
+    console.log('An error occurred while initialising notifications: ', err);
   }
 };
 
