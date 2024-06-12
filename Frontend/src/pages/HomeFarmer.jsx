@@ -14,16 +14,44 @@ export default function HomeFarmer() {
   const { theme } = useContext(ThemeContext);
   const [popUp, setPopUp] = useState(true);
   const { user } = useContext(UserContext);
-  
+  const [coordinates, setCoordinates] = useState({ "latitude": "", "longitude": ""});
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
+
+
+  const handleGetLocation = () => {
+    //Pops up prompt for allowing App to get user's current location
+    navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+      enableHighAccuracy: true
+    })
+  }
+    
+  const successLocation = (position) => {
+    //Set state of coordinates when Allow current location is accepted
+    setLatitude(position.coords.latitude);
+    setLongitude(position.coords.longitude);
+    if (longitude && latitude) {
+      setCoordinates({"latitude": latitude, "longitude": longitude});
+    } 
+  }
+
+  const errorLocation = (error) => {
+    /*handles an error with getting current location,
+     or user disagrees to allow App to get user's current Location.*/
+    console.log(error) //test
+  }
+
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {user && !user.farm  && popUp && <FarmPopUp setPopUp={setPopUp} />}
+        {handleGetLocation()}
+        {user && !user.farm  && popUp && <FarmPopUp setPopUp={setPopUp} coordinates={coordinates}/>}
         {<SideBarFarmer setNavItem={setNavItem} />}
-        {navItem === 'profile' && <Profile />}
+        {navItem === 'profile' && <Profile handleGetLocation={handleGetLocation} coordinates={coordinates} />}
         {navItem === 'produce' && <Produce />}
         {navItem === 'settings' && <Settings />}
       </div>

@@ -1,18 +1,13 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import '../styles/Members.css'
-import Recent from './Recent';
-import Farmers from './Farmers';
-import Applications from './Applications';
-import Farmer from './Farmer';
 import History from './History';
 import Details from './Details';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext';
 
-export default function Profile() {
+export default function Profile({handleGetLocation, coordinates}) {
   const [selected, setSelected] = useState('history');
-  const [selectedFarmer, setSelectedFarmer] = useState();
   const { theme } = useContext(ThemeContext);
+  const [reRender, setReRender] = useState(false);
 
   return (
     <div className={`members-container ${theme}`}>
@@ -29,7 +24,16 @@ export default function Profile() {
           </div>}
         </div>
         {selected == 'history' && <History />}
-        {selected == 'details' && <Details />}
+        {selected == 'details' && !reRender &&
+          <Details
+            handleGetLocation={handleGetLocation}
+            coordinates={coordinates}
+            setReRender={setReRender}/>}
+        {selected == 'details' && reRender &&
+          <Details
+            handleGetLocation={handleGetLocation}
+            coordinates={coordinates}
+            setReRender={setReRender}/>}
       </div>
     </div>
   )
