@@ -43,7 +43,7 @@ export const ResetPassword = async (userData) => {
 export const Logout = async () => {
   //logout
   try {
-    const response = await axiosInstance.post('api/v1/logout');
+    const response = await axiosInstance.get('api/v1/logout');
     return response.data;
   } catch (error) {
     throw error.response.data;
