@@ -4,7 +4,7 @@ import '../styles/FarmPopUp.css'
 import { addFarmerDatails } from '../services/farmerService'
 import { UserContext } from '../contexts/UserContext'
 
-export const FarmPopUp = ({ setPopUp }) => {
+export const FarmPopUp = ({ setPopUp, coordinates }) => {
   const { user } = useContext(UserContext)
   const [name, setName] = useState(user.name)
   const [location, setLocation] = useState();
@@ -12,15 +12,16 @@ export const FarmPopUp = ({ setPopUp }) => {
   const [houseNumber, setHouseNumber] = useState();
   const [city, setCity] = useState();
   const [farmSize, setFarmSize] = useState();
-
+  
   const handleSumbit = async () => {
     try {
-      const data = await addFarmerDatails({ name, location, streetName, houseNumber, city, farmSize });
+      const data = await addFarmerDatails({ name, location, streetName, houseNumber, city, farmSize, coordinates});
       setPopUp(false)
     } catch (error) {
       console.log(error)
     }
   }
+
   return (
     <div className="farmpopup-container">
         <div className="popup-content">
