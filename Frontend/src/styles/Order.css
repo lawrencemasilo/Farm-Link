@@ -376,7 +376,32 @@
     text-decoration: none;
 }
 
-
+/* AutoOrder crop persistance */
+    .order-output-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .order-output-title {
+        flex: 1;
+    }
+    .order-output-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    .quantity-container {
+        display: flex;
+        align-items: center;
+    }
+    .remove-crop-icon {
+        cursor: pointer;
+        margin-left: 5px;
+    }
+    .order-output-item:hover {
+        background-color: #0575e6;
+        color: white;
+    }
 
 /* Responsive*/
 

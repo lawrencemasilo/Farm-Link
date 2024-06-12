@@ -11,6 +11,7 @@ import Settings from '../components/Settings'
 import PlaceDelivery from '../components/PlaceDelivery'
 import { SidebarContext } from '../contexts/SideBarContext'
 import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import AutoOrder from '../components/AutoOrder'
 import '../styles/Members.css'
 
 
@@ -36,6 +37,7 @@ export default function Home() {
             />)}
         {navItem === 'listOrders' && <ListOrders />}
         {navItem === 'delivery' && <PlaceDelivery />}
+        {navItem === 'autoOrder' && <AutoOrder />}
         {navItem === 'settings' && <Settings />}
       </div>
     </div>

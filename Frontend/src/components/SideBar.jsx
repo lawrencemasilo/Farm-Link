@@ -5,6 +5,7 @@ import { faWheatAwn, faUserGroup, faGear, faTruckFast } from '@fortawesome/free-
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SidebarContext } from '../contexts/SideBarContext';
+import AutoOrder from '../components/AutoOrder'
 
 export default function SideBar() {
   const { theme } = useContext(ThemeContext);
@@ -15,6 +16,10 @@ export default function SideBar() {
         <div className={`item-container ${theme}`} onClick={() => setNavItem('members')}>
             <FontAwesomeIcon icon={faUserGroup} className="icon" />
             <p className="item-title members">Members</p>
+        </div>
+        <div className={`item-container ${theme}`} onClick={() => setNavItem('autoOrder')}>
+          <FontAwesomeIcon icon={faWheatAwn} className="icon"/>
+          <p className="item-title schedule">Auto Order</p>
         </div>
         <div className={`item-container ${theme}`} onClick={() => setNavItem('listOrders')}>
           <FontAwesomeIcon icon={faWheatAwn} className="icon" />
