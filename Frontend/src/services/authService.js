@@ -39,3 +39,13 @@ export const ResetPassword = async (userData) => {
     throw error.response.data;
   }
 };
+
+export const Logout = async () => {
+  //logout
+  try {
+    const response = await axiosInstance.post('api/v1/logout');
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};

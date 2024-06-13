@@ -1,66 +1,95 @@
-import React, { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../styles/History.css'
-import { getOrder } from '../services/OrderService';
-import { profile } from '../services/ProfileService';
+import { getOrder, updateOrderStatus } from '../services/OrderService';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function History() {
   const [select, setSelect] = useState('');
-  const [user, setUser] = useState();
-  const [id, setId] = useState();
-  const [orders, setOrders] = useState();
-  
+  const [orders, setOrders] = useState([]);
+  const [isDispatched, setIsDispatched] = useState(false)
+  const { theme } = useContext(ThemeContext);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchOrders = async () => {
       try {
-        const userData = await profile();
-        setUser(userData.data);
-        if (userData.data._id) {
-          console.log(userData.data._id)
-          setId(userData.data._id)
+        const farmData = await getOrder();
+        const {crops} = farmData.data;
+        if (Array.isArray(crops)) {
+            const extractedOrders = crops.flatMap(crop =>
+            crop.orders.map(order => ({
+              _id: order._id,
+              cropName: crop.cropName,
+              quantity: order.quantity,
+              date: order.createdAt,
+              status: order.status || 'pending'
+            }))
+          );
+          setOrders(extractedOrders);
+        } else {
+          console.error('crops is not an array:', crops);
         }
       } catch (err) {
         console.log(err)
       }
     }
-    fetchData()
-  }, [])
+    fetchOrders();
+  }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const handleDispatch = async (index) => {
+    const order = orders[index];
+    const confirmed = window.confirm('Are you sure this order is dispatched?')
+    if (confirmed) {
       try {
-        if (id) {
-          const userOrders = await getOrder(id);
-          setOrders(userOrders.data)
-        }
-      } catch (err) {
-        console.log(err)
+        await updateOrderStatus(order._id, 'dispatched');
+        setOrders(prevOrders => {
+          const newOrders = [...prevOrders];
+          newOrders[index].status = 'dispatched';
+          setIsDispatched(true)
+          return newOrders;
+        });
+      } catch (error) {
+        console.log(error);
       }
     }
-    fetchData()
-  }, [])
-
-  
+  };
   return (
     <div className="history-container">
       <div className="header-history-containers">
 
       </div>
-      <div className="history-table-container">
+      <div className={`history-table-container ${theme}`}>
         <table>
           <thead>
             <tr>
               <th>Crop Name</th>
-              <th>Farm Size</th>
-              <th>Quantity</th>
+              <th>Quantity(kg)</th>
+              <th>Date Issued</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {orders && orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order.cropDetails.cropName}</td>
-                <td>{order.cropDetails.plotSize}</td>
+            {orders && orders.map((order, index) => (
+              <tr key={index} className={`history-table-tr ${theme}`}>
+                <td>{order.cropName}</td>
                 <td>{order.quantity}</td>
-            </tr>))}
+                <td>{new Date(order.date).toLocaleDateString()}</td>
+                <td>
+                  {order.status != 'dispatched' &&
+                    <button className={`history-dispatch-btn ${theme}`}
+                      onClick={() => handleDispatch(index)}
+                      disabled={order.status === 'dispatched'}
+                    >
+                      Dispatch
+                    </button>}
+                  {order.status === 'dispatched' &&
+                    <button className={`history-dispatched-btn  ${theme}`}
+                      disabled
+                      >
+                        {order.status === 'dispatched' && 'Dispatched'}
+                    </button>}
+                </td>
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>

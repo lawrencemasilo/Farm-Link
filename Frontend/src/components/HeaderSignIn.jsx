@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import '../styles/HeaderSignIn.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faGear, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react';
+import { faUser, faBars } from '@fortawesome/free-solid-svg-icons'
+import { useContext, useEffect, useState } from 'react';
 import { profile } from '../services/ProfileService';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { Logout } from '../services/authService';
 
 
 export default function HeaderSignIn() {
@@ -11,6 +13,7 @@ export default function HeaderSignIn() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 720);
   const [toggle, setToggle] = useState(false);
   const [user, setUser] = useState();
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,37 +39,42 @@ export default function HeaderSignIn() {
     fetchData();
   }, [])
 
+  const handleLogout = async () => {
+    try {
+        const data = await Logout();
+      } catch(err) {
+        console.log(err);
+      }
+    navigate('/login')
+  }
+
   return (
-    <div className="header_signin-container">
-      <div className="logo_signin-container">
-        <h1>FarmLink</h1>
+    <div className={`header_signin-container ${theme}`}>
+      <div className={`logo_signin-container ${theme}`}>
+        <h1 className={`logo_signin-title-container ${theme}`}>FarmLink</h1>
       </div>
       <div className="header-nav">
         
       </div>
       {isMobile ? <FontAwesomeIcon icon={faBars} className="headerBar" onClick={() => setToggle((prev) => !prev)} /> : <div className="signin-wrapper">
         <div className="logout-btn-container">
-          <div className="profile-container">
-            <FontAwesomeIcon icon={faUser} className="profileIcon" />
-            <p className="userName-title">{user && user.name}</p>
+          <div className={`profile-container ${theme}`}>
+            <FontAwesomeIcon icon={faUser} className={`profileIcon ${theme}`} />
+            <p className={`userName-title ${theme}`}>{user && user.name}</p>
           </div>
-          <div className="logout-container">
-            <button onClick={() => {navigate('/login')}}>Logout</button>
+          <div className={`logout-container ${theme}`}>
+            <button className={`logout-btn-container ${theme}`} onClick={() => {navigate('/login')}}>Logout</button>
           </div>
         </div>
       </div>}
       {toggle && (
         <div className="logout-btn-container-nav">
-          <div className="setting-nav">
-            <FontAwesomeIcon icon={faGear} className="settingsIconNav"/>
-            <p className="settings-title-nav">Settings</p>
-          </div>
           <div className="profile-container-nav">
             <FontAwesomeIcon icon={faUser} className="profileIconNav" />
             <p className="userName-title-nav">{user && user.name}</p>
           </div>
           <div className="logout-container-nav">
-            <button onClick={() => {navigate('/login')}}>Logout</button>
+            <button onClick={() => handleLogout}>Logout</button>
           </div>
       </div>)}
     </div>

@@ -1,88 +1,88 @@
 // Logic for farm-related operations
-// const User = require('../models/userModel');
-
-// const ErrorHandler = require('../utils/errorHandler');
-// const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const Farm = require('../models/farmModel')
+const User = require('../models/userModel');
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Create farm instance
-// const createFarm = catchAsyncErrors(async (req, res, next) => {
-//   const farm = await Farm.create(req.body);
+const createFarm = catchAsyncErrors(async (req, res, next) => {
+    const userId = req.user.id;
+    const { name, location, streetName, houseNumber, city, farmSize, coordinates } = req.body;
+  
+    const user = await User.findById(userId);
+    if (!user) {
+      return next(new ErrorHandler('User not found!', 404));
+    }
+  
+    if (user.farm) {
+      return next(new ErrorHandler('User already has a farm!', 400));
+    }
+  
+    const farm = new Farm({user: user._id, name, location, streetName, houseNumber, city, farmSize, coordinates});
+    await farm.save();
+  
+    user.farm = farm._id;
+    await user.save();
+  
+    res.status(200).json({
+      success: true,
+      data: farm
+    });
+  });
+  
+// Update farm details
+const updateFarm = catchAsyncErrors(async (req, res, next) => {
+    const userId = req.user.id;
+    const { name, location, streetName, houseNumber, city, farmSize, coordinates } = req.body;
+  
+    // find the user and populate the farm fields
+    const user = await User.findById(userId).populate('farm');
+    if (!user) {
+      return next(new ErrorHandler('User not found', 404));
+    }
+  
+    if (!user.farm) {
+        return next(new ErrorHandler('User does not have a farm', 400));
+    }
+  
+    // Update the farm document
+    const farm = await Farm.findByIdAndUpdate(
+      user.farm._id,
+      { name, location, streetName, houseNumber, city, farmSize, coordinates },
+      { new: true, runValidators: true }
+    );
+  
+    res.status(200).json({
+      success: true,
+      data: farm
+    });
+  });
 
-//   res.status(201).json({
-//     success: true,
-//     message: 'Farm details added successfully!',
-//     data: farm
-//   });
-// });
+const getUserFarmAndCrops = catchAsyncErrors(async (req, res, next) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId).populate({
+      path: 'farm',
+      populate: {
+      path: 'crops',
+      populate: {
+          path: 'orders'
+      }
+      }
+  });
 
-// // Get farm instance by ID
-// const getFarm = catchAsyncErrors(async (req, res, next) => {
-//   const farm = await Farm.findById(req.params.id);
+  if (!user || !user.farm) {
+      return next(new ErrorHandler('Farm not found', 404));
+  }
 
-//   if (!farm) {
-//     return next(new ErrorHandler('Farm not found!', 404));
-//   }
+  res.status(200).json({
+      success: true,
+      data: user.farm,
+});
 
-//   res.status(200).json({
-//     success: true,
-//     data: farm
-//   });
-// });
+});
 
-// Get all farm instances : /api/v1/farm
-// const getFarms = catchAsyncErrors(async (req, res, next) => {
-//   const farms = await Farm.find();
-
-//   res.status(200).json({
-//     success: true,
-//     data: farms
-//   });
-// });
-
-// Update the current user's farm details
-// const updateFarm =  catchAsyncErrors(async (req, res, next) => {
-//   const { name, location, streetName, houseNumber, city, farmSize } = req.body;
-
-//   const user = await User.findById(req.user._id);
-
-//   if (!User.updateSearchIndex) {
-//     return next(new ErrorHandler('Farm not found!', 404));
-//   }
-
-//   if (!user.farm) {
-//     return next(new ErrorHandler('User does not have a farm!', 400));
-//   }
-
-//   user.farm = { ...user.farm, name, location, streetName, houseNumber, city, farmSize };
-//   await user.save(); 
-
-//   res.status(200).json({
-//     success: true,
-//     message: 'Farm details updated successfully!',
-//     data: user
-//   });
-// });
-
-// Delete farm instance by ID
-// const deleteFarm = catchAsyncErrors(async (req, res, next) => {
-//   const farm = await Farm.findById(req.params.id);
-
-//   if (!farm) {
-//     return next(new ErrorHandler('Farm not found', 404));
-//   }
-
-//   await farm.remove();
-
-//   res.status(200).json({
-//     success: true,
-//     message: 'Farm deleted successfully!'
-//   });
-// });
-
-// module.exports = {
-//     createFarm,
-    // getFarm,
-    // getFarms,
-    // updateFarm,
-    // deleteFarm
-// };
+module.exports = {
+    createFarm,
+    updateFarm,
+    getUserFarmAndCrops,
+};

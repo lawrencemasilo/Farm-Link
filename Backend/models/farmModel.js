@@ -15,6 +15,10 @@ const farmSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  coordinates: {
+    latitude: Number,
+    longitude: Number,
+  },
   streetName: {
     type: String,
     required: true

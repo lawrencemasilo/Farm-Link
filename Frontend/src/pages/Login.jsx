@@ -1,15 +1,22 @@
-import { Link, useNavigate } from 'react-router-dom'
-import '../styles/Login.css'
-import { loginUser } from '../services/authService'
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Login.css';
+import { loginUser } from '../services/authService';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
-/*
-{
-    "success": true,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGRlM2Y0YzNmNmMwMmUzYWIwMTVlNCIsImlhdCI6MTcxNjkwNjYwMywiZXhwIjoxNzE3MzM4NjAzfQ.ZoNlh6fryXGyiFAi0ZquLaO5tOTyKVlDYTKT8i7K2_s",
-    "role": "user"
-}
-*/
+// Shows an error alert when incorrect credentials are entered
+const showErrorAlert = (message) => {
+  Swal.fire({
+    title: 'Error!',
+    text: message,
+    icon: 'error',
+    confirmButtonText: 'OK',
+    customClass: {
+      confirmButton: 'confirm-error-alert'
+    }
+  });
+};
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,9 +40,15 @@ export default function Login() {
     } catch (err) {
       console.error('Error object:', err);
       setError(err.message || 'Something went wrong, please try again!');
+      showErrorAlert(err.message || 'Something went wrong, please try again!');
       console.log(err.message);
     }
   }
+
+  const handleInputChange = (setter) => (event) => {
+    setter(event.target.value);
+    setError(null); // To clear error message on user input change
+  };
 
   return (
     <div className="outer-login-container">
@@ -53,7 +66,6 @@ export default function Login() {
         <div className="input-container">
           <div className="input-spacer"></div>
           <div className="input-content-container">
-          {error && <div className="error-alert">{error}</div>}
             <div className="login-title">
               <h1>Hello Again!</h1>
               <p>Welcome Back</p>
@@ -62,11 +74,23 @@ export default function Login() {
             <form className='form-container' onSubmit={handleSubmit}>
 
               <div className="email-container">
-                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" required/>
+                <input type="email"
+                       name="email"
+                       value={email}
+                       onChange={handleInputChange(setEmail)}
+                       placeholder="Email Address"
+                       required
+                />
               </div>
 
               <div className="password-container">
-                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required/>
+                <input type="password"
+                       name="password"
+                       value={password}
+                       onChange={handleInputChange(setPassword)}
+                       placeholder="Password"
+                       required
+                />
               </div>
 
               <div className="submit-btn-container-l">

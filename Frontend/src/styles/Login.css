@@ -196,14 +196,18 @@
     margin: 0 20px 0 20px;
 }
 
-.error-alert {
-    padding: 1em;
-    margin: 1em 0;
-    color: red;
-    border-radius: 5px;
-    text-align: center;
-    margin-left: -70px;
-    font-weight: 550;
+.confirm-error-alert {
+    background-color: #0575E6 !important;
+    color: white;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.confirm-error-alert:hover {
+    background-color: #0575E6 !important;
+    opacity: 70%;
+    color: white;
 }
 
 @media (max-width: 1300px) {

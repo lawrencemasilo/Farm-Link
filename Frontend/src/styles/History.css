@@ -1,7 +1,16 @@
-.history-table-container {
+.history-table-container.light {
     margin-top: 50px;
 }
 
+.history-table-container.dark {
+    margin-top: 50px;
+    color: #ebebeb;
+}
+
+.history-table-tr.dark:hover {
+    cursor: pointer;
+    background-color: #757575;
+}
 
 table {
     width: 100%;
@@ -13,4 +22,55 @@ tr, th {
     height: 30px;
     border: 1px solid #D9D9D9;
     text-align: left;
+}
+
+.history-panding-btn {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #909231;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.history-dispatch-btn, .history-dispatched-btn {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    background-color: #ffffff;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.history-dispatch-btn.dark {
+    width: 80px;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #ebebeb;
+    background-color: #212121;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.history-dispatch-btn:hover {
+    cursor: pointer;
+    /*background-color: #0575e6;*/
+    background-color: red;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.history-dispatched-btn.light {
+    color: #ffffff;
+    background-color: rgb(0, 198, 0);
+    border: 1px solid #ffffff;
+}
+
+.history-dispatched-btn.dark {
+    color: #ffffff;
+    background-color: rgb(0, 155, 0);
+    border: none;
 }

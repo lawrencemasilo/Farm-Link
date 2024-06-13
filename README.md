@@ -34,13 +34,13 @@ git clone https://github.com/lawrencemasilo/Farm-Link.git
 cd Farm-Link
 ```
 
-3. **Install dependencies**:
+3. **Install dependencies in root, Frontend & Backend directories**:
 ```bash
 npm install
 ```
 
-4. Set up environment variables:
-- Create a `.env` file in the root directory
+4. **Set up environment variables**:
+- Create a `.env` file in the root of Backend directory
 - Add the following environment variables:
 ```env
 MONGODB_URI=your_mongodb_uri

@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+/* eslint-disable react/prop-types */
+import { useContext } from 'react'
 import { useState } from 'react'
 import '../styles/Order.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import Product from './Product'
 import { placeOrder } from '../services/OrderService'
+import { ThemeContext } from '../contexts/ThemeContext';
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import Swal from 'sweetalert2';
+import '../styles/AlertStyles.css'
 
-export default function Orders({ user, handleOrderClick }) {
+export default function Orders({ user }) {
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState(0);
-  const [add, setAdd] = useState(false);
+  const { theme } = useContext(ThemeContext);
+  const { setSelectedFarmer, setShowOrderForm } = useContext(SelectedFarmerContext);
 
   const handleCropChange = (e) => {
     setSelectedCrop(e.target.value);
@@ -21,7 +26,15 @@ export default function Orders({ user, handleOrderClick }) {
 
   const handleOrder = async () => {
     if (!user || !selectedCrop || quantity <= 0) {
-      alert('Please select a crop and enter a valid quantity');
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please select a crop and enter a valid quantity',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button-ok'
+        }
+      });
       return;
     }
 
@@ -32,26 +45,58 @@ export default function Orders({ user, handleOrderClick }) {
     }
     try {
       const response = await placeOrder(orderDetails);
-      console.log('Order response:', response);
       setSelectedCrop('');
       setQuantity(0);
+      handleOrderClose();
     } catch (error) {
       console.error('Error placing order:', error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error placing your order. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'confirm-error-placing-order'
+        }
+      });
     }
   };
+
+  const handleOrderClose = () => {
+    /* handles closing the order page after placing an order */
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Order has been placed successfully!',
+        icon: 'success',
+        confirmButtonText: 'Close',
+        customClass: {
+          confirmButton: 'custom-confirm-button'
+        }
+      }).then(() => {
+      setShowOrderForm(false);
+      setSelectedFarmer(null);
+      });
+    }, 1500); // wait 1.5 seconds before closing
+  }
+
+  const handleCancel = () => {
+    setShowOrderForm(false);
+    setSelectedFarmer(null);
+  }
 
   return (
     <div className="orders-container">
       <div className="orders-wrapper">
-        <div className="orders-title">
+        <div className={`orders-title ${theme}`}>
           <h1>Place Order</h1>
         </div>
-        <div className="orders-nav-container">
-          <div className="orders-title-container">
-            <p className="Orders-nav-title">Order</p>
+        <div className={`orders-nav-container ${theme}`}>
+          <div className={`orders-title-container ${theme}`}>
+            <p className={`Orders-nav-title ${theme}`}>Order</p>
           </div>
         </div>
-        <div className="order-selectors">
+        <div className={`order-selectors ${theme}`}>
           
           <div className="orders-s-farmer-container">
             <p className="order-s-farmer-title">Farmer</p>
@@ -60,10 +105,10 @@ export default function Orders({ user, handleOrderClick }) {
             < FontAwesomeIcon icon={faAngleUp} className="orders-arrowIcon" />
             </div>
           </div>
-          <div className="orders-s-crop-type-container">
-            <p className="order-s-crops-title">Crops</p>
-            <div className="orders-s-crop-type-btn">
-              <select value={selectedCrop} onChange={handleCropChange} className=" crop-type-sel">
+          <div className={`orders-s-crop-type-container ${theme}`}>
+            <p className={`order-s-crops-title ${theme}`}>Crops</p>
+            <div className={`orders-s-crop-type-btn ${theme}`}>
+              <select value={selectedCrop} onChange={handleCropChange} className={`crop-type-sel ${theme}`}>
                 <option value=""></option>
                 { user && user.farm ? user.farm.crops.map(crop => (
                   <option key={crop._id} value={crop.cropName}>{crop.cropName}</option>
@@ -71,21 +116,26 @@ export default function Orders({ user, handleOrderClick }) {
               </select>
             </div>
           </div>
-          <div className="orders-s-quantity-container">
-            <p className="order-s-quantity-title">Quantity</p>
-            <div className="orders-s-quantity-btn">
-              <input type="number" placeholder="0" required value={quantity} onChange={handleQuantityChange}/>
+          <div className={`orders-s-quantity-container ${theme}`}>
+            <p className={`order-s-quantity-title ${theme}`}>Quantity</p>
+            <div className={`orders-s-quantity-btn ${theme}`}>
+              <input type="number" className={`orders-s-quantity-input-btn ${theme}`} placeholder="0" required value={quantity} onChange={handleQuantityChange}/>
             </div>
           </div>
         </div>
-        {user ? <div className="add-order-container" onClick={handleOrder}>
-          <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
-          <p>Add</p>
-        </div> :
-        <div className="add-order-container">
-          <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
-          <p>Add</p>
-        </div>}
+        <div className="place-order-btn-container">
+          {user ? <div className="add-order-container add-order-btn-container" onClick={handleOrder}>
+            <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
+            <p>Add</p>
+          </div> :
+          <div className="add-order-container add-order-btn-container">
+            <FontAwesomeIcon icon={faCirclePlus} className="add-orderIcon" />
+            <p>Add</p>
+          </div>}
+          <div className="cancel-order-container" onClick={handleCancel}>
+            <p>Cancel</p>
+          </div>
+        </div>
         <div className="order-form-container">
           <div className="order-output-container">
           </div>  

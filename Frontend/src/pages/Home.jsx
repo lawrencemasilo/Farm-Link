@@ -2,45 +2,43 @@ import '../styles/Home.css'
 import HeaderSignIn from '../components/HeaderSignIn'
 import SideBar from '../components/SideBar'
 import Members from '../components/Members'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import Orders from '../components/Orders'
+import { ThemeContext } from '../contexts/ThemeContext';
+import '../styles/Members.css'
+import ListOrders from '../components/ListOrders'
+import Settings from '../components/Settings'
 import PlaceDelivery from '../components/PlaceDelivery'
-import Farmers from '../components/Farmers'
+import { SidebarContext } from '../contexts/SideBarContext'
+import { SelectedFarmerContext } from '../contexts/SelectedFarmerContext'
+import AutoOrder from '../components/AutoOrder'
 import '../styles/Members.css'
 
-export default function Home() {
-  const [navItem, setNavItem] = useState('members');
-  const [selected, setSelected] = useState('recent');
-  const [showOrderForm, setShowOrderForm] = useState(false);
-  const [selectedFarmer, setSelectedFarmer] = useState();
 
-  const handleOrderClick = (user) => {
-    if (user != null) {
-      setShowOrderForm(true);
-      setSelectedFarmer(user);
-    }
-    if (user === null) {
-      setShowOrderForm(false);
-      setSelectedFarmer(null);
-      setNavItem('order')
-    }
-  }
+export default function Home() {
+  const { theme } = useContext(ThemeContext);
+  const { navItem } = useContext(SidebarContext);
+  const { selectedFarmer, showOrderForm, setShowOrderForm } = useContext(SelectedFarmerContext)
+
   return (
-    <div className="home-container">
+    <div className={`home-container ${theme}`}>
       <div className="home-header-container">
         {<HeaderSignIn />}
       </div>
       <div className="main-content-container">
-        {<SideBar setNavItem={setNavItem} setSelectedItem={setSelected} />}
+        {<SideBar />}
         {selectedFarmer && showOrderForm && (
-          <Orders user={selectedFarmer} handleOrderClick={handleOrderClick}/>)}
+          <Orders user={selectedFarmer} />)}
         {navItem === 'order' && !showOrderForm && selectedFarmer === null &&  <Orders />}
-        {navItem === 'members' && !showOrderForm &&  
+        {navItem === 'members' && !showOrderForm &&  (
           <Members 
-            handleOrderClick={handleOrderClick} 
-            selectedFarmer={selectedFarmer} 
-            setSelectedFarmer={setSelectedFarmer}
-            showOrderForm={showOrderForm}/>}
+            showOrderForm={showOrderForm}
+            setShowOrderForm={setShowOrderForm}
+            />)}
+        {navItem === 'listOrders' && <ListOrders />}
+        {navItem === 'delivery' && <PlaceDelivery />}
+        {navItem === 'autoOrder' && <AutoOrder />}
+        {navItem === 'settings' && <Settings />}
       </div>
     </div>
   )

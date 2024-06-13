@@ -15,6 +15,12 @@
     color: #283712;
 }
 
+.orders-title.dark h1 {
+    font-size: 27px;
+    font-weight: 500;
+    color: #efefef;
+}
+
 .orders-wrapper {
     width: auto;
     display: flex;
@@ -33,6 +39,18 @@
     margin: 0;
 }
 
+.orders-nav-container.dark {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: left;
+    align-items: end;
+    border-bottom: 2px solid #efefef;
+    color: #283712;
+    margin: 0;
+}
+
+
 .orders-title-container {
     cursor: pointer;
     padding-bottom: 7px;
@@ -41,10 +59,17 @@
     border-bottom: 3px solid #0575E6;
 }
 
+.orders-title-container.dark {
+    cursor: pointer;
+    padding-bottom: 7px;
+    margin: 0 15px -3px 0;
+    color: #ffffff;
+    border-bottom: 3px solid #ffffff;
+}
+
 .order-form-container{
     width: 100%;
     height: 300px;
-    /*border-top: 2px solid #D9D9D9;*/
     overflow-y: auto;
     margin-top: 30px;
 }
@@ -52,7 +77,6 @@
 .produce-form-container {
     width: auto;
     height: 300px;
-    /*border-top: 2px solid #D9D9D9;*/
     overflow-y: auto;
     margin-top: 30px;
     margin-right: 50px;
@@ -63,14 +87,27 @@
     margin-top: 30px;
 }
 
+.order-selectors.dark {
+    display: flex;
+    margin-top: 30px;
+    color: #efefef;
+}
+
 .orders-s-crop-type-container, .orders-s-plantDate-container, .orders-s-harvestDate-container {
     width: 191px;
-    /*border: 1px solid #585858;*/
     position: relative;
     margin-right: 20px;
 }
 
-.crop-type-dropDown, .plantDate-dropDown {
+.orders-s-crop-type-btn.dark {
+    width: 191px;
+    position: relative;
+    margin-right: 20px;
+    background-color: #ffffff;
+}
+
+
+.crop-type-dropDown.light, .plantDate-dropDown {
     position: absolute;
     width: 100%;
     height: auto;
@@ -86,15 +123,37 @@
 .plantDate-dropDown {
     height: 120px;
 }
+
 .crop-type-dropDown p {
     margin-bottom: 5px;
     padding: 0 0 0 10px;
 }
+
+.crop-type-dropDown.dark {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    border: 1px solid #b1b1b1;
+    margin-top: 5px;
+    overflow-y: auto;
+    border-radius: 7px;
+    z-index: 1;
+    padding: 5px 0;
+    background-color: #212121;
+}
+
 .crop-type-dropDown p:hover {
     cursor: pointer;
     background-color: #0575E6;
     color: #ffffff;
 }
+
+.crop-type-dropDown p.dark:hover{
+    cursor: pointer;
+    background-color: #D9D9D9;
+    color: #ffffff;
+}
+
 .orders-s-farmer-btn, .orders-s-crop-type-btn, .orders-s-quantity-btn {
     position: relative;
     width: 120px;
@@ -111,6 +170,43 @@
     margin-right: 20px;
 }
 
+.orders-s-farmer-btn, .orders-s-crop-type-btn, .orders-s-quantity-btn {
+    position: relative;
+    width: 120px;
+    height: 32px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    font-size: 14px;
+    color: #585858;
+    border: 1px solid #D9D9D9;
+    border-radius: 7px;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+
+.orders-s-quantity-btn.dark {
+    position: relative;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    font-size: 14px;
+    color: #585858;
+    border: 1px solid #D9D9D9;
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+
+.produce-s-quantity-btn-input.dark {
+    background-color: #ffffff;
+    
+}
 .orders-s-farmer-btn:hover, .orders-s-crop-type-btn:hover, .orders-s-quantity-btn:hover, .orders-s-plantDate-btn:hover {
     cursor: pointer;
 }
@@ -122,8 +218,13 @@
     width: 180px;
 }
 
+.orders-s-crop-type-btn.dark, .orders-s-plantDate-btn.dark {
+    width: 180px;
+}
+
 .orders-s-quantity-btn {
     width: 100px;
+    padding-right: 10px;
 }
 
 .orders-s-quantity-btn input {
@@ -131,6 +232,12 @@
     height: 100%;
     border: none;
     outline: none;
+
+}
+
+.crop-type-sel.dark, .orders-s-quantity-input-btn.dark, .orders-s-quantity-btn.dark {
+    background-color: #212121;
+    color: #efefef;
 }
 
 .orders-arrowIcon, .orders-arrowIcon2 {
@@ -154,7 +261,14 @@
     font-weight: 450;
 }
 
-.add-order-container, .add-produce-container {
+.place-order-btn-container {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.add-order-container, .add-produce-container, .cancel-order-container {
     width: 70px;
     height: 30px;
     display: flex;
@@ -165,6 +279,24 @@
     margin-top: 10px;
 }
 
+.cancel-order-container {
+    justify-content: center;
+    margin-left: 10px;
+    color: #585858;
+}
+
+.add-produce-container.dark {
+    width: 70px;
+    height: 30px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid #D9D9D9;
+    border-radius: 7px;
+    margin-top: 10px;
+    color: #efefef;
+}
+
 .add-orderIcon, .add-produceIcon {
     margin-left: 10px;
     font-size: 12px;
@@ -173,18 +305,33 @@
     margin-right: 5px;
 }
 
+.add-produceIcon.dark {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    color: #efefef;
+    margin-right: 5px;
+}
+
 .add-orderIcon:hover, .add-produceIcon:hover {
     color: #ffffff;
 }
+
 .add-order-container p, .add-produceIcon p {
     font-size: 14px;
     font-weight: 450;
     color: #585858;
 }
 
-.add-order-container:hover {
+.add-order-container:hover, .add-order-btn-container p:hover {
     cursor: pointer;
     background-color: #0575E6;
+    color: #ffffff;
+}
+
+.cancel-order-container:hover {
+    cursor: pointer;
+    background-color: rgb(235, 0, 0);
     color: #ffffff;
 }
 
@@ -228,6 +375,33 @@
     border-radius: 6px;
     text-decoration: none;
 }
+
+/* AutoOrder crop persistance */
+    .order-output-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .order-output-title {
+        flex: 1;
+    }
+    .order-output-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    .quantity-container {
+        display: flex;
+        align-items: center;
+    }
+    .remove-crop-icon {
+        cursor: pointer;
+        margin-left: 5px;
+    }
+    .order-output-item:hover {
+        background-color: #0575e6;
+        color: white;
+    }
 
 /* Responsive*/
 
@@ -324,7 +498,7 @@
         font-weight: 450;
     }
 
-    .add-order-container, .add-produce-container {
+    .add-order-container:hover {
         /*margin-top: -15px;*/
     }
     .produce-form-container {
