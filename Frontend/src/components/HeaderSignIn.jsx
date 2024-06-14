@@ -42,10 +42,10 @@ export default function HeaderSignIn() {
   const handleLogout = async () => {
     try {
         const data = await Logout();
+        navigate('/login')
       } catch(err) {
         console.log(err);
       }
-    navigate('/login')
   }
 
   return (
@@ -63,7 +63,7 @@ export default function HeaderSignIn() {
             <p className={`userName-title ${theme}`}>{user && user.name}</p>
           </div>
           <div className={`logout-container ${theme}`}>
-            <button className={`logout-btn-container ${theme}`} onClick={() => {navigate('/login')}}>Logout</button>
+            <button className={`logout-btn-container ${theme}`} onClick={handleLogout}>Logout</button>
           </div>
         </div>
       </div>}

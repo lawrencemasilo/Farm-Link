@@ -41,7 +41,7 @@ export default function HomeFarmer() {
      or user disagrees to allow App to get user's current Location.*/
     console.log(error) //test
   }
-
+  //console.log(user)
   return (
     <div className={`home-container ${theme}`}>
       <div className="home-header-container">
