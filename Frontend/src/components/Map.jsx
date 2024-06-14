@@ -1,231 +1,24 @@
-// import React, { useRef, useState, useEffect } from 'react';
-// import '../styles/Schedule.css'
-// import '../styles/Map.css'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCaretDown, faTruckFast, faCirclePlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-// import { useJsApiLoader, GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker, Autocomplete } from '@react-google-maps/api';
-
-// /*WARNING to anyone working on this file. It took me 2 days, 8 cups of coffee, reading documentation,
-//   Youtube tutorials, and 3 different API service providers to get this map routing feature somewhat
-//   working, so if you so happen to break something and can't fix it. Please do me a favour and unalive yourself before I DO!!! */
-
-// /* HAPPY CODING!!! */
-
-
-// //Handles Map styles
-// const containerStyle = {
-//   width: '100%',
-//   height: '80%',
-//   "border-radius": '20px',
-//   "margin-right": '40px'
-// };
-
-// //Coordinates of where the map initially loads up
-// const center = {
-//   lat: -26.19676443081683,
-//   lng: 28.064208020288774,
-// };
-
-// export default function Map() {
-//   const [map, setMap] = useState(null);
-//   const [origin, setOrigin] = useState('');
-//   const [destination, setDestination] = useState('');
-//   const [waypoints, setWaypoints] = useState([]);
-//   const [addStop, setAddStop] = useState(false);
-//   const [numStops, setNumStops] = useState(0);
-//   const [directionsResponse, setDirectionsResponse] = useState('');
-//   const [distance, setDistance] = useState('');
-//   const [durationResponse, setDurationResponse] = useState('');
-
-//   const originRef = useRef();
-//   const waypointsRefs = useRef([]);
-//   const destinationRef = useRef();
-
-//   /*(Starts here) Handles the Configuration of the api( not the Map configures itself, that's below...)*/
-//   const { isLoaded } = useJsApiLoader({
-//     /*loads the Map api and addtional services, using the key*/
-//     googleMapsApiKey: '',
-//     libraries: ['places'],
-//   });
-
-//   if (!isLoaded) {
-//     /*Handle situation where the api has not been loaded yet*/
-//     return <div>Loading...</div>;
-//   }
-
-//   async function calculateRoute() {
-//     /*Calcutates the Route*/
-//     if (originRef.current.value === '' || destinationRef.current.value === '') {
-//       return;
-//     }
-
-//     const directionsService = new google.maps.DirectionsService();
-
-//     const waypointsArray = waypointsRefs.current.map(ref => {
-//       if (ref.current && ref.current.value) {
-//         return {
-//           location: ref.current.value,
-//           stopover: true,
-//         };
-//       }
-//       return null;
-//     }).filter(waypoint => waypoint !== null);
-
-//     const results = await directionsService.route({
-//       origin: originRef.current.value,
-//       destination: destinationRef.current.value,
-//       travelMode: google.maps.TravelMode.DRIVING,
-//       waypoints: waypointsArray,
-//     });
-
-//     setDirectionsResponse(results);
-//     setDistance(results.routes[0].legs[0].distance.text);
-//     setDurationResponse(results.routes[0].legs[0].duration.text);
-//     clearRoute()
-//   }
-
-//   const clearRoute = () => {
-//     setDirectionsResponse(null);
-//     setDistance('');
-//     setDurationResponse('');
-//     originRef.current.value = '';
-//     destinationRef.current.value = '';
-//   };
-
-//   /*Api configurations end here!!! */
-
-
-//   /*(Starts here) Handles input values*/
-
-//   const handleAddWaypoint = () => {
-//     if (waypoints.length < 3) {
-//       setWaypoints([...waypoints, '']);
-//       waypointsRefs.current.push(React.createRef());
-//       setNumStops((prev) => prev + 1);
-//       setAddStop(true);
-//     }
-//   };
-
-//   const handleWaypointChange = (index, value) => {
-//     const newWaypoints = [...waypoints];
-//     newWaypoints[index] = value;
-//     setWaypoints(newWaypoints);
-//   };
-
-//   /*(Ends here) handling of input values*/
-
-//   return (
-//     <div className="map-input-container">
-//       <div className="schedule-container">
-//         <div className={`planner-container${numStops + 1}`}>
-//           <div className="planner-title-container">
-//             <h1 className="planner-title">Plan Collection</h1>
-//           </div>
-//           <div className="origin-container">
-//             <Autocomplete>
-//               <input
-//                 type="text"
-//                 className={addStop ? "pickup origin-pickup2" : "pickup"}
-//                 placeholder="Pickup location"
-//                 ref={originRef}
-//                 onChange={(e) => setOrigin(e.target.value)}
-//               />
-//             </Autocomplete>
-//           </div>
-//           {addStop && (
-//             <div className="waypoint-container">
-//               {/*This block handles the additional waypoints(stops)*/}
-//               {waypointsRefs.current.map((ref, index) => (
-//                 index < 4 && (
-//                   <Autocomplete key={index}>
-//                     <input
-//                       className="pickup waypoint-input"
-//                       ref={ref}
-//                       type="text"
-//                       placeholder={`Waypoint ${index + 1}`}
-//                     />
-//                   </Autocomplete>
-//                 )
-//               ))}
-//             </div>
-//           )}
-//           {addStop ? (
-//             <div className="destination-container">
-//               <Autocomplete>
-//                 <input
-//                   type="text"
-//                   className={addStop ? "pickup second-pickup2" : "pickup second-pickup"}
-//                   placeholder="Destination"
-//                   ref={destinationRef}
-//                   onChange={(e) => setDestination(e.target.value)}
-//                 />
-//               </Autocomplete>
-//               {numStops < 3 && (
-//                 <FontAwesomeIcon
-//                   icon={faCirclePlus}
-//                   className={addStop ? "addIcon2" : "addIcon"}
-//                   onClick={handleAddWaypoint}
-//                 />
-//               )}
-//             </div>
-//           ) : (
-//             <div className="destination-container">
-//               <Autocomplete>
-//                 <input
-//                   type="text"
-//                   className={addStop ? "pickup second-pickup2" : "pickup second-pickup"}
-//                   placeholder="Destination"
-//                   ref={destinationRef}
-//                   onChange={(e) => setDestination(e.target.value)}
-//                 />
-//               </Autocomplete>
-//               <FontAwesomeIcon
-//                 icon={faCirclePlus}
-//                 className={addStop ? "addIcon2" : "addIcon"}
-//                 onClick={handleAddWaypoint}
-//               />
-//             </div>
-//           )}
-//           <div className="pickup-time-container">
-//             <FontAwesomeIcon icon={faTruckFast} className="truckIcon" />
-//             <p className="pickup-time">Pickup Now</p>
-//             <FontAwesomeIcon icon={faCaretDown} className="pickup-arrowIcon" />
-//           </div>
-//           <div className="schedule-btn-container">
-//             <button className="schedule-submit-btn" onClick={calculateRoute}>Schedule</button>
-//           </div>
-//         </div>
-//       </div>
-//       {/*Map visuals configures below*/}
-//       <GoogleMap
-//         center={center}
-//         zoom={10}
-//         mapContainerStyle={containerStyle}
-//         options={{ streetViewControl: true }}
-//         onLoad={(map) => setMap(map)}
-//       >
-//         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
-//       </GoogleMap>
-//     </div>
-//   );
-// }
-
-
-import React, { useRef, useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import '../styles/Schedule.css'
 import '../styles/Map.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faTruckFast, faCirclePlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { useJsApiLoader, GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker, Autocomplete } from '@react-google-maps/api';
+import { faCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useJsApiLoader, GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { fetchRoute } from '../services/routePlannerservice';
+import { usersData } from '../services/farmerService';
+import '../styles/Schedule.css'
+import { darkModeStyle } from '../mapStyles/GoogleMapDarkMode';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 //Handles Map styles
 const containerStyle = {
   width: '100%',
   height: '80%',
-  "borderRadius": '20px',
+  "borderRadius": '15px',
   "marginRight": '40px'
 };
+
+
 
 //Coordinates of where the map initially loads up
 const center = {
@@ -235,13 +28,37 @@ const center = {
 
 export default function Map() {
   const [map, setMap] = useState(null);
-  const [farmNames, setFarmNames] = useState(['', '', '', '']);
+  const [farmNames, setFarmNames] = useState(['', '']);
   const [route, setRoute] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [numStops, setNumStops] = useState(0);
+  const [addStop, setAddStop] = useState(false);
+  const [removeStop, setRemoveStop] = useState(false);
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [allNames, setAllNames] = useState([]);
+  const [change, setChange] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
+
+
+  useEffect(() => {
+    //Requests and stores all farmer's information.
+    const getFarmersInfo = async () => {
+        try {
+            const data = await usersData();
+            setAllNames(data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    getFarmersInfo();
+  }, []);
+
+  /*(Starts here) Handles the Configuration of the api( not the Map configures itself, that's below...)*/
   const { isLoaded } = useJsApiLoader({
     /*loads the Map api and addtional services, using the key*/
-    googleMapsApiKey: '',
+    googleMapsApiKey: 'AIzaSyBoy9iqOcx0Zap0oPYYvrCKIy-NNVWUFIs',
     libraries: ['places'],
   });
 
@@ -252,8 +69,24 @@ export default function Map() {
   
   const handleAddFarm = () => {
     setFarmNames([...farmNames, '']);
+    setNumStops((prev) => prev + 1);
+    setAddStop(true);
   }
 
+  const handleRemoveFarm = (stops) => {
+    const index = stops + 2
+
+    if (farmNames[index -1]) {
+      const filteredNames = farmNames.filter(name =>
+        name !== farmNames[index -1]);
+
+      console.log(filteredNames);
+      setFarmNames(filteredNames);
+    }
+
+    //setNumStops((prev) => prev - 1);
+    setRemoveStop(true);
+  }
   const handleFarmNameChange = (index, value) => {
     const newFarmNames = [...farmNames];
     newFarmNames[index] = value;
@@ -261,13 +94,13 @@ export default function Map() {
   }
 
   const calculateRoute = async () => {
-    if (farmNames.some(name => name === '')) {
+    /*if (farmNames.some(name => name === '')) {
       return;
-    }
-
+    }*/
+   //console.log(farmNames)//test
     try {
       const data = await fetchRoute(farmNames);
-
+      //console.log(data)//test
       if (data.success) {
         setRoute(data.route);
         const waypoints = data.route.slice(1, -1).map(index => ({
@@ -290,7 +123,6 @@ export default function Map() {
           },
           travelMode: google.maps.TravelMode.DRIVING,
           waypoints,
-
         });
 
         setDirectionsResponse(directionsResult);
@@ -303,46 +135,95 @@ export default function Map() {
     }
   };
 
+
+  /* Handles Autocorrection */
+  
+  const handleInputChange = (index, value) => {
+    const inputValue = value;
+    setQuery(inputValue);
+    setChange(true);
+
+    // Filter names based on input value
+    const filteredNames = allNames.filter(name =>
+      name.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+
+    setSuggestions(filteredNames);
+    //handleFarmNameChange(index, value);
+  };
+
+  const handleSelectSuggestion = (index, name) => {
+    setQuery(name.name); // Set the selected name in the input field
+    handleFarmNameChange(index, name.name)
+    setSuggestions([]); // Clear suggestions
+  };
+
   return (
     <div className="map-input-container">
        <div className="schedule-container">
-         <div className={`planner-container`}>
+         <div className={`planner-container${numStops + 1}`}>
           <div className="planner-title-container">
-             <h1 className="planner-title">Plan Collection</h1>
+             <h1 className={`planner-title ${theme}`}>Plan Collection</h1>
            </div>
-           {farmNames.map((name, index) => (
-              <div className="farm-name-container">
-              <Autocomplete>
-                  <input
-                    type="text"
-                    className="pickup"
-                    placeholder={`Farm ${index + 1}`}
-                    value={name}
-                    onChange={(e) => handleFarmNameChange(index, e.target.value)}
-                  />
-                </Autocomplete>
-              </div>
-           ))}
-           <FontAwesomeIcon 
-            icon={faCirclePlus}
-            className="addIcon"
-            onClick={handleAddFarm}
-           />
+           <div className="destination-container">
+            {farmNames.map((name, index) => (
+                <div className="farm-name-container" key={index}>
+                  {index < 6 && 
+                    <input
+                      key={index}
+                      type="text"
+                      className={addStop ? "pickup second-pickup2" : "pickup second-pickup"}
+                      placeholder={`Farm ${index + 1}`}
+                      value={name}
+                      onChange={(e) => handleFarmNameChange(index, e.target.value)}
+                    />
+                  }
+                </div>
+            ))}
+            <div className="icon-add-remove">
+              {numStops < 4 && <FontAwesomeIcon 
+                icon={faCirclePlus}
+                className={addStop ? (`addIcon${numStops + 1}`) : "addIcon"}
+                onClick={handleAddFarm}
+              />}
+              {/*numStops < 4 && <FontAwesomeIcon 
+                icon={faTrash}
+                className={removeStop ? (`removeIcon${numStops + 1}`) : "removeIcon"}
+                onClick={() => handleRemoveFarm(numStops)}
+              />*/}
+            </div>
+           </div>
           <div className="schedule-btn-container">
             <button className="schedule-submit-btn" onClick={calculateRoute}>Schedule</button>
           </div>
         </div>
       </div>
       {/*Map visuals configures below*/}
+      {theme == 'dark' ?
       <GoogleMap
         center={center}
         zoom={10}
         mapContainerStyle={containerStyle}
-        options={{ streetViewControl: true }}
+        options={{ 
+          styles: darkModeStyle,
+          streetViewControl: true 
+        }}
+        onLoad={(map) => setMap(map)}
+      >
+        {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
+      </GoogleMap>:
+      <GoogleMap
+        center={center}
+        zoom={10}
+        mapContainerStyle={containerStyle}
+        options={{ 
+          streetViewControl: true 
+        }}
         onLoad={(map) => setMap(map)}
       >
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
+      }
     </div>
   );
 }

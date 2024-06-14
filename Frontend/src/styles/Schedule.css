@@ -9,7 +9,7 @@
 
 .planner-container1 {
     width: 350px;
-    height: 420px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     margin: 20px 0px 20px 0px;
@@ -19,7 +19,7 @@
 
 .planner-container2 {
     width: 350px;
-    height: 460px;
+    height: 380px;
     display: flex;
     flex-direction: column;
     margin: 20px 0px 20px 0px;
@@ -29,7 +29,7 @@
 
 .planner-container3 {
     width: 350px;
-    height: 520px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     margin: 20px 0px 20px 0px;
@@ -39,7 +39,17 @@
 
 .planner-container4 {
     width: 350px;
-    height: auto;
+    height: 510px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px 20px 0px;
+    border: 3px solid #D9D9D9;
+    border-radius: 20px;
+}
+
+.planner-container5 {
+    width: 350px;
+    height: 580px;
     display: flex;
     flex-direction: column;
     margin: 20px 0px 20px 0px;
@@ -59,9 +69,14 @@
     margin: 30px 0 20px 25px;
 }
 
-.planner-title {
+.planner-title.light {
     font-size: 30px;
     color: #363636;
+}
+
+.planner-title.dark {
+    font-size: 30px;
+    color: #ffffff;
 }
 
 .pickup {
@@ -78,11 +93,11 @@
     margin-bottom: 15px;
 }
 .second-pickup {
-    margin: 15px 0 15px 25px;
+    margin: 15px 0 0px 0px;
 }
 
 .second-pickup2 {
-    margin: 0px 0 15px 25px;
+    margin: 15px 0 0px 0px;
 }
 
 .waypoint-input {
@@ -92,28 +107,57 @@
 .destination-container, .origin-container {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    margin-bottom: 15px;
 }
 
-.addIcon, .addIcon2 {
+.farm-name-container {
+    display: flex;
+    justify-content: center;
+}
+
+.removeIcon {
+    position: absolute;
+    right: 65px;
+    top: 98px;
+    border: 1px solid#0575E6;
+}
+
+.removeIcon1 {
+    top: 165px;
+}
+
+.addIcon, .addIcon2, .addIcon3, .addIcon4 {
     position: absolute;
     right: 0;
+    top: 17px;
     font-size: 18px;
     margin-right: 40px;
 }
 
-.addIcon2 {
-    margin-top: -15px;
+.addIcon {
+    top: 98px;
 }
 
-.addIcon2:hover {
+.addIcon2 {
+    top: 165px;
+    margin-top: 0px;
+}
+
+.addIcon3 {
+    top: 235px;
+    margin-top: 0px;
+}
+
+.addIcon4 {
+    top: 300px;
+    margin-top: 0px;
+}
+
+.addIcon:hover, .addIcon2:hover, .addIcon3:hover, .addIcon4:hover {
     cursor: pointer;
     color: #363636;
-}
-
-.addIcon:hover {
-    cursor: pointer;
 }
 
 .pickup-time-container, .schedule-submit-btn {
@@ -180,11 +224,11 @@
     align-items: center;
     padding: 0;
     background-color: #ffffff;
-    /*margin-top: 15px;*/
 }
 
 .schedule-submit-btn:hover {
     cursor: pointer;
-    color: #0575E6;
-    border: 1px solid #0575E6;
+    color: #ffffff;
+    background-color: #0575E6;
+    border: none;
 }
