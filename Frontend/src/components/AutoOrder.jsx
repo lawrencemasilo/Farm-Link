@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faCirclePlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { autoOrder } from '../services/autoOrderService';
+import '../styles/Order.css'
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const VARIABLE_CROPS = [
   'tomatoes', 'pappers', 'brinjal', 'butternut', 'babyMarrows', 'sweetPotatoes', 'beans',
   'peas', 'pumpkin', 'englishSpinach', 'swissChard', 'beetroot', ''
 ]
 
-const OrderForm = ({ theme, user }) => {
+const OrderForm = ({ user }) => {
   const [variableCrops, setVariableCrops] = useState([]);
   const [errorMessage,  setErrorMessage] = useState('');
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState('0');
+  const { theme } = useContext(ThemeContext);
 
   // Display an error/success message for 3 seconds
   const displayMessage = (message) => {
