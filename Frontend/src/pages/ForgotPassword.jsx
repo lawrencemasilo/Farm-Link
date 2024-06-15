@@ -14,6 +14,7 @@ export default function ForgotPassword() {
     try {
       //sends password reset link to specified email
       const data = await forgotPassword({ email });
+      navigate('/recoveryemailsent');
     } catch (err) {
       console.log(err.message);
     }
