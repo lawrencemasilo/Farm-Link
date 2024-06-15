@@ -1,38 +1,21 @@
-// import React, { useState } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faAngleUp, faCirclePlus, faTimes } from '@fortawesome/free-solid-svg-icons';
-// import { autoOrder } from '../services/autoOrderService'; 
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faCirclePlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { autoOrder } from '../services/autoOrderService';
-
-// const VARIABLE_CROPS = [
-//   'tomatoes', 'peppers', 'brinjal', 'butternut', 'babyMarrows', 
-//   'sweetPotatoes', 'beans', 'peas', 'pumpkin', 'englishSpinach', 
-//   'swissChard', 'beetroot'
-// ];
+import '../styles/Order.css'
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const VARIABLE_CROPS = [
   'tomatoes', 'pappers', 'brinjal', 'butternut', 'babyMarrows', 'sweetPotatoes', 'beans',
   'peas', 'pumpkin', 'englishSpinach', 'swissChard', 'beetroot', ''
 ]
 
-// const OrderForm = ({ theme, user }) => {
-//   const [variableCrops, setVariableCrops] = useState([]);
-//   const [errorMessage, setErrorMessage] = useState('');
-//   const [selectedCrop, setSelectedCrop] = useState('');
-//   const [quantity, setQuantity] = useState(0);
-const OrderForm = ({ theme, user }) => {
+const OrderForm = ({ user }) => {
   const [variableCrops, setVariableCrops] = useState([]);
   const [errorMessage,  setErrorMessage] = useState('');
   const [selectedCrop, setSelectedCrop] = useState('');
   const [quantity, setQuantity] = useState('0');
-
-  // const handleCropChange = (event) => {
-  //   setSelectedCrop(event.target.value);
-  // };
+  const { theme } = useContext(ThemeContext);
 
   // Display an error/success message for 3 seconds
   const displayMessage = (message) => {
@@ -46,21 +29,9 @@ const OrderForm = ({ theme, user }) => {
     setSelectedCrop(e.target.value);
   }
 
-  // const handleQuantityChange = (event) => {
-  //   setQuantity(event.target.value ? parseInt(event.target.value) : 0);
-  // };
-
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value ? parseInt(e.target.value) : 0);
   }
-
-  // const addVariableCrop = () => {
-  //   if (selectedCrop && quantity > 0) {
-  //     setVariableCrops([...variableCrops, { name: selectedCrop, quantity }]);
-  //     setSelectedCrop('');
-  //     setQuantity(0);
-  //   }
-  // };
 
   const addVariableCrop = () => {
     if (!selectedCrop || !quantity > 0) {
@@ -74,19 +45,9 @@ const OrderForm = ({ theme, user }) => {
     
   };
 
-  // const removeVariableCrop = (index) => {
-  //   setVariableCrops(variableCrops.filter((_, i) => i !== index));
-  // };
   const removeVariableCrop = (index) => {
     setVariableCrops(variableCrops.filter((_, i) => i !== index));
   };
-
-  // const submitOrder = async () => {
-  //   const crops = variableCrops.filter(crop => crop.name).map(crop => ({
-  //     crop: crop.name,
-  //     quantity: crop.quantity
-  //   }));
-
 
   const submitOrder = async () => {
     if (variableCrops.length === 0) {
@@ -97,19 +58,10 @@ const OrderForm = ({ theme, user }) => {
       crop: crop.name,
       quantity: crop.quantity
     }));
-    // const orderData = { crops };
+   
     
     const orderData = { crops };
 
-    // try {
-    //   const result = await autoOrder(orderData);
-    //   console.log('Order submitted successfully', result);
-    //   setErrorMessage(''); // Clear error message on success
-    //   // Reset form or perform other actions
-    // } catch (error) {
-    //   console.error('Order submission failed', error);
-    //   setErrorMessage(error.errMessage || 'An error occurred while submitting the order.');
-    // }
     try {
       const result = await autoOrder(orderData);
       console.log("Order submited successfully", result);
@@ -183,6 +135,5 @@ const OrderForm = ({ theme, user }) => {
   </div> 
   );  
 }
-
 
 export default OrderForm;

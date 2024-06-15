@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import '../styles/SideBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWheatAwn, faUserGroup, faGear, faTruckFast } from '@fortawesome/free-solid-svg-icons'
+import { faWheatAwn, faUserGroup, faGear, faTruckFast, faRobot } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext';
 import { SidebarContext } from '../contexts/SideBarContext';
-import AutoOrder from '../components/AutoOrder'
 
 export default function SideBar() {
   const { theme } = useContext(ThemeContext);
@@ -18,7 +17,7 @@ export default function SideBar() {
             <p className="item-title members">Members</p>
         </div>
         <div className={`item-container ${theme}`} onClick={() => setNavItem('autoOrder')}>
-          <FontAwesomeIcon icon={faWheatAwn} className="icon"/>
+          <FontAwesomeIcon icon={faRobot} className="icon"/>
           <p className="item-title schedule">Auto Order</p>
         </div>
         <div className={`item-container ${theme}`} onClick={() => setNavItem('listOrders')}>

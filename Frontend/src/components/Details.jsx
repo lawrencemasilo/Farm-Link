@@ -157,9 +157,9 @@ export default function Details({handleGetLocation, coordinates, setReRender}) {
           <div className=" details-coordinates-container">
             <p className={`details-title ${theme}`}>Coordinates</p>
             {farm && <div className="details-coordinates2-btn">
-              <p className={`details-value ${theme}`}>{farm && farm.coordinates.latitude}
+              <p className={`details-value ${theme}`}>{farm && farm.coordinates && farm.coordinates.latitude}
               <span>, </span>
-              {farm && farm.coordinates.longitude}</p>
+              {farm && farm.coordinates && farm.coordinates.longitude}</p>
             </div>}
           </div>
         </div>
