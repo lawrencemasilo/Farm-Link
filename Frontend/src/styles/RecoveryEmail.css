@@ -1,0 +1,89 @@
+.recovery-email-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #283712;
+}
+
+.logo-recovery-email {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px 0 0 40px;
+    opacity: 80%;
+}
+
+.recovery-email-sent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.sent-email-mes-containter {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sent-email-mes {
+    width: 70%;
+    height: 150px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #283712;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.sent-email-mes p {
+    font-size: 14px;
+}
+
+.sent-email-mes-p {
+    width: 90%;
+    height: 80px;
+    font-size: 14px;
+    color: #000;
+    margin: 10px 0 0 25px;
+}
+
+.back-to-login-recovery {
+    position: absolute;
+    bottom: 0;
+    width: 78%;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #283712;
+}
+
+.recovery-email-title {
+    font-size: 23px;
+    margin-bottom: 25px;
+}
+
+.back-to-login-recovery {
+    font-size: 12px;
+    color: #000;
+}
+
+
+.back-to-login-recovery:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #0575e6;
+    border: none;
+}

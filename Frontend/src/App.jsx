@@ -6,9 +6,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import ForgotPassword from './pages/ForgotPassword'
-import SuccessfulRegisteration from './pages/SuccessfulRegisteration'
 import PasswordReset from './pages/PasswordReset'
 import HomeFarmer from './pages/HomeFarmer'
+import RecoveryEmail from './pages/RecoveryEmail'
 
 function App() {
   //handles all the routing for the application.
@@ -22,8 +22,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/home/farmer" element={<HomeFarmer />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/successfulregistration" element={<SuccessfulRegisteration />} />
         <Route path="/password/reset/:token" element={<PasswordReset />} />
+        <Route path="/recoveryemailsent" element={<RecoveryEmail />}/>
       </Routes>
     </BrowserRouter>
   )

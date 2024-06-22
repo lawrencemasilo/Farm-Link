@@ -21,6 +21,41 @@ Farm Link is a web application designed to connect small-scale farmers with majo
 - **Backend**: Node.js, Express.js, MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
+## Images
+### Landing Page:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(103).png)
+### Login and Registration:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(104).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(107).png)
+### Admin access:
+#### Farmer List:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(109).png)
+#### Dark Mode:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(110).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(112).png)
+#### Place Orders:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(113).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(114).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(119).png)
+#### Auto Ordering:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(111).png)
+#### Delivery Routing:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(117).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(118).png)
+#### All Orders:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(120).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(121).png)
+### Farmer access:
+#### First Time User Prompt:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(128).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(122).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(126).png)
+#### Farmer Details:
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(123).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(124).png)
+![](https://github.com/lawrencemasilo/Farm-Link/blob/Features/Frontend/src/assets/images/Readme_Imgs/Screenshot%20(125).png)
+
+
 ## Installation
 To run this project locally, follow these steps:
 
